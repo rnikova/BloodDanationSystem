@@ -3,10 +3,12 @@ namespace BloodDanationSystem.Data.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using BloodDanationSystem.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+
+    using static BloodDanationSystem.Data.Models.Constants;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -33,5 +35,14 @@ namespace BloodDanationSystem.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        [Required]
+        public string FullName { get; set; }
+
+        public int Age { get; set; }
+
+        public ICollection<Donor> BloodDonors { get; set; }
+
+        public ICollection<Patient> Patients { get; set; }
     }
 }

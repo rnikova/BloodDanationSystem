@@ -24,6 +24,20 @@
         {
         }
 
+        public DbSet<Donor> Donors { get; set; }
+
+        public DbSet<BloodType> BloodTypes { get; set; }
+
+        public DbSet<Patient> Patients { get; set; }
+
+        public DbSet<DonorsPatients> DonorsPatients { get; set; }
+
+        public DbSet<Hospital> Hospitals { get; set; }
+
+        public DbSet<BloodCenter> BloodCenters { get; set; }
+
+        public DbSet<City> Cities { get; set; }
+
         public DbSet<Setting> Settings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);

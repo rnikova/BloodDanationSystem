@@ -1,9 +1,8 @@
 ﻿namespace BloodDanationSystem.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {
