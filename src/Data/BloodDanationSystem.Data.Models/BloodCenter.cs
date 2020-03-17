@@ -1,22 +1,35 @@
 ﻿namespace BloodDanationSystem.Data.Models
 {
-    using System;
+    using System.ComponentModel.DataAnnotations;
 
-    public class BloodCenter
+    using BloodDanationSystem.Data.Common.Models;
+
+    public class BloodCenter : BaseDeletableModel<int>
     {
         public BloodCenter()
         {
-            this.Id = Guid.NewGuid().ToString();
         }
 
-        public string Id { get; set; }
-
+        [Required]
         public string Name { get; set; }
 
-        public string CityId { get; set; }
+        public int CityId { get; set; }
 
-        public City City { get; set; }
+        public virtual City City { get; set; }
 
+        [Required]
         public string Address { get; set; }
+
+        [Required]
+        public string Phone { get; set; }
+
+        [Required]
+        public string Email { get; set; }
+
+        [Required]
+        public string WorkingHours { get; set; }
+
+        [Required]
+        public string EventPhone { get; set; }
     }
 }

@@ -1,22 +1,24 @@
 ﻿namespace BloodDanationSystem.Data.Models
 {
-    using System;
+    using System.ComponentModel.DataAnnotations;
 
-    public class Hospital
+    using BloodDanationSystem.Data.Common.Models;
+
+    public class Hospital : BaseDeletableModel<int>
     {
         public Hospital()
         {
-            this.Id = Guid.NewGuid().ToString();
         }
 
-        public string Id { get; set; }
-
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         public string Ward { get; set; }
 
-        public string CityId { get; set; }
+        [Required]
+        public int CityId { get; set; }
 
-        public City City { get; set; }
+        public virtual City City { get; set; }
     }
 }

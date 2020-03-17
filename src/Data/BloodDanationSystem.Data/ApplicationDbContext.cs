@@ -86,6 +86,9 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            builder.Entity<DonorsPatients>()
+                .HasKey(dp => new { dp.PatientId, dp.DonorId });
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

@@ -2,20 +2,23 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public class City
     {
         public City()
         {
-            this.Id = Guid.NewGuid().ToString();
+            this.Hospitals = new HashSet<Hospital>();
+            this.BloodCentres = new HashSet<BloodCenter>();
         }
 
-        public string Id { get; set; }
+        public int Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
-        public ICollection<BloodCenter> BloodCentres { get; set; }
+        public virtual ICollection<BloodCenter> BloodCentres { get; set; }
 
-        public ICollection<Hospital> Hospitals { get; set; }
+        public virtual ICollection<Hospital> Hospitals { get; set; }
     }
 }

@@ -1,30 +1,35 @@
 ﻿namespace BloodDanationSystem.Data.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
-    public class Patient
+    using BloodDanationSystem.Data.Common.Models;
+
+    public class Patient : BaseDeletableModel<string>
     {
         public Patient()
         {
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public string Id { get; set; }
-
+        [Required]
         public string FullName { get; set; }
 
         public int Age { get; set; }
 
+        [Required]
         public string BloodTypeId { get; set; }
 
-        public BloodType BloodType { get; set; }
+        public virtual BloodType BloodType { get; set; }
 
+        [Required]
         public string HospitalId { get; set; }
 
-        public Hospital Hospital { get; set; }
+        public virtual Hospital Hospital { get; set; }
 
+        [Required]
         public string UserId { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

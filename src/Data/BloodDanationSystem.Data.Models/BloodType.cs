@@ -1,6 +1,6 @@
 ﻿namespace BloodDanationSystem.Data.Models
 {
-    using System;
+    using System.ComponentModel.DataAnnotations;
 
     using BloodDanationSystem.Data.Models.Enums;
 
@@ -8,13 +8,14 @@
     {
         public BloodType()
         {
-            this.Id = Guid.NewGuid().ToString();
         }
 
-        public string Id { get; set; }
+        public int Id { get; set; }
 
+        [Required]
         public ABOGroup ABOGroupName { get; set; }
 
+        [Required]
         public RhesusFactor RhesusFactor { get; set; }
     }
 }

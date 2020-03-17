@@ -4,14 +4,16 @@ using BloodDanationSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BloodDanationSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200317162820_AddInitialModels")]
+    partial class AddInitialModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,17 +150,16 @@ namespace BloodDanationSystem.Data.Migrations
 
             modelBuilder.Entity("BloodDanationSystem.Data.Models.BloodCenter", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
+                    b.Property<string>("CityId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -187,10 +188,8 @@ namespace BloodDanationSystem.Data.Migrations
 
             modelBuilder.Entity("BloodDanationSystem.Data.Models.BloodType", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ABOGroupName")
                         .HasColumnType("int");
@@ -205,10 +204,8 @@ namespace BloodDanationSystem.Data.Migrations
 
             modelBuilder.Entity("BloodDanationSystem.Data.Models.City", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -229,10 +226,7 @@ namespace BloodDanationSystem.Data.Migrations
 
                     b.Property<string>("BloodTypeId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("BloodTypeId1")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -256,7 +250,7 @@ namespace BloodDanationSystem.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BloodTypeId1");
+                    b.HasIndex("BloodTypeId");
 
                     b.HasIndex("IsDeleted");
 
@@ -282,13 +276,12 @@ namespace BloodDanationSystem.Data.Migrations
 
             modelBuilder.Entity("BloodDanationSystem.Data.Models.Hospital", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
+                    b.Property<string>("CityId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -329,10 +322,7 @@ namespace BloodDanationSystem.Data.Migrations
 
                     b.Property<string>("BloodTypeId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("BloodTypeId1")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -346,10 +336,7 @@ namespace BloodDanationSystem.Data.Migrations
 
                     b.Property<string>("HospitalId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("HospitalId1")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -363,9 +350,9 @@ namespace BloodDanationSystem.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BloodTypeId1");
+                    b.HasIndex("BloodTypeId");
 
-                    b.HasIndex("HospitalId1");
+                    b.HasIndex("HospitalId");
 
                     b.HasIndex("IsDeleted");
 
@@ -523,7 +510,9 @@ namespace BloodDanationSystem.Data.Migrations
                 {
                     b.HasOne("BloodDanationSystem.Data.Models.BloodType", "BloodType")
                         .WithMany()
-                        .HasForeignKey("BloodTypeId1");
+                        .HasForeignKey("BloodTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("BloodDanationSystem.Data.Models.ApplicationUser", "User")
                         .WithMany("BloodDonors")
@@ -560,11 +549,15 @@ namespace BloodDanationSystem.Data.Migrations
                 {
                     b.HasOne("BloodDanationSystem.Data.Models.BloodType", "BloodType")
                         .WithMany()
-                        .HasForeignKey("BloodTypeId1");
+                        .HasForeignKey("BloodTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("BloodDanationSystem.Data.Models.Hospital", "Hospital")
                         .WithMany()
-                        .HasForeignKey("HospitalId1");
+                        .HasForeignKey("HospitalId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("BloodDanationSystem.Data.Models.ApplicationUser", "User")
                         .WithMany("Patients")

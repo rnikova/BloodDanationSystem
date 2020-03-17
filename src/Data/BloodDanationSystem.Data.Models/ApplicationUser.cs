@@ -18,6 +18,8 @@ namespace BloodDanationSystem.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.BloodDonors = new HashSet<Donor>();
+            this.Patients = new HashSet<Patient>();
         }
 
         // Audit info
@@ -41,8 +43,8 @@ namespace BloodDanationSystem.Data.Models
 
         public int Age { get; set; }
 
-        public ICollection<Donor> BloodDonors { get; set; }
+        public virtual ICollection<Donor> BloodDonors { get; set; }
 
-        public ICollection<Patient> Patients { get; set; }
+        public virtual ICollection<Patient> Patients { get; set; }
     }
 }
