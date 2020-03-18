@@ -21,7 +21,7 @@
                 new BloodCenter
                 {
                     Name = "НЦТХ София",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "София-град"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "София").Id,
                     Address = "ул.Братя Миладинови № 112",
                     Phone = "02/9210 417",
                     Email = "office@ncth.bg",
@@ -31,7 +31,7 @@
                 new BloodCenter
                 {
                     Name = "ВМА София",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "София-град"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "София").Id,
                     Address = "бул. Св. Георги Софийски № 3",
                     Phone = "02/9226 000",
                     Email = "vma@vma.bg",
@@ -41,7 +41,7 @@
                 new BloodCenter
                 {
                     Name = "София Област - УМБАЛ Света Анна",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "София-област"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "София").Id,
                     Address = "София, ж.к. Младост 1,  ул. Димитър Моллов № 1",
                     Phone = "02/975 90 00",
                     Email = "uno@sveta-anna.eu",
@@ -51,7 +51,7 @@
                 new BloodCenter
                 {
                     Name = "Сливен",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Сливен"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Сливен").Id,
                     Address = "ул.Христо Ботев № 1",
                     Phone = "044/ 611 700",
                     Email = "sekretar@mbalsliven.org",
@@ -61,7 +61,7 @@
                 new BloodCenter
                 {
                     Name = "Хасково",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Хасково"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Хасково").Id,
                     Address = "бул. Съединение № 49",
                     Phone = "038/624612",
                     Email = "oth_haskovo@abv.bg",
@@ -71,7 +71,7 @@
                 new BloodCenter
                 {
                     Name = "Кърджали",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Кърджали"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Кърджали").Id,
                     Address = "бул. Беломорски № 53",
                     Phone = "0361/68 333",
                     Email = "hospital_kj@abv.bg",
@@ -81,7 +81,7 @@
                 new BloodCenter
                 {
                     Name = "Разград",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Разград"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Разград").Id,
                     Address = "ул. Коста Петров № 2",
                     Phone = "0893057403",
                     Email = "mbal@bogytec.com",
@@ -91,7 +91,7 @@
                 new BloodCenter
                 {
                     Name = "Велико Търново",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Велико Търново"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Велико Търново").Id,
                     Address = "ул. Ниш № 1",
                     Phone = "062/626841",
                     Email = "OTH.VT@abv.bg",
@@ -101,7 +101,7 @@
                 new BloodCenter
                 {
                     Name = "Търговище",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Търговище"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Търговище").Id,
                     Address = "бул. Сюрен",
                     Phone = "0601/68849",
                     Email = "mbal_trg@mail.bg",
@@ -111,7 +111,7 @@
                 new BloodCenter
                 {
                     Name = "РЦТХ Варна",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Варна"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Варна").Id,
                     Address = "бул. Цар Освободител № 100",
                     Phone = "052/681801",
                     Email = "rcth_varna@abv.bg",
@@ -121,7 +121,7 @@
                 new BloodCenter
                 {
                     Name = "Кюстендил",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Кюстендил"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Кюстендил").Id,
                     Address = "площад 17 януари № 1",
                     Phone = "078/550261",
                     Email = "mbal_kn@abv.bg",
@@ -131,7 +131,7 @@
                 new BloodCenter
                 {
                     Name = "Благоевград",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Благоевград"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Благоевград").Id,
                     Address = "ул. Славянска № 60",
                     Phone = "08795352888",
                     Email = "mbal_bl@abv.bg",
@@ -141,7 +141,7 @@
                 new BloodCenter
                 {
                     Name = "Бургас",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Бургас"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Бургас").Id,
                     Address = "бул. Стефан Стамболов № 73",
                     Phone = "056/810565",
                     Email = "dirmbal@abv.bgg",
@@ -151,7 +151,7 @@
                 new BloodCenter
                 {
                     Name = "Смолян",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Смолян"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Смолян").Id,
                     Address = "бул. България № 2",
                     Phone = "0301/92 600",
                     Email = "orb-sm@mbox.digsys.bg",
@@ -161,7 +161,7 @@
                 new BloodCenter
                 {
                     Name = "РЦТХ Пловдив",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Пловдив"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Пловдив").Id,
                     Address = "бул. България № 234Б",
                     Phone = "032/904 401",
                     Email = "rcth_pl@abv.bg",
@@ -171,7 +171,7 @@
                 new BloodCenter
                 {
                     Name = "Ловеч",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Ловеч"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Ловеч").Id,
                     Address = "ул. д-р Съйко Съев № 27",
                     Phone = "068/603381",
                     Email = "mbal_lovech@abv.bg",
@@ -181,7 +181,7 @@
                 new BloodCenter
                 {
                     Name = "РЦТХ Плевен",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Плевен"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Плевен").Id,
                     Address = "бул. Русе № 36",
                     Phone = "064/898848",
                     Email = "rcthpleven@gmail.com",
@@ -191,7 +191,7 @@
                 new BloodCenter
                 {
                     Name = "Силистра",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Силистра"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Силистра").Id,
                     Address = "ул. Петър Мутафчиев № 80",
                     Phone = "086818420",
                     Email = "mbalss@abv.bg",
@@ -201,7 +201,7 @@
                 new BloodCenter
                 {
                     Name = "Перник",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Перник"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Перник").Id,
                     Address = "ул. Брезник № 2",
                     Phone = "076/688 210",
                     Email = "mbal.pk@abv.bg",
@@ -211,7 +211,7 @@
                 new BloodCenter
                 {
                     Name = "Видин",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Видин"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Видин").Id,
                     Address = "ул. Цар Симеон Велики № 119",
                     Phone = "0887279737",
                     Email = "OTH_Vidin@abv.bg",
@@ -221,7 +221,7 @@
                 new BloodCenter
                 {
                     Name = "Ямбол",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Ямбол"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Ямбол").Id,
                     Address = "ул. Панайот Хитов № 30",
                     Phone = "046/682 303",
                     Email = "mbal_zop@abv.bg",
@@ -231,7 +231,7 @@
                 new BloodCenter
                 {
                     Name = "РЦТХ Стара Загора",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Стара Загора"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Стара Загора").Id,
                     Address = "ул. ген, Столетов № 2",
                     Phone = "042/611 444",
                     Email = "rcth_st_zagora@abv.bg",
@@ -241,7 +241,7 @@
                 new BloodCenter
                 {
                     Name = "Пазарджик",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Пазарджик"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Пазарджик").Id,
                     Address = "ул. Болнична № 15",
                     Phone = "0882 805 617",
                     Email = "mbalpz@gmail.com",
@@ -251,7 +251,7 @@
                 new BloodCenter
                 {
                     Name = "Русе",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Русе"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Русе").Id,
                     Address = "площад Независимост № 2",
                     Phone = "082/887 228",
                     Email = "mbalruse@mail.bg",
@@ -261,7 +261,7 @@
                 new BloodCenter
                 {
                     Name = "Габрово",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Габрово"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Габрово").Id,
                     Address = "Д-р Илиев–Детския № 1",
                     Phone = "066/800253",
                     Email = "mbalgab@gmail.com",
@@ -271,7 +271,7 @@
                 new BloodCenter
                 {
                     Name = "Шумен",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Шумен"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Шумен").Id,
                     Address = "ул. Васил Априлов № 63",
                     Phone = "054/800924",
                     Email = "mbal-shumen@ro-ni.net",
@@ -281,7 +281,7 @@
                 new BloodCenter
                 {
                     Name = "Добрич",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Добрич"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Добрич").Id,
                     Address = "ул. Панайот Хитов № 24",
                     Phone = "058/600 690",
                     Email = "oth_dobrich1952@abv.bg",
@@ -291,7 +291,7 @@
                 new BloodCenter
                 {
                     Name = "Лом",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Лом"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Лом").Id,
                     Address = "ул. Тодор Каблешков № 2",
                     Phone = "0879215530",
                     Email = "oth_lom@abv.bg",
@@ -301,7 +301,7 @@
                 new BloodCenter
                 {
                     Name = "Враца",
-                    City = dbContext.Cities.FirstOrDefault(c => c.Name == "Враца"),
+                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Враца").Id,
                     Address = "бул. 2 юни № 66",
                     Phone = "0884999532",
                     Email = "mbal_vratza@abv.bg",
@@ -312,7 +312,6 @@
 
             for (int i = 0; i < bloodCenters.Count; i++)
             {
-                bloodCenters[i].Id = i + 1;
                 await dbContext.BloodCenters.AddAsync(bloodCenters[i]);
             }
         }

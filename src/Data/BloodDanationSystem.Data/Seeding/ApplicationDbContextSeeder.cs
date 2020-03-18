@@ -29,6 +29,8 @@
                               new SettingsSeeder(),
                               new CitiesSeeder(),
                               new BloodCentersSeeder(),
+                              new BloodTypesSeeder(),
+                              new HospitalsSeeder(),
                           };
 
             foreach (var seeder in seeders)
