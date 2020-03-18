@@ -8,7 +8,7 @@
 
     using BloodDanationSystem.Data.Common.Models;
     using BloodDanationSystem.Data.Models;
-
+    using BloodDanationSystem.Data.Models.Enums;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
@@ -89,6 +89,14 @@
 
             builder.Entity<DonorsPatients>()
                 .HasKey(dp => new { dp.PatientId, dp.DonorId });
+
+            builder.Entity<BloodType>()
+                .Property(bt => bt.ABOGroupName)
+                .HasConversion(bt => bt.ToString(), x => (ABOGroup)Enum.Parse(typeof(ABOGroup), x));
+
+            builder.Entity<BloodType>()
+                .Property(bt => bt.RhesusFactor)
+                .HasConversion(bt => bt.ToString(), x => (RhesusFactor)Enum.Parse(typeof(RhesusFactor), x));
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

@@ -18,12 +18,12 @@
         public int Age { get; set; }
 
         [Required]
-        public string BloodTypeId { get; set; }
+        public int BloodTypeId { get; set; }
 
         public virtual BloodType BloodType { get; set; }
 
         [Required]
-        public string HospitalId { get; set; }
+        public int HospitalId { get; set; }
 
         public virtual Hospital Hospital { get; set; }
 

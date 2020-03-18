@@ -72,7 +72,7 @@
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
                 if (env.IsDevelopment())
-                {
+               {
                     dbContext.Database.Migrate();
                 }
 

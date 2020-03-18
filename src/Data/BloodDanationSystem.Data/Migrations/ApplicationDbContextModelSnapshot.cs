@@ -166,6 +166,14 @@ namespace BloodDanationSystem.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventPhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -173,6 +181,14 @@ namespace BloodDanationSystem.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkingHours")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -192,11 +208,13 @@ namespace BloodDanationSystem.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ABOGroupName")
-                        .HasColumnType("int");
+                    b.Property<string>("ABOGroupName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RhesusFactor")
-                        .HasColumnType("int");
+                    b.Property<string>("RhesusFactor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -227,11 +245,7 @@ namespace BloodDanationSystem.Data.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<string>("BloodTypeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("BloodTypeId1")
+                    b.Property<int>("BloodTypeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -256,7 +270,7 @@ namespace BloodDanationSystem.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BloodTypeId1");
+                    b.HasIndex("BloodTypeId");
 
                     b.HasIndex("IsDeleted");
 
@@ -327,11 +341,7 @@ namespace BloodDanationSystem.Data.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<string>("BloodTypeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("BloodTypeId1")
+                    b.Property<int>("BloodTypeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -344,11 +354,7 @@ namespace BloodDanationSystem.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("HospitalId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("HospitalId1")
+                    b.Property<int>("HospitalId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -363,9 +369,9 @@ namespace BloodDanationSystem.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BloodTypeId1");
+                    b.HasIndex("BloodTypeId");
 
-                    b.HasIndex("HospitalId1");
+                    b.HasIndex("HospitalId");
 
                     b.HasIndex("IsDeleted");
 
@@ -523,7 +529,9 @@ namespace BloodDanationSystem.Data.Migrations
                 {
                     b.HasOne("BloodDanationSystem.Data.Models.BloodType", "BloodType")
                         .WithMany()
-                        .HasForeignKey("BloodTypeId1");
+                        .HasForeignKey("BloodTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("BloodDanationSystem.Data.Models.ApplicationUser", "User")
                         .WithMany("BloodDonors")
@@ -560,11 +568,15 @@ namespace BloodDanationSystem.Data.Migrations
                 {
                     b.HasOne("BloodDanationSystem.Data.Models.BloodType", "BloodType")
                         .WithMany()
-                        .HasForeignKey("BloodTypeId1");
+                        .HasForeignKey("BloodTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("BloodDanationSystem.Data.Models.Hospital", "Hospital")
                         .WithMany()
-                        .HasForeignKey("HospitalId1");
+                        .HasForeignKey("HospitalId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("BloodDanationSystem.Data.Models.ApplicationUser", "User")
                         .WithMany("Patients")

@@ -4,7 +4,7 @@
 
     using Microsoft.EntityFrameworkCore.Migrations;
 
-    public partial class AddInitialModels : Migration
+    public partial class AddInitialModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,9 +24,10 @@
                 name: "BloodTypes",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    ABOGroupName = table.Column<int>(nullable: false),
-                    RhesusFactor = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ABOGroupName = table.Column<string>(nullable: false),
+                    RhesusFactor = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -37,7 +38,8 @@
                 name: "Cities",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
@@ -56,7 +58,7 @@
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     FullName = table.Column<string>(nullable: false),
                     Age = table.Column<int>(nullable: false),
-                    BloodTypeId = table.Column<string>(nullable: false),
+                    BloodTypeId = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
@@ -80,14 +82,19 @@
                 name: "BloodCenters",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: false),
-                    CityId = table.Column<string>(nullable: false),
+                    CityId = table.Column<int>(nullable: false),
                     Address = table.Column<string>(nullable: false),
+                    Phone = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    WorkingHours = table.Column<string>(nullable: false),
+                    EventPhone = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -104,14 +111,15 @@
                 name: "Hospitals",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: false),
                     Ward = table.Column<string>(nullable: false),
-                    CityId = table.Column<string>(nullable: false),
+                    CityId = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -135,8 +143,8 @@
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     FullName = table.Column<string>(nullable: false),
                     Age = table.Column<int>(nullable: false),
-                    BloodTypeId = table.Column<string>(nullable: false),
-                    HospitalId = table.Column<string>(nullable: false),
+                    BloodTypeId = table.Column<int>(nullable: false),
+                    HospitalId = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: false),
                 },
                 constraints: table =>

@@ -21,7 +21,7 @@
         public int Age { get; set; }
 
         [Required]
-        public string BloodTypeId { get; set; }
+        public int BloodTypeId { get; set; }
 
         public virtual BloodType BloodType { get; set; }
 
