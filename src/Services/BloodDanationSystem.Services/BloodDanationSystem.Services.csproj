@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
@@ -16,6 +16,12 @@
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.164" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\BloodDanationSystem.Data\BloodDanationSystem.Data.csproj" />
+    <ProjectReference Include="..\BloodDanationSystem.Services.Mapping\BloodDanationSystem.Services.Mapping.csproj" />
+    <ProjectReference Include="..\BloodDonationSystem.Services.Models\BloodDonationSystem.Services.Models.csproj" />
   </ItemGroup>
 
 </Project>

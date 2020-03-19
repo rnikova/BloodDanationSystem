@@ -5,7 +5,7 @@
 
     using BloodDanationSystem.Data.Common.Models;
 
-    using static BloodDanationSystem.Data.Models.Constants;
+    using static BloodDanationSystem.Common.GlobalConstants;
 
     public class Donor : BaseDeletableModel<string>
     {
@@ -17,7 +17,7 @@
         [Required]
         public string FullName { get; set; }
 
-        [Range(UserMinAge, UserMaxAge)]
+        [Range(DonorMinAge, DonorMaxAge)]
         public int Age { get; set; }
 
         [Required]

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BloodDanationSystem.Common\BloodDanationSystem.Common.csproj" />
     <ProjectReference Include="..\BloodDanationSystem.Data.Common\BloodDanationSystem.Data.Common.csproj" />
   </ItemGroup>
   

@@ -8,8 +8,6 @@ namespace BloodDanationSystem.Data.Models
     using BloodDanationSystem.Data.Common.Models;
     using Microsoft.AspNetCore.Identity;
 
-    using static BloodDanationSystem.Data.Models.Constants;
-
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
         public ApplicationUser()

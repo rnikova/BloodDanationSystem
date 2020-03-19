@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BloodDanationSystem.Common\BloodDanationSystem.Common.csproj" />
+    <ProjectReference Include="..\..\Data\BloodDanationSystem.Data.Models\BloodDanationSystem.Data.Models.csproj" />
+    <ProjectReference Include="..\BloodDanationSystem.Services.Mapping\BloodDanationSystem.Services.Mapping.csproj" />
+  </ItemGroup>
+
+</Project>
