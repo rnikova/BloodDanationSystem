@@ -1,0 +1,19 @@
+﻿@model IList<BloodDanationSystem.Web.ViewModels.Administration.Donor.PatientAllViewModel>;
+
+@{
+    ViewData["Title"] = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>All</h1>
+
+<div>
+    <h4>All Donors</h4>
+    <hr />
+    @foreach (var patient in Model)
+    {
+        <h5 class="text-primary text-center mt-3">@patient.FullName</h5>
+        <h5 class="text-primary text-center mt-3">@patient.Age</h5>
+        <h5 class="text-primary text-center mt-3">@patient.BloodType</h5>
+    }
+</div>

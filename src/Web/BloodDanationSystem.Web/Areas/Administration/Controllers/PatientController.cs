@@ -8,18 +8,18 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
-    public class DonorController : AdministrationController
+    public class PatientController : Controller
     {
-        private readonly IDonorService donorService;
+        private readonly IPatentService patientService;
 
-        public DonorController(IDonorService donorService)
+        public PatientController(IPatentService patientService)
         {
-            this.donorService = donorService;
+            this.patientService = patientService;
         }
 
         public async Task<IActionResult> All()
         {
-            var allDonors = await this.donorService.All().To<DonorAllViewModel>().ToListAsync();
+            var allDonors = await this.patientService.All().To<PatientAllViewModel>().ToListAsync();
 
             return this.View(allDonors);
         }
