@@ -56,6 +56,11 @@
                 this.ModelState.AddModelError(string.Empty, this.ErrorMessage);
             }
 
+            if (this.User.Identity.IsAuthenticated)
+            {
+                this.Response.Redirect("/");
+            }
+
             returnUrl = returnUrl ?? this.Url.Content("~/");
 
             // Clear the existing external cookie to ensure a clean login process
@@ -89,7 +94,7 @@
                 if (result.IsLockedOut)
                 {
                     this.logger.LogWarning("User account locked out.");
-                    return this.RedirectToPage("./Lockout");
+                    return this.RedirectToPage("/Lockout");
                 }
                 else
                 {

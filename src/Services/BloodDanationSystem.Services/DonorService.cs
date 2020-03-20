@@ -1,12 +1,10 @@
 ﻿namespace BloodDanationSystem.Services
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+    using System.Linq;
 
     using BloodDanationSystem.Data;
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models;
-    using Microsoft.EntityFrameworkCore;
 
     public class DonorService : IDonorService
     {
@@ -17,9 +15,9 @@
             this.context = context;
         }
 
-        public async Task<ICollection<DonorServiceModel>> All()
+        public IQueryable<DonorServiceModel> All()
         {
-            return await this.context.Donors.To<DonorServiceModel>().ToListAsync();
+            return this.context.Donors.To<DonorServiceModel>();
         }
     }
 }

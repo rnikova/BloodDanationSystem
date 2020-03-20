@@ -1,15 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BloodDonationSystem.Services.Models
+﻿namespace BloodDonationSystem.Services.Models
 {
-    public class BloodTypeServiceModel
+    using BloodDanationSystem.Data.Models;
+    using BloodDanationSystem.Services.Mapping;
+
+    public class BloodTypeServiceModel : IMapFrom<BloodType>, IMapTo<BloodType>
     {
         public int Id { get; set; }
 
-        [Required]
         public string ABOGroupName { get; set; }
 
-        [Required]
         public string RhesusFactor { get; set; }
     }
 }

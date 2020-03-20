@@ -8,11 +8,12 @@
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Data.Repositories;
     using BloodDanationSystem.Data.Seeding;
+    using BloodDanationSystem.Services;
     using BloodDanationSystem.Services.Data;
     using BloodDanationSystem.Services.Mapping;
     using BloodDanationSystem.Services.Messaging;
     using BloodDanationSystem.Web.ViewModels;
-
+    using BloodDonationSystem.Services.Models;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -59,12 +60,15 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IDonorService, DonorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            AutoMapperConfig.RegisterMappings(
+                typeof(ErrorViewModel).GetTypeInfo().Assembly,
+                typeof(DonorServiceModel).GetTypeInfo().Assembly);
 
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())

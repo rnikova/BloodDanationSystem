@@ -41,6 +41,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BloodDanationSystem.Web.Vie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonationSystem.Services.Models", "Services\BloodDonationSystem.Services.Models\BloodDonationSystem.Services.Models.csproj", "{ECE6BC6E-FBDC-471F-98F9-7AF71C5EEFD2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonationSystem.Web.InputModels", "Web\BloodDonationSystem.Web.InputModels\BloodDonationSystem.Web.InputModels.csproj", "{D3C53AA1-0C19-4AA3-8B45-173A5A55723B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,10 @@ Global
 		{ECE6BC6E-FBDC-471F-98F9-7AF71C5EEFD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECE6BC6E-FBDC-471F-98F9-7AF71C5EEFD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECE6BC6E-FBDC-471F-98F9-7AF71C5EEFD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3C53AA1-0C19-4AA3-8B45-173A5A55723B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3C53AA1-0C19-4AA3-8B45-173A5A55723B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3C53AA1-0C19-4AA3-8B45-173A5A55723B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3C53AA1-0C19-4AA3-8B45-173A5A55723B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +132,7 @@ Global
 		{3EE06C6E-C8F3-418A-A309-8AC81976A074} = {7A731632-6714-44E2-A9E4-069EBA9E666C}
 		{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7} = {E389DEB6-5F90-444B-A054-12A10D39C76F}
 		{ECE6BC6E-FBDC-471F-98F9-7AF71C5EEFD2} = {516E002B-9E6E-4456-B7F6-EAA353966DE6}
+		{D3C53AA1-0C19-4AA3-8B45-173A5A55723B} = {E389DEB6-5F90-444B-A054-12A10D39C76F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {384484BE-4680-4529-9CC2-AD37BA4D12D1}
