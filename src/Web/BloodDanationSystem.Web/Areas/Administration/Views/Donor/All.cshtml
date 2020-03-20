@@ -12,11 +12,8 @@
     <hr />
     @foreach (var donor in Model)
     {
-        <h5 class="text-primary text-center mt-3>@donor.FullName</h5>
-        <h5 class="text-primary text-center mt-3>@donor.Age</h5>
+        <h5 class="text-primary text-center mt-3">@donor.FullName</h5>
+        <h5 class="text-primary text-center mt-3">@donor.Age</h5>
         <h5 class="text-primary text-center mt-3">@donor.BloodType</h5>
     }
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>

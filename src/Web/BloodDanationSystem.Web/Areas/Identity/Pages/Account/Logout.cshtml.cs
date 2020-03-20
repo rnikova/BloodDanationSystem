@@ -21,12 +21,22 @@
             this.logger = logger;
         }
 
-        [AllowAnonymous]
-        public async Task<IActionResult> OnGet()
+        public void OnGet()
+        {
+        }
+
+        public async Task<IActionResult> OnPost(string returnUrl = null)
         {
             await this.signInManager.SignOutAsync();
-
-            return this.Redirect("/");
+            this.logger.LogInformation("User logged out.");
+            if (returnUrl != null)
+            {
+                return this.LocalRedirect(returnUrl);
+            }
+            else
+            {
+                return this.RedirectToPage();
+            }
         }
     }
 }
