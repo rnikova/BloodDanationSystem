@@ -4,24 +4,24 @@
 
     using BloodDanationSystem.Services;
     using BloodDanationSystem.Services.Mapping;
-    using BloodDanationSystem.Web.ViewModels.Administration.Donor;
+    using BloodDanationSystem.Web.ViewModels.Administration.Patient;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
-    public class PatientController : Controller
+    public class PatientController : AdministrationController
     {
-        private readonly IPatentService patientService;
+        private readonly IPatientService patientService;
 
-        public PatientController(IPatentService patientService)
+        public PatientController(IPatientService patientService)
         {
             this.patientService = patientService;
         }
 
         public async Task<IActionResult> All()
         {
-            var allDonors = await this.patientService.All().To<PatientAllViewModel>().ToListAsync();
+            var allPatients = await this.patientService.All().To<PatientAllViewModel>().ToListAsync();
 
-            return this.View(allDonors);
+            return this.View(allPatients);
         }
     }
 }

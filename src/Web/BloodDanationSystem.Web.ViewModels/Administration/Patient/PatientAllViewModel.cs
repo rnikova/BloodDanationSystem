@@ -1,4 +1,4 @@
-﻿namespace BloodDanationSystem.Web.ViewModels.Administration.Donor
+﻿namespace BloodDanationSystem.Web.ViewModels.Administration.Patient
 {
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models;

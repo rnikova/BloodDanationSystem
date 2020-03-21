@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Services\BloodDanationSystem.Services.Mapping\BloodDanationSystem.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\BloodDonationSystem.Services.Models\BloodDonationSystem.Services.Models.csproj" />
+  </ItemGroup>
+
 </Project>

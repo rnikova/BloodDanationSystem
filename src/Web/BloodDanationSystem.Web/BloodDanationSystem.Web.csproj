@@ -50,6 +50,7 @@
     <ProjectReference Include="..\..\Services\BloodDanationSystem.Services\BloodDanationSystem.Services.csproj" />
     <ProjectReference Include="..\BloodDanationSystem.Web.Infrastructure\BloodDanationSystem.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\BloodDanationSystem.Web.ViewModels\BloodDanationSystem.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\BloodDonationSystem.Web.InputModels\BloodDonationSystem.Web.InputModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

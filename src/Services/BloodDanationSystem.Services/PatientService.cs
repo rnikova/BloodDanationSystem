@@ -1,13 +1,23 @@
-﻿using BloodDonationSystem.Services.Models;
-using System.Linq;
-
-namespace BloodDanationSystem.Services
+﻿namespace BloodDanationSystem.Services
 {
-    public class PatientService : IPatentService
+    using System.Linq;
+
+    using BloodDanationSystem.Data;
+    using BloodDanationSystem.Services.Mapping;
+    using BloodDonationSystem.Services.Models;
+
+    public class PatientService : IPatientService
     {
+        private readonly ApplicationDbContext context;
+
+        public PatientService(ApplicationDbContext context)
+        {
+            this.context = context;
+        }
+
         public IQueryable<PatientServiceModel> All()
         {
-            throw new System.NotImplementedException();
+            return this.context.Patients.To<PatientServiceModel>();
         }
     }
 }
