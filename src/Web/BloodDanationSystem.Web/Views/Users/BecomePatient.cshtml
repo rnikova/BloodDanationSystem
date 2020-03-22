@@ -1,0 +1,59 @@
+﻿@using BloodDanationSystem.Data.Models.Enums;
+@model BloodDonationSystem.Web.InputModels.Patients.PatientsCreateInputModel;
+@inject BloodDanationSystem.Services.PatientService service
+
+@{
+    ViewData["Title"] = "BecomePatient";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var hospitals = service.AllHospitals();
+}
+
+<h1>Become Patient</h1>
+
+<h4>Patient</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="BecomePatient">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BloodType" class="control-label"></label>
+                <select asp-for="BloodType.ABOGroupName" class="form-control" asp-items="Html.GetEnumSelectList<ABOGroup>()"></select>
+                <action selected=""></action>
+            </div>
+            <div class="form-group">
+                <label asp-for="BloodType" class="control-label"></label>
+                <select asp-for="BloodType.RhesusFactor" class="form-control" asp-items="Html.GetEnumSelectList<RhesusFactor>()"></select>
+                <action selected=""></action>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hospital" class="control-label"></label>
+                @foreach (var hospital in hospitals)
+                {
+                    <div>
+                        <a>@hospital.Name</a>
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
