@@ -1,4 +1,5 @@
-﻿@model BloodDonationSystem.Web.InputModels.Donors.DonorsCreateInputModel;
+﻿@using BloodDanationSystem.Data.Models.Enums;
+@model BloodDonationSystem.Web.InputModels.Donors.DonorsCreateInputModel;
 
 @{
     ViewData["Title"] = "Donor";
@@ -7,11 +8,10 @@
 
 <h1>Donor</h1>
 
-<h4>Donor</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Donor">
+        <form asp-action="BecomeDonor" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FullName" class="control-label"></label>
@@ -24,9 +24,15 @@
                 <span asp-validation-for="Age" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BloodTypeId" class="control-label"></label>
-                <select asp-for="BloodTypeId" class ="form-control" asp-items="ViewBag.BloodTypeId"></select>
+                <label asp-for="BloodType" class="control-label"></label>
+                <select asp-for="BloodType.ABOGroupName" class ="form-control" asp-items="Html.GetEnumSelectList<ABOGroup>()"></select>
+                <action selected=""></action>
             </div>
+            <div class="form-group">
+                <label asp-for="BloodType" class="control-label"></label>
+                <select asp-for="BloodType.RhesusFactor" class="form-control" asp-items="Html.GetEnumSelectList<RhesusFactor>()"></select>
+                <action selected=""></action>
+            </div>        
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
