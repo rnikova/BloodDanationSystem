@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using BloodDanationSystem.Data;
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Data.Models.Enums;
@@ -23,7 +24,7 @@
         public async Task<bool> Create(PatientServiceModel patientServiceModel)
         {
             var user = this.context.Users.FirstOrDefault(x => x.Id == patientServiceModel.UserId);
-            var role = this.context.Roles.FirstOrDefault(x => x.Name == "Donor");
+            var role = this.context.Roles.FirstOrDefault(x => x.Name == "Patient");
             var aboGroup = Enum.Parse<ABOGroup>(patientServiceModel.BloodType.ABOGroupName);
             var rhesusFactor = Enum.Parse<RhesusFactor>(patientServiceModel.BloodType.RhesusFactor);
 

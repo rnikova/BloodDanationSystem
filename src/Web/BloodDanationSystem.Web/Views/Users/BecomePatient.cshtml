@@ -1,12 +1,9 @@
 ﻿@using BloodDanationSystem.Data.Models.Enums;
 @model BloodDonationSystem.Web.InputModels.Patients.PatientsCreateInputModel;
-@inject BloodDanationSystem.Services.PatientService service
 
 @{
     ViewData["Title"] = "BecomePatient";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-    var hospitals = service.AllHospitals();
 }
 
 <h1>Become Patient</h1>
@@ -15,7 +12,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="BecomePatient">
+        <form asp-action="BecomePatient" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FullName" class="control-label"></label>
@@ -38,13 +35,10 @@
                 <action selected=""></action>
             </div>
             <div class="form-group">
-                <label asp-for="Hospital" class="control-label"></label>
-                @foreach (var hospital in hospitals)
-                {
-                    <div>
-                        <a>@hospital.Name</a>
-                    </div>
-                }
+                <label asp-for="HospitalId" class="control-label"></label>
+                <select asp-for="HospitalId" class="form-control" asp-items="@(new SelectList(Model.Hospitals,"Id","Name"))">
+                </select>
+                <action selected=""></action>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

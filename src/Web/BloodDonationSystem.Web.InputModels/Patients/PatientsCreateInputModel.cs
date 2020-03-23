@@ -3,6 +3,7 @@
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models;
+    using System.Collections.Generic;
 
     public class PatientsCreateInputModel : IMapTo<PatientServiceModel>, IMapFrom<PatientServiceModel>
     {
@@ -20,6 +21,6 @@
 
         public int HospitalId { get; set; }
 
-        public Hospital Hospital { get; set; }
+        public IEnumerable<Hospital> Hospitals { get; set; }
     }
 }

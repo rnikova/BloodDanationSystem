@@ -44,23 +44,34 @@
 
             await this.donorService.Create(model);
 
-            return this.View("/");
+            return this.RedirectToAction("/Home/Index");
         }
 
         [HttpGet]
         public IActionResult BecomePatient()
         {
             var hospitals = this.patientService.AllHospitals();
-
-            return this.View();
+            var hospital = new PatientsCreateInputModel { Hospitals = hospitals };
+            return this.View(hospital);
         }
 
         [HttpPost]
         public async Task<IActionResult> BecomePatient(PatientsCreateInputModel patientCreateInputModel)
         {
+            var user = await this.userManager.GetUserAsync(this.HttpContext.User);
 
+            var model = new PatientServiceModel()
+            {
+                FullName = patientCreateInputModel.FullName,
+                Age = patientCreateInputModel.Age,
+                BloodType = patientCreateInputModel.BloodType,
+                HospitalId = patientCreateInputModel.HospitalId,
+                UserId = user.Id,
+            };
 
-            return this.View();
+            await this.patientService.Create(model);
+
+            return this.RedirectToAction("/Home/Index");
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿namespace BloodDanationSystem.Web.ViewModels.Administration.Patient
 {
+    using System.Collections.Generic;
+
+    using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Web.ViewModels.Administration.BloodTypes;
-    using Microsoft.AspNetCore.Mvc;
 
     public class BecomePatientViewModel
     {
@@ -13,11 +15,6 @@
 
         public BloodTypeViewModel BloodType { get; set; }
 
-        [BindProperty]
-        public HospitalViewModel HospitalId { get; set; }
-        public void OnPost()
-        {
-
-        }
+        public int HospitalId { get; set; }
     }
 }
