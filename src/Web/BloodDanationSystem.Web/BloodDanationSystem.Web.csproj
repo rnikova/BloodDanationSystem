@@ -84,4 +84,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties wwwroot_4css_4style_1map__JsonSchema="" /></VisualStudio></ProjectExtensions>
 </Project>
