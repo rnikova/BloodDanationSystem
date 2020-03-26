@@ -16,11 +16,16 @@
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<LoginModel> logger;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(
+            SignInManager<ApplicationUser> signInManager,
+            ILogger<LoginModel> logger,
+            UserManager<ApplicationUser> userManager)
         {
+            this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
         }
@@ -38,7 +43,6 @@
         public class InputModel
         {
             [Required]
-            [Display(Name = "Username")]
             public string Username { get; set; }
 
             [Required]
@@ -51,6 +55,11 @@
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            if (this.User.Identity.IsAuthenticated)
+            {
+                this.Response.Redirect("/");
+            }
+
             if (!string.IsNullOrEmpty(this.ErrorMessage))
             {
                 this.ModelState.AddModelError(string.Empty, this.ErrorMessage);
@@ -79,17 +88,6 @@
                 {
                     this.logger.LogInformation("User logged in.");
                     return this.LocalRedirect(returnUrl);
-                }
-
-                if (result.RequiresTwoFactor)
-                {
-                    return this.RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = this.Input.RememberMe });
-                }
-
-                if (result.IsLockedOut)
-                {
-                    this.logger.LogWarning("User account locked out.");
-                    return this.RedirectToPage("./Lockout");
                 }
                 else
                 {

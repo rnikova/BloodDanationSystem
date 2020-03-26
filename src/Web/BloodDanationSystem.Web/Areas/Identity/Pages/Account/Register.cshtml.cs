@@ -6,7 +6,7 @@
     using System.Text;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
-
+    using BloodDanationSystem.Common;
     using BloodDanationSystem.Data.Models;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
@@ -77,13 +77,13 @@
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            this.ReturnUrl = returnUrl;
+            this.ReturnUrl = "/Identity/Account/Login";
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? this.Url.Content("~/");
+            returnUrl = "/Identity/Account/Login";
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (this.ModelState.IsValid)
             {
@@ -118,6 +118,7 @@
                     }
                     else
                     {
+                        await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
                         await this.signInManager.SignInAsync(user, isPersistent: false);
                         return this.LocalRedirect(returnUrl);
                     }
