@@ -4,35 +4,34 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using BloodDanationSystem.Common;
     using BloodDanationSystem.Data;
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Data.Models.Enums;
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
 
     public class DonorService : IDonorService
     {
         private readonly ApplicationDbContext context;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public DonorService(ApplicationDbContext context)
+        public DonorService(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             this.context = context;
-        }
-
-        public IQueryable<DonorServiceModel> All()
-        {
-            return this.context.Donors.To<DonorServiceModel>();
+            this.userManager = userManager;
         }
 
         public async Task<bool> Create(DonorServiceModel donorServiceModel)
         {
-            var user = this.context.Users.FirstOrDefault(x => x.Id == donorServiceModel.UserId);
-            var role = this.context.Roles.FirstOrDefault(x => x.Name == "Donor");
+            var user = await this.context.Users.FirstOrDefaultAsync(x => x.Id == donorServiceModel.UserId);
+            var role = await this.context.Roles.FirstOrDefaultAsync(x => x.Name == "Donor");
             var aboGroup = Enum.Parse<ABOGroup>(donorServiceModel.BloodType.ABOGroupName);
             var rhesusFactor = Enum.Parse<RhesusFactor>(donorServiceModel.BloodType.RhesusFactor);
 
-            var bloodType = this.context.BloodTypes.SingleOrDefault(x => x.ABOGroupName == aboGroup && x.RhesusFactor == rhesusFactor);
+            var bloodType = await this.context.BloodTypes.SingleOrDefaultAsync(x => x.ABOGroupName == aboGroup && x.RhesusFactor == rhesusFactor);
 
             var donor = new Donor()
             {
@@ -44,12 +43,17 @@
                 UserId = user.Id,
             };
 
-            user.Roles.Add(new IdentityUserRole<string>() { RoleId = role.Id, UserId = user.Id });
+            await this.userManager.AddToRoleAsync(user, GlobalConstants.DonorRoleName);
 
-            this.context.Donors.Add(donor);
+            await this.context.Donors.AddAsync(donor);
             var result = await this.context.SaveChangesAsync();
 
             return result > 0;
+        }
+
+        public IQueryable<DonorServiceModel> All()
+        {
+            return this.context.Donors.To<DonorServiceModel>();
         }
     }
 }

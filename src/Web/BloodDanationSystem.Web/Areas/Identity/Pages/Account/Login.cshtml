@@ -14,16 +14,16 @@
             <a href="#" class="btn btn-danger btn-block"><i class="fa fa-google"></i> Sign in with <b>Google</b></a>
         </div>
         <div class="or-seperator"><i>or</i></div>
-        <div asp-validation-summary="All" class="text-danger"></div>
+        <div asp-validation-summary="All" class="text-warning"></div>
         <div class="form-group">
             <label asp-for="Input.Username"></label>
             <input asp-for="Input.Username" class="form-control" />
-            <span asp-validation-for="Input.Username" class="text-danger"></span>
+            <span asp-validation-for="Input.Username" class="text-warning"></span>
         </div>
         <div class="form-group">
             <label asp-for="Input.Password"></label>
             <input asp-for="Input.Password" class="form-control" />
-            <span asp-validation-for="Input.Password" class="text-danger"></span>
+            <span asp-validation-for="Input.Password" class="text-warning"></span>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-success btn-block login-btn">Sign in</button>

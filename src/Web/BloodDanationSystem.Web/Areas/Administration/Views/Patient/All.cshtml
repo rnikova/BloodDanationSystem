@@ -5,15 +5,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>All</h1>
+<h1>All Patients</h1>
 
-<div>
-    <h4>All Patients</h4>
-    <hr />
-    @foreach (var patient in Model)
-    {
-        <h5 class="text-primary text-center mt-3">@patient.FullName</h5>
-        <h5 class="text-primary text-center mt-3">@patient.Age</h5>
-        <h5 class="text-primary text-center mt-3">@patient.BloodType</h5>
-    }
+<div class="row custyle">
+    <table class="table table-striped custab">
+        <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Blood Type</th>
+                <th scope="col">User</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <th scope="row">(@i+1)</th>
+                    <td>@Model[i].FullName</td>
+                    <td>@Model[i].Age </td>
+                    <td>@Model[i].BloodType.ToString() </td>
+                    <td>@Model[i].User.ToString() </td>
+                    <td>
+                        <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

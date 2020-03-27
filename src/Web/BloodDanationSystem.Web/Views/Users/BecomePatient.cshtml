@@ -6,48 +6,41 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Become Patient</h1>
 
-<h4>Patient</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="BecomePatient" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FullName" class="control-label"></label>
-                <input asp-for="FullName" class="form-control" />
-                <span asp-validation-for="FullName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
-                <span asp-validation-for="Age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BloodType" class="control-label"></label>
-                <select asp-for="BloodType.ABOGroupName" class="form-control" asp-items="Html.GetEnumSelectList<ABOGroup>()"></select>
-                <action selected=""></action>
-            </div>
-            <div class="form-group">
-                <label asp-for="BloodType" class="control-label"></label>
-                <select asp-for="BloodType.RhesusFactor" class="form-control" asp-items="Html.GetEnumSelectList<RhesusFactor>()"></select>
-                <action selected=""></action>
-            </div>
-            <div class="form-group">
-                <label asp-for="HospitalId" class="control-label"></label>
-                <select asp-for="HospitalId" class="form-control" asp-items="@(new SelectList(Model.Hospitals,"Id","Name"))">
-                </select>
-                <action selected=""></action>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="patient-form">
+    <h1>Become Patient</h1>
+    <form asp-action="BecomePatient" method="post">
+        <div asp-validation-summary="All" class="text-warning"></div>
+        <div class="form-group">
+            <label asp-for="FullName" class="control-label"></label>
+            <input asp-for="FullName" class="form-control" />
+            <span asp-validation-for="FullName" class="text-warning"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Age" class="control-label"></label>
+            <input asp-for="Age" class="form-control" />
+            <span asp-validation-for="Age" class="text-warning"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="BloodType" class="control-label"></label>
+            <select asp-for="BloodType.ABOGroupName" class="form-control" asp-items="Html.GetEnumSelectList<ABOGroup>()"></select>
+            <action selected=""></action>
+        </div>
+        <div class="form-group">
+            <label asp-for="BloodType" class="control-label"></label>
+            <select asp-for="BloodType.RhesusFactor" class="form-control" asp-items="Html.GetEnumSelectList<RhesusFactor>()"></select>
+            <action selected=""></action>
+        </div>
+        <div class="form-group">
+            <label asp-for="HospitalId" class="control-label"></label>
+            <select asp-for="HospitalId" class="form-control" asp-items="@(new SelectList(Model.Hospitals,"Id","Name"))">
+            </select>
+            <action selected=""></action>
+        </div>
+        <div class="form-group col-md-8 offset-5">
+            <input type="submit" value="Create" class="btn btn-success" />
+        </div>
+    </form>
 </div>
 

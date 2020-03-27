@@ -32,6 +32,11 @@
         [HttpPost]
         public async Task<IActionResult> BecomeDonor(DonorsCreateInputModel donorsCreateInputModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
             var user = await this.userManager.GetUserAsync(this.HttpContext.User);
 
             var model = new DonorServiceModel()
@@ -44,7 +49,7 @@
 
             await this.donorService.Create(model);
 
-            return this.RedirectToAction("/Home/Index");
+            return this.Redirect("/");
         }
 
         [HttpGet]
@@ -58,6 +63,11 @@
         [HttpPost]
         public async Task<IActionResult> BecomePatient(PatientsCreateInputModel patientCreateInputModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
             var user = await this.userManager.GetUserAsync(this.HttpContext.User);
 
             var model = new PatientServiceModel()
@@ -71,7 +81,7 @@
 
             await this.patientService.Create(model);
 
-            return this.RedirectToAction("/Home/Index");
+            return this.Redirect("/");
         }
     }
 }

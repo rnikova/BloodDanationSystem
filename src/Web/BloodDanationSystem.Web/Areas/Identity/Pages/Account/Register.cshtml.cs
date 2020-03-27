@@ -6,6 +6,7 @@
     using System.Text;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
+
     using BloodDanationSystem.Common;
     using BloodDanationSystem.Data.Models;
     using Microsoft.AspNetCore.Authentication;
@@ -112,16 +113,10 @@
                     string htmlMessage = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
                     await this.emailSender.SendEmailAsync(this.Input.Email, "Confirm your email", htmlMessage);
 
-                    //if (this.userManager.Options.SignIn.RequireConfirmedAccount)
-                    //{
-                    //    return this.RedirectToPage("RegisterConfirmation", new { email = this.Input.Email });
-                    //}
-                    //else
-                    //{
-                        await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
-                        await this.signInManager.SignInAsync(user, isPersistent: false);
-                        return this.LocalRedirect(returnUrl);
-                    //}
+                    await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
+                    await this.signInManager.SignInAsync(user, isPersistent: false);
+
+                    return this.LocalRedirect(returnUrl);
                 }
 
                 foreach (var error in result.Errors)

@@ -5,30 +5,34 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using BloodDanationSystem.Common;
     using BloodDanationSystem.Data;
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Data.Models.Enums;
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
 
     public class PatientService : IPatientService
     {
         private readonly ApplicationDbContext context;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public PatientService(ApplicationDbContext context)
+        public PatientService(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             this.context = context;
+            this.userManager = userManager;
         }
 
         public async Task<bool> Create(PatientServiceModel patientServiceModel)
         {
-            var user = this.context.Users.FirstOrDefault(x => x.Id == patientServiceModel.UserId);
-            var role = this.context.Roles.FirstOrDefault(x => x.Name == "Patient");
+            var user = await this.context.Users.FirstOrDefaultAsync(x => x.Id == patientServiceModel.UserId);
+            var role = await this.context.Roles.FirstOrDefaultAsync(x => x.Name == "Patient");
             var aboGroup = Enum.Parse<ABOGroup>(patientServiceModel.BloodType.ABOGroupName);
             var rhesusFactor = Enum.Parse<RhesusFactor>(patientServiceModel.BloodType.RhesusFactor);
 
-            var bloodType = this.context.BloodTypes.SingleOrDefault(x => x.ABOGroupName == aboGroup && x.RhesusFactor == rhesusFactor);
+            var bloodType = await this.context.BloodTypes.SingleOrDefaultAsync(x => x.ABOGroupName == aboGroup && x.RhesusFactor == rhesusFactor);
 
             var patient = new Patient()
             {
@@ -41,9 +45,9 @@
                 HospitalId = patientServiceModel.HospitalId,
             };
 
-            user.Roles.Add(new IdentityUserRole<string>() { RoleId = role.Id, UserId = user.Id });
+            await this.userManager.AddToRoleAsync(user, GlobalConstants.PatientRoleName);
 
-            this.context.Patients.Add(patient);
+            await this.context.Patients.AddAsync(patient);
             var result = await this.context.SaveChangesAsync();
 
             return result > 0;
