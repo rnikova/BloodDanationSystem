@@ -1,0 +1,112 @@
+﻿@{
+    this.ViewData["Title"] = "About us";
+}
+
+<div class="breadcam_area bradcam_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="breadcam_text">
+                    <h3>About Us</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="about_page">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 col-md-6">
+                <div class="about_image">
+                    <img src="~/img/about/1.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="about_image">
+                    <img src="~/img/about/2.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="about_info">
+                    <h3>
+                        We are Global Non-profit NGO to help peoples <br>
+                        To make a better World
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 col-md-6">
+                <div class="about_text_info">
+                    <p>
+                        According to the research firm Frost & Sullivan, the estimated size of the North
+                        American used test and measurement equipment market was $446.4 million
+                        in 2004 and is estimated to grow to $654.5 million by 2011. For over 50 years,
+                        companies and governments have procured used test and measurement
+                        instruments.
+                    </p>
+                    <p>
+                        According to the research firm Frost & Sullivan, the estimated size of the North
+                        American used test and measurement equipment market was $446.4 million
+                        in 2004 and is estimated to grow to $654.5 million by 2011. For over 50 years,
+                        companies and governments have procured used test and measurement
+                        instruments.
+                    </p>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="about_text_info">
+                    <p>
+                        According to the research firm Frost & Sullivan, the estimated size of the North
+                        American used test and measurement equipment market was $446.4 million
+                        in 2004 and is estimated to grow to $654.5 million by 2011. For over 50 years,
+                        companies and governments have procured used test and measurement
+                        instruments.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (!this.User.Identity.IsAuthenticated)
+{
+    <div class="become_volunter volunter_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 offset-xl-2 col-md-10 offset-md-1">
+                    <div class="volunter_text text-center">
+                        <h3>Become a Volunteer</h3>
+                        <p>
+                            Inspires employees and organizations to support causes they care <br>
+                            about. We do this to bring more resources to the nonprofits that are
+                            changing our world.
+                        </p>
+                        <a class="boxed-btn4" href="/Identity/Account/Register">Join Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="become_volunter volunter_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 offset-xl-2 col-md-10 offset-md-1">
+                    <div class="volunter_text text-center">
+                        <h3>Become a Volunteer</h3>
+                        <p>
+                            Inspires employees and organizations to support causes they care <br>
+                            about. We do this to bring more resources to the nonprofits that are
+                            changing our world.
+                        </p>
+                        <a class="boxed-btn4" href="">Join Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
