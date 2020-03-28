@@ -5,35 +5,49 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>All Donors</h1>
-
-<div class="row custyle">
-    <table class="table table-striped custab">
-        <thead>
-            <tr>
-                <th class="text-center">#</th>
-                <th scope="col">Full Name</th>
-                <th scope="col">Age</th>
-                <th scope="col">Blood Type</th>
-                <th scope="col">User</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (var i = 0; i < Model.Count; i++)
-            {
-                <tr>
-                    <th scope="row">(@i+1)</th>
-                    <td>@Model[i].FullName</td>
-                    <td>@Model[i].Age </td>
-                    <td>@Model[i].BloodType.ToString() </td>
-                    <td>@Model[i].User.ToString() </td>
-                    <td>
-                        <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="card mb-4">
+    <div class="card-body">
+        <!-- Grid row -->
+        <div class="row">
+            <!-- Grid column -->
+            <div class="col-md-12">
+                <h2 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">Search within donors</h2>
+                <div class="input-group md-form form-sm form-2 pl-0">
+                    <input class="form-control my-0 py-1 pl-3 purple-border text-light" type="text" placeholder="Search something here..." aria-label="Search">
+                    <span class="input-group-addon waves-effect purple lighten-2" id="basic-addon1"><a><i class="fa fa-search white-text text-light" aria-hidden="true"></i></a></span>
+                </div>
+            </div>
+            <!-- Grid column -->
+        </div>
+        <div class="row custyle">
+            <table class="table table-striped text-light">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Blood Type</th>
+                        <th scope="col">User</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <th scope="row">(@i+1)</th>
+                            <td>@Model[i].FullName</td>
+                            <td>@Model[i].Age </td>
+                            <td>@Model[i].BloodType.ToString() </td>
+                            <td>@Model[i].User.ToString() </td>
+                            <td>
+                                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
