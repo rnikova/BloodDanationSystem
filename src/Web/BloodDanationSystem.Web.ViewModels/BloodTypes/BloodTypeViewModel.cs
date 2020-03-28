@@ -1,6 +1,10 @@
 ﻿namespace BloodDanationSystem.Web.ViewModels.Administration.BloodTypes
 {
-    public class BloodTypeViewModel
+    using BloodDanationSystem.Data.Models;
+    using BloodDanationSystem.Services.Mapping;
+    using BloodDonationSystem.Services.Models;
+
+    public class BloodTypeViewModel : IMapFrom<BloodTypeServiceModel>, IMapTo<BloodTypeServiceModel>
     {
         public int Id { get; set; }
 

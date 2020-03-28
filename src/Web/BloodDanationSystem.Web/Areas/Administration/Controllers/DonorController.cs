@@ -5,6 +5,7 @@
     using BloodDanationSystem.Services;
     using BloodDanationSystem.Services.Mapping;
     using BloodDanationSystem.Web.ViewModels.Administration.Donor;
+    using BloodDonationSystem.Services.Models;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 

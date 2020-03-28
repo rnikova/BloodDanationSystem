@@ -3,6 +3,7 @@
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models;
+    using BloodDonationSystem.Services.Models.Patients;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -22,6 +23,7 @@
 
         public string UserId { get; set; }
 
+        [Display(Name ="Hospital")]
         public int HospitalId { get; set; }
 
         public IEnumerable<Hospital> Hospitals { get; set; }

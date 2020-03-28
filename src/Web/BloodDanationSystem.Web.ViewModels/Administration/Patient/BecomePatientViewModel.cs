@@ -1,8 +1,5 @@
 ﻿namespace BloodDanationSystem.Web.ViewModels.Administration.Patient
 {
-    using System.Collections.Generic;
-
-    using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Web.ViewModels.Administration.BloodTypes;
 
     public class BecomePatientViewModel

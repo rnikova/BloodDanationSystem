@@ -7,7 +7,7 @@
 
     public interface IDonorService
     {
-        Task<bool> Create(DonorServiceModel donorServiceModel);
+        Task<bool> CreateAsync(DonorServiceModel donorServiceModel);
 
         IQueryable<DonorServiceModel> All();
     }

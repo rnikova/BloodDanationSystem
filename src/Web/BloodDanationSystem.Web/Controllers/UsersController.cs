@@ -4,7 +4,10 @@
 
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Services;
+    using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models;
+    using BloodDonationSystem.Services.Models.Patients;
+    using BloodDonationSystem.Services.Models.Users;
     using BloodDonationSystem.Web.InputModels.Donors;
     using BloodDonationSystem.Web.InputModels.Patients;
     using Microsoft.AspNetCore.Identity;
@@ -41,13 +44,14 @@
 
             var model = new DonorServiceModel()
             {
+                Id = donorsCreateInputModel.Id,
                 FullName = donorsCreateInputModel.FullName,
                 Age = donorsCreateInputModel.Age,
                 BloodType = donorsCreateInputModel.BloodType,
                 UserId = user.Id,
             };
 
-            await this.donorService.Create(model);
+            await this.donorService.CreateAsync(model);
 
             return this.Redirect("/");
         }
@@ -56,8 +60,12 @@
         public IActionResult BecomePatient()
         {
             var hospitals = this.patientService.AllHospitals();
-            var hospital = new PatientsCreateInputModel { Hospitals = hospitals };
-            return this.View(hospital);
+            var inputModel = new PatientsCreateInputModel
+            {
+                Hospitals = hospitals,
+            };
+
+            return this.View(inputModel);
         }
 
         [HttpPost]
@@ -79,7 +87,7 @@
                 UserId = user.Id,
             };
 
-            await this.patientService.Create(model);
+            await this.patientService.CreateAsync(model);
 
             return this.Redirect("/");
         }

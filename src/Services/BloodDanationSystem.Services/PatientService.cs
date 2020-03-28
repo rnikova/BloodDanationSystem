@@ -10,7 +10,7 @@
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Data.Models.Enums;
     using BloodDanationSystem.Services.Mapping;
-    using BloodDonationSystem.Services.Models;
+    using BloodDonationSystem.Services.Models.Patients;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
@@ -25,10 +25,9 @@
             this.userManager = userManager;
         }
 
-        public async Task<bool> Create(PatientServiceModel patientServiceModel)
+        public async Task<bool> CreateAsync(PatientServiceModel patientServiceModel)
         {
             var user = await this.context.Users.FirstOrDefaultAsync(x => x.Id == patientServiceModel.UserId);
-            var role = await this.context.Roles.FirstOrDefaultAsync(x => x.Name == "Patient");
             var aboGroup = Enum.Parse<ABOGroup>(patientServiceModel.BloodType.ABOGroupName);
             var rhesusFactor = Enum.Parse<RhesusFactor>(patientServiceModel.BloodType.RhesusFactor);
 

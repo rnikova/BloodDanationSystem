@@ -1,6 +1,10 @@
-﻿namespace BloodDonationSystem.Services.Models.Patients
+﻿using BloodDanationSystem.Data.Models;
+using BloodDanationSystem.Services.Mapping;
+using BloodDonationSystem.Services.Models.Users;
+
+namespace BloodDonationSystem.Services.Models.Patients
 {
-    public class PatientServiceModel
+    public class PatientServiceModel : IMapFrom<Patient>, IMapTo<Patient>
     {
         public string FullName { get; set; }
 
@@ -12,6 +16,10 @@
 
         public string UserId { get; set; }
 
-        public string HospitalId { get; set; }
+        public UserServiceModel User { get; set; }
+
+        public int HospitalId { get; set; }
+
+        public HospitalServiceModel Hospital { get; set; }
     }
 }

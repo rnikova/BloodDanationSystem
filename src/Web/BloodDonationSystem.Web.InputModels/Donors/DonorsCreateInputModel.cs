@@ -8,6 +8,8 @@
 
     public class DonorsCreateInputModel : IMapTo<DonorServiceModel>, IMapFrom<DonorServiceModel>
     {
+        public string Id { get; set; }
+
         [Required]
         public string FullName { get; set; }
 

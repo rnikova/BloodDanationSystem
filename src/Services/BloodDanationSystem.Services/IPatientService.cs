@@ -5,11 +5,11 @@
     using System.Threading.Tasks;
 
     using BloodDanationSystem.Data.Models;
-    using BloodDonationSystem.Services.Models;
+    using BloodDonationSystem.Services.Models.Patients;
 
     public interface IPatientService
     {
-        Task<bool> Create(PatientServiceModel patientServiceModel);
+        Task<bool> CreateAsync(PatientServiceModel patientServiceModel);
 
         IQueryable<PatientServiceModel> All();
 

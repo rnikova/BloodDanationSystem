@@ -77,7 +77,7 @@ body {
     line-height: 1.5;
     color: #212529;
     text-align: left;
-    background-color: #fff
+    background-color: #450000;
 }
 
 [tabindex="-1"]:focus {
@@ -1924,13 +1924,13 @@ pre {
 }
 
 .table {
-    width: 93%;
+    width: 100%;
     max-width: 100%;
     margin: 0px auto;
     margin-bottom: 1rem;
     margin-top: 1rem;
     background-color: transparent;
-        border:1px solid
+    border: 1px solid
 }
 
     .table td,
@@ -1946,7 +1946,7 @@ pre {
     }
 
     .table tbody + tbody {
-        border-top: 2px solid #dee2e6
+        border-top: 2px solid #dee2e6;
     }
 
     .table .table {
@@ -1977,7 +1977,10 @@ pre {
 }
 
 .table-hover tbody tr:hover {
-    background-color: rgba(0, 0, 0, .075)
+    background-color: #b9405b86;
+}
+.table .table-hover tr:hover {
+    background-color: #a13006;
 }
 
 .table-primary,
@@ -10054,4 +10057,26 @@ a.text-dark:hover {
 
 .table.table-bordered th {
     text-align: center;
+}
+
+.custyle table-hover tr:hover {
+    background-color: #17a2b8;
+}
+
+.btn-label {
+    position: relative;
+    left: -12px;
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 3px 0 0 3px;
+}
+
+.btn-labeled {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.btn {
+    margin-bottom: 10px;
 }

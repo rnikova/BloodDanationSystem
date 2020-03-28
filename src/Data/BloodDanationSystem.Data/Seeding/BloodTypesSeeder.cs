@@ -31,6 +31,16 @@
                 },
                 new BloodType
                 {
+                    ABOGroupName = ABOGroup.O,
+                    RhesusFactor = RhesusFactor.NoMatter,
+                },
+                new BloodType
+                {
+                    ABOGroupName = ABOGroup.O,
+                    RhesusFactor = RhesusFactor.Unknown,
+                },
+                new BloodType
+                {
                     ABOGroupName = ABOGroup.A,
                     RhesusFactor = RhesusFactor.Plus,
                 },
@@ -38,6 +48,16 @@
                 {
                     ABOGroupName = ABOGroup.A,
                     RhesusFactor = RhesusFactor.Minus,
+                },
+                new BloodType
+                {
+                    ABOGroupName = ABOGroup.A,
+                    RhesusFactor = RhesusFactor.NoMatter,
+                },
+                new BloodType
+                {
+                    ABOGroupName = ABOGroup.A,
+                    RhesusFactor = RhesusFactor.Unknown,
                 },
                 new BloodType
                 {
@@ -51,6 +71,16 @@
                 },
                 new BloodType
                 {
+                    ABOGroupName = ABOGroup.B,
+                    RhesusFactor = RhesusFactor.NoMatter,
+                },
+                new BloodType
+                {
+                    ABOGroupName = ABOGroup.B,
+                    RhesusFactor = RhesusFactor.Unknown,
+                },
+                new BloodType
+                {
                     ABOGroupName = ABOGroup.AB,
                     RhesusFactor = RhesusFactor.Plus,
                 },
@@ -58,6 +88,16 @@
                 {
                     ABOGroupName = ABOGroup.AB,
                     RhesusFactor = RhesusFactor.Minus,
+                },
+                new BloodType
+                {
+                    ABOGroupName = ABOGroup.AB,
+                    RhesusFactor = RhesusFactor.NoMatter,
+                },
+                new BloodType
+                {
+                    ABOGroupName = ABOGroup.AB,
+                    RhesusFactor = RhesusFactor.Unknown,
                 },
             };
 

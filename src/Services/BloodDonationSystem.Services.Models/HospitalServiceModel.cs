@@ -1,9 +1,9 @@
-﻿namespace BloodDanationSystem.Web.ViewModels.Administration.Patient
+﻿namespace BloodDonationSystem.Services.Models
 {
+    using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Services.Mapping;
-    using BloodDonationSystem.Services.Models;
 
-    public class HospitalViewModel : IMapFrom<HospitalServiceModel>
+    public class HospitalServiceModel : IMapFrom<Hospital>, IMapTo<Hospital>
     {
         public string Name { get; set; }
 
