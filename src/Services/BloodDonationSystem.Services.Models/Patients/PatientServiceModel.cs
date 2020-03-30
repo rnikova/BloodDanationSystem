@@ -1,9 +1,9 @@
-﻿using BloodDanationSystem.Data.Models;
-using BloodDanationSystem.Services.Mapping;
-using BloodDonationSystem.Services.Models.Users;
-
-namespace BloodDonationSystem.Services.Models.Patients
+﻿namespace BloodDonationSystem.Services.Models.Patients
 {
+    using BloodDanationSystem.Data.Models;
+    using BloodDanationSystem.Services.Mapping;
+    using BloodDonationSystem.Services.Models.Users;
+
     public class PatientServiceModel : IMapFrom<Patient>, IMapTo<Patient>
     {
         public string FullName { get; set; }

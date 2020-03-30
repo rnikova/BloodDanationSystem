@@ -5,9 +5,11 @@
     using BloodDanationSystem.Services;
     using BloodDanationSystem.Services.Mapping;
     using BloodDanationSystem.Web.ViewModels.Administration.Patient;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
+    [Authorize]
     public class PatientController : AdministrationController
     {
         private readonly IPatientService patientService;

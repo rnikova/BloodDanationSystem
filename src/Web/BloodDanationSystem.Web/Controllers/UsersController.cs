@@ -7,12 +7,13 @@
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models;
     using BloodDonationSystem.Services.Models.Patients;
-    using BloodDonationSystem.Services.Models.Users;
     using BloodDonationSystem.Web.InputModels.Donors;
     using BloodDonationSystem.Web.InputModels.Patients;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;

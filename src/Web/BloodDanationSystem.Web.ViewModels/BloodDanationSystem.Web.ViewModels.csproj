@@ -25,4 +25,8 @@
     <ProjectReference Include="..\..\Services\BloodDonationSystem.Services.Models\BloodDonationSystem.Services.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Informations\" />
+  </ItemGroup>
+
 </Project>

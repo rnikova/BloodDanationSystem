@@ -6,9 +6,11 @@
     using BloodDanationSystem.Services.Mapping;
     using BloodDanationSystem.Web.ViewModels.Administration.Donor;
     using BloodDonationSystem.Services.Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
+    [Authorize]
     public class DonorController : AdministrationController
     {
         private readonly IDonorService donorService;
