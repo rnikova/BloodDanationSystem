@@ -1,4 +1,6 @@
-﻿@{
+﻿@using BloodDanationSystem.Common
+
+@{
     this.ViewData["Title"] = "About us";
 }
 
@@ -103,7 +105,14 @@ else
                             about. We do this to bring more resources to the nonprofits that are
                             changing our world.
                         </p>
-                        <a class="boxed-btn4" href="">Join Now</a>
+                        @if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.DonorRoleName))
+                        {
+                            <a class="boxed-btn4" href="/Users/FindPatient">Join Now</a>
+                        }
+                        else if (this.User.Identity.IsAuthenticated && !this.User.IsInRole(GlobalConstants.DonorRoleName))
+                        {
+                            <a class="boxed-btn4" href="/Users/BecomeDonor">Join Now</a>
+                        }
                     </div>
                 </div>
             </div>
