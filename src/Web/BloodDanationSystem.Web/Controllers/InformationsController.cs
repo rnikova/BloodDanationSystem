@@ -2,8 +2,8 @@
 {
     using System.Threading.Tasks;
 
+    using Aspose.Words;
     using BloodDanationSystem.Services;
-    using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models.Informations;
     using BloodDonationSystem.Web.InputModels.Informations;
     using Microsoft.AspNetCore.Mvc;
@@ -47,6 +47,19 @@
             await this.informationsService.CreateContactFormAsync(model);
 
             return this.Redirect("/");
+        }
+
+        [HttpGet]
+        public IActionResult Article()
+        {
+            string filepath = @"Articles/QA.docx";
+            Document doc = new Document(filepath);
+            string allText = doc.ToString(SaveFormat.Html);
+
+            var text = allText.Substring(51062);
+
+            this.ViewBag.WordHtml = text;
+            return this.View();
         }
     }
 }
