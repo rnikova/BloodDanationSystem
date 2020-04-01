@@ -20,6 +20,6 @@
 
         public int HospitalId { get; set; }
 
-        public HospitalServiceModel Hospital { get; set; }
+        public BloodCentersServiceModel Hospital { get; set; }
     }
 }

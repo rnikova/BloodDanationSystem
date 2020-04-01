@@ -1,4 +1,4 @@
-﻿namespace BloodDonationSystem.Services.Models
+﻿namespace BloodDonationSystem.Services.Models.Hospitals
 {
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Services.Mapping;

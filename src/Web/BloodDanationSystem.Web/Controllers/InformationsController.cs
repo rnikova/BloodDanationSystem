@@ -5,6 +5,9 @@
     using Aspose.Words;
     using Aspose.Words.Saving;
     using BloodDanationSystem.Services;
+    using BloodDanationSystem.Services.Mapping;
+    using BloodDanationSystem.Web.ViewModels.Administration.Patient;
+    using BloodDanationSystem.Web.ViewModels.BloodCenters;
     using BloodDonationSystem.Services.Models.Informations;
     using BloodDonationSystem.Web.InputModels.Informations;
     using Microsoft.AspNetCore.Mvc;
@@ -51,9 +54,37 @@
         }
 
         [HttpGet]
-        public IActionResult Article()
+        public IActionResult BloodCenters()
+        {
+            var hospitals = this.informationsService.AllBloodCenters().To<BloodCentersViewModel>();
+
+            return this.View(hospitals);
+        }
+
+        [HttpGet]
+        public IActionResult ArticleQA()
         {
             string filepath = @"Articles/QA.docx";
+            Document doc = new Document(filepath);
+
+            HtmlSaveOptions saveOptions = new HtmlSaveOptions
+            {
+                ExportHeadersFootersMode = ExportHeadersFootersMode.None,
+                ExportRelativeFontSize = true,
+                CssStyleSheetType = CssStyleSheetType.External,
+            };
+
+            string allText = doc.ToString(saveOptions);
+            var text = allText.Substring(406);
+
+            this.ViewBag.WordHtml = text;
+            return this.View();
+        }
+
+        [HttpGet]
+        public IActionResult ArticleTests()
+        {
+            string filepath = @"Articles/Tests.docx";
             Document doc = new Document(filepath);
 
             HtmlSaveOptions saveOptions = new HtmlSaveOptions

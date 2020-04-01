@@ -1,0 +1,25 @@
+﻿@using System.Linq;
+@model IQueryable<BloodDanationSystem.Web.ViewModels.BloodCenters.BloodCentersViewModel>
+
+@{
+    ViewData["Title"] = "Hospitals";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @foreach (var bloodCenter in Model)
+    {
+        <div class="col-xl-4 col-lg-4">
+            <div class="card-bloodCenters">
+                <div class="card-header-bloodCenters">@bloodCenter.Name</div>
+                <div class="card-body-bloodCenters">
+                    <p class="card-text">@bloodCenter.Address</p>
+                    <p class="card-text">@bloodCenter.Phone</p>
+                    <p class="card-text">@bloodCenter.WorkingHours</p>
+                    <p class="card-text">@bloodCenter.Email</p>
+                    <p class="card-text">@bloodCenter.EventPhone</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,11 +1,13 @@
 ﻿namespace BloodDanationSystem.Services
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using BloodDanationSystem.Data;
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Services.Mapping;
+    using BloodDonationSystem.Services.Models;
     using BloodDonationSystem.Services.Models.Informations;
 
     public class InformationsService : IInformationsService
@@ -52,6 +54,11 @@
             };
 
             return model;
+        }
+
+        public IQueryable<BloodCentersServiceModel> AllBloodCenters()
+        {
+            return this.context.BloodCenters.OrderBy(x => x.City.Name).To<BloodCentersServiceModel>();
         }
     }
 }

@@ -102,7 +102,8 @@ h6 {
 
 p {
     margin-top: 0;
-    margin-bottom: 1rem
+    margin-bottom: 1rem;
+    color: black;
 }
 
 abbr[data-original-title],
@@ -720,8 +721,8 @@ pre {
     position: relative;
     width: 100%;
     min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px
+    padding-right: 40px;
+    padding-left: 40px;
 }
 
 .col {
@@ -10084,4 +10085,53 @@ a.text-dark:hover {
 
 .btn {
     margin-bottom: 10px;
+}
+
+.card-bloodCenters {
+    margin: 20px;
+    text-align: center;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #450000;
+    background-clip: border-box;
+    border: 6px solid rgba(0, 0, 0, .125);
+    border-radius: 9.25rem;
+    width: 450px;
+    background-color: #521219;
+}
+
+.card-body-bloodCenters {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: .25rem;
+    margin: 2px;
+}
+
+.card-header-bloodCenters {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, .03);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+    color: #f0e9ff;
+}
+
+.card-header-tabs-bloodCenters {
+    margin-right: -.625rem;
+    margin-bottom: -.75rem;
+    margin-left: -.625rem;
+    border-bottom: 0
+}
+
+.card-header-pills-bloodCenters {
+    margin-right: -.625rem;
+    margin-left: -.625rem
 }

@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using BloodDonationSystem.Services.Models;
     using BloodDonationSystem.Services.Models.Informations;
 
     public interface IInformationsService
@@ -12,5 +13,7 @@
         IQueryable<ContactFormServiceModel> AllMessages();
 
         Task<ContactFormServiceModel> GetByIdAsync(string id);
+
+        IQueryable<BloodCentersServiceModel> AllBloodCenters();
     }
 }

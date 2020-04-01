@@ -3,7 +3,7 @@
     using BloodDanationSystem.Services.Mapping;
     using BloodDanationSystem.Web.ViewModels.Administration.BloodTypes;
     using BloodDanationSystem.Web.ViewModels.Administration.User;
-    using BloodDonationSystem.Services.Models;
+    using BloodDanationSystem.Web.ViewModels.Hospitals;
     using BloodDonationSystem.Services.Models.Patients;
 
     public class PatientAllViewModel : IMapFrom<PatientServiceModel>

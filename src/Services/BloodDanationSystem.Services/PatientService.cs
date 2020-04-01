@@ -1,7 +1,6 @@
 ﻿namespace BloodDanationSystem.Services
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -10,6 +9,7 @@
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Data.Models.Enums;
     using BloodDanationSystem.Services.Mapping;
+    using BloodDonationSystem.Services.Models.Hospitals;
     using BloodDonationSystem.Services.Models.Patients;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -57,9 +57,9 @@
             return this.context.Patients.To<PatientServiceModel>();
         }
 
-        public IEnumerable<Hospital> AllHospitals()
+        public IQueryable<HospitalServiceModel> AllHospitals()
         {
-            return this.context.Hospitals.ToList();
+            return this.context.Hospitals.To<HospitalServiceModel>();
         }
     }
 }

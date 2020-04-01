@@ -8,13 +8,14 @@
     using BloodDonationSystem.Services.Models;
     using BloodDonationSystem.Services.Models.Patients;
     using BloodDonationSystem.Web.InputModels.Donors;
+    using BloodDonationSystem.Web.InputModels.Hospitals;
     using BloodDonationSystem.Web.InputModels.Patients;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IDonorService donorService;
@@ -63,7 +64,7 @@
             var hospitals = this.patientService.AllHospitals();
             var inputModel = new PatientsCreateInputModel
             {
-                Hospitals = hospitals,
+                Hospitals = hospitals.To<HospitalInputModel>(),
             };
 
             return this.View(inputModel);
