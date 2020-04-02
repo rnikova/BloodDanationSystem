@@ -275,7 +275,8 @@ textarea {
 
 button,
 input {
-    overflow: visible
+    overflow: visible;
+    width: 100%;
 }
 
 button,
@@ -346,7 +347,8 @@ progress {
 
 [type=search] {
     outline-offset: -2px;
-    -webkit-appearance: none
+    -webkit-appearance: none;
+    background-color: #450000;
 }
 
     [type=search]::-webkit-search-cancel-button,
@@ -721,8 +723,6 @@ pre {
     position: relative;
     width: 100%;
     min-height: 1px;
-    padding-right: 40px;
-    padding-left: 40px;
 }
 
 .col {

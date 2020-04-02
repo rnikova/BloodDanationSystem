@@ -42,6 +42,7 @@
                 User = user,
                 UserId = user.Id,
                 HospitalId = patientServiceModel.HospitalId,
+                Ward = patientServiceModel.Ward,
             };
 
             await this.userManager.AddToRoleAsync(user, GlobalConstants.PatientRoleName);

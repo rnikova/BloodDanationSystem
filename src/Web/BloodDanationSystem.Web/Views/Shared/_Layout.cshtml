@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="~/css/animate.css">
         <link rel="stylesheet" href="~/css/slicknav.css">
         <link rel="stylesheet" href="~/css/style.css">
+        <link rel="stylesheet" href="~/css/jquery.dataTables.min.css">
         <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     </environment>
     <environment names="Staging,Production">
@@ -40,8 +41,8 @@
                         <div class="row align-items-center justify-content-between no-gutters">
                             <div class="col-xl-1 col-lg-1">
                                 <div class="logo-img">
-                                    <a href="~/Index.cshtml">
-                                        <img src="~/img/favicon.png" alt="">
+                                    <a href="/">
+                                        <img src="~/img/logo.png" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -49,8 +50,7 @@
                                 <div class="main-menu d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a class="active" href="/">home</a></li>
-                                            <li><a href="/Informations/About">About</a></li>
+                                            <li><a href="/Informations/About">За нас</a></li>
                                             <li><a href="causes.html">causes</a></li>
                                             <li><a href="impact.html">impact</a></li>
 
@@ -69,12 +69,12 @@
                                                     <li><a href="elements.html">elements</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="/Administration/Information/Emails">Emails</a></li>
+                                            <li><a href="/Administration/Information/Emails">Съобщения</a></li>
                                             <li>
-                                                <a href="#">Users<i class="ti-angle-down"></i></a>
+                                                <a href="#">Кръводаряване<i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                    <li><a href="/Administration/Donor/All">Donors</a></li>
-                                                    <li><a href="/Administration/Patient/All">Patients</a></li>
+                                                    <li><a href="/Administration/Donor/All">Донори</a></li>
+                                                    <li><a href="/Administration/Patient/All">Пациенти</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -102,8 +102,8 @@
                         <div class="row align-items-center justify-content-between no-gutters">
                             <div class="col-xl-1 col-lg-1">
                                 <div class="logo-img">
-                                    <a href="~/Index.cshtml">
-                                        <img src="~/img/favicon.png" alt="">
+                                    <a href="/">
+                                        <img src="~/img/logo.png" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -111,8 +111,7 @@
                                 <div class="main-menu d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a class="active" href="/">home</a></li>
-                                            <li><a href="/Informations/About">About</a></li>
+                                            <li><a href="/Informations/About">За нас</a></li>
                                             <li><a href="causes.html">causes</a></li>
                                             <li><a href="impact.html">impact</a></li>
 
@@ -133,10 +132,23 @@
                                             </li>
                                             <li><a href="/Informations/Contact">Contact</a></li>
                                             <li>
-                                                <a href="#">Users<i class="ti-angle-down"></i></a>
+                                                <a href="/">Кърводаряване<i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                    <li><a href="/Users/BecomeDonor">Become Donor</a></li>
-                                                    <li><a href="/Users/BecomePatient">Become Patient</a></li>
+                                                    @if (this.User.IsInRole(GlobalConstants.DonorRoleName))
+                                                    {
+                                                        <li><a href="/Users/BecomePatient">Регистрирай нужда от кръв</a></li>
+                                                        <li><a href="/Users/">Намери нуждаещ се</a></li>
+                                                    }
+                                                    else if (this.User.IsInRole(GlobalConstants.PatientRoleName))
+                                                    {
+                                                        <li><a href="/Users/BecomeDonor">Стани Кръводарител</a></li>
+                                                        <li><a href="/Users/">Намери кръводарител</a></li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><a href="/Users/BecomeDonor">Стани Кръводарител</a></li>
+                                                        <li><a href="/Users/BecomePatient">Регистрирай нужда от кръв</a></li>
+                                                    }
                                                 </ul>
                                             </li>
                                         </ul>
@@ -164,8 +176,8 @@
                         <div class="row align-items-center justify-content-between no-gutters">
                             <div class="col-xl-1 col-lg-1">
                                 <div class="logo-img">
-                                    <a href="~/Index.cshtml">
-                                        <img src="~/img/favicon.png" alt="">
+                                    <a href="/">
+                                        <img src="~/img/logo.png" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -173,8 +185,7 @@
                                 <div class="main-menu d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a class="active" href="/">home</a></li>
-                                            <li><a href="/Informations/About">About</a></li>
+                                            <li><a href="/Informations/About">За нас</a></li>
                                             <li><a href="causes.html">causes</a></li>
                                             <li><a href="impact.html">impact</a></li>
 
@@ -325,13 +336,14 @@
     <script src="~/js/jquery.slicknav.min.js"></script>
     <script src="~/js/jquery.magnific-popup.min.js"></script>
     <script src="~/js/plugins.js"></script>
+    <script src="~/js/jquery.dataTables.min.js"></script>
 
     <!--contact js-->
     <script src="~/js/contact.js"></script>
     <script src="~/js/jquery.ajaxchimp.min.js"></script>
     <script src="~/js/jquery.form.js"></script>
     <script src="~/js/jquery.validate.min.js"></script>
-    <script src="~/js/mail-script.js"></script>    
+    <script src="~/js/mail-script.js"></script>
 
     <script src="~/js/main.js"></script>
     @RenderSection("Scripts", required: false)

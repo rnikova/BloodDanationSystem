@@ -5,6 +5,7 @@
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Services;
     using BloodDanationSystem.Services.Mapping;
+    using BloodDanationSystem.Web.ViewModels;
     using BloodDonationSystem.Services.Models;
     using BloodDonationSystem.Services.Models.Patients;
     using BloodDonationSystem.Web.InputModels.Donors;
@@ -64,7 +65,7 @@
             var hospitals = this.patientService.AllHospitals();
             var inputModel = new PatientsCreateInputModel
             {
-                Hospitals = hospitals.To<HospitalInputModel>(),
+                Hospitals = hospitals,
             };
 
             return this.View(inputModel);
@@ -75,7 +76,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View();
+                return this.View("Error", new ErrorViewModel { Message = "Моля въведете коректни данни" });
             }
 
             var user = await this.userManager.GetUserAsync(this.HttpContext.User);
@@ -84,9 +85,10 @@
             {
                 FullName = patientCreateInputModel.FullName,
                 Age = patientCreateInputModel.Age,
-                BloodType = patientCreateInputModel.BloodType,
                 HospitalId = patientCreateInputModel.HospitalId,
+                BloodType = patientCreateInputModel.BloodType,
                 UserId = user.Id,
+                Ward = patientCreateInputModel.Ward,
             };
 
             await this.patientService.CreateAsync(model);

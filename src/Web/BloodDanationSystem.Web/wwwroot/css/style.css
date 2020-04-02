@@ -82,6 +82,7 @@ p {
 }
 
 label {
+    width: 100%;
     color: #7e7e7e;
     cursor: pointer;
     font-size: 14px;

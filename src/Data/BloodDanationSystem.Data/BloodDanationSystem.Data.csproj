@@ -17,6 +17,8 @@
     <Compile Remove="Migrations\20200318113230_AddInitialModel.Designer.cs" />
     <Compile Remove="Migrations\20200318113512_AddInitialModel.cs" />
     <Compile Remove="Migrations\20200318113512_AddInitialModel.Designer.cs" />
+    <Compile Remove="Migrations\20200402193738_AddWards.cs" />
+    <Compile Remove="Migrations\20200402193738_AddWards.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -11,10 +11,12 @@
         public string Id { get; set; }
 
         [Required]
+        [Display(Name = "Трите имена")]
         public string FullName { get; set; }
 
         [Required]
         [Range(DonorMinAge, DonorMaxAge)]
+        [Display(Name = "Години")]
         public int Age { get; set; }
 
         public string BloodTypeId { get; set; }

@@ -31,5 +31,8 @@
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
+
+        [Required]
+        public string Ward { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 {
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Services.Mapping;
+    using BloodDonationSystem.Services.Models.Hospitals;
     using BloodDonationSystem.Services.Models.Users;
 
     public class PatientServiceModel : IMapFrom<Patient>, IMapTo<Patient>
@@ -20,6 +21,8 @@
 
         public int HospitalId { get; set; }
 
-        public BloodCentersServiceModel Hospital { get; set; }
+        public HospitalServiceModel Hospital { get; set; }
+
+        public string Ward { get; set; }
     }
 }
