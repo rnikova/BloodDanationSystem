@@ -1,0 +1,42 @@
+﻿@using System.Linq;
+@model IList<BloodDanationSystem.Web.ViewModels.Donors.DonorViewModel>;
+@{
+    ViewData["Title"] = "FindPatients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card mb-4">
+    <div class="card-body">
+        <!-- Grid row -->
+        <div class="row">
+            <h2 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">Намери кръводарител</h2>
+            <!-- Grid column -->
+        </div>
+        <div class="row custyle">
+            <table class="table table-striped text-light table-hover" id="all">
+                <!--Table head-->
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Град</th>
+                        <th>Кръвна група</th>
+                        <th>Резус фактор</th>
+                        <th>Действие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 1; i <= Model.Count(); i++)
+                    {
+                        <tr>
+                            <th scope="row">@i</th>
+                            <td>@Model[i - 1].City</td>
+                            <td>@Model[i - 1].BloodType.ABOGroupName </td>
+                            <td>@Model[i - 1].BloodType.RhesusFactor </td>
+                            <td><button class="btn btn-danger"><i class="fa fa-heart" aria-hidden="true"></i></button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

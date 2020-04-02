@@ -20,5 +20,7 @@
         public virtual ICollection<BloodCenter> BloodCentres { get; set; }
 
         public virtual ICollection<Hospital> Hospitals { get; set; }
+
+        public virtual ICollection<Donor> Donors { get; set; }
     }
 }

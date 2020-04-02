@@ -1,9 +1,9 @@
 ﻿namespace BloodDonationSystem.Web.InputModels.Patients
 {
     using BloodDanationSystem.Services.Mapping;
-    using BloodDonationSystem.Services.Models;
     using BloodDonationSystem.Services.Models.Hospitals;
     using BloodDonationSystem.Services.Models.Patients;
+    using BloodDonationSystem.Web.InputModels.BloodTypees;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
@@ -19,7 +19,7 @@
 
         public string BloodTypeId { get; set; }
 
-        public BloodTypeServiceModel BloodType { get; set; }
+        public BloodTypeInputModel BloodType { get; set; }
 
         public string UserId { get; set; }
 

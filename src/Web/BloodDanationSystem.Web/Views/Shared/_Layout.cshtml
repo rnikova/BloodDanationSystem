@@ -83,7 +83,7 @@
                             </div>
                             <div class="col-xl-2 col-lg-2 d-none d-lg-block">
                                 <div class="donate_now">
-                                    <a href="/Identity/Account/Logout" class="boxed-btn">Logout</a>
+                                    <a href="/Identity/Account/Logout" class="boxed-btn">Изход</a>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -134,15 +134,20 @@
                                             <li>
                                                 <a href="/">Кърводаряване<i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                    @if (this.User.IsInRole(GlobalConstants.DonorRoleName))
+                                                    @if (this.User.IsInRole(GlobalConstants.DonorRoleName) && this.User.IsInRole(GlobalConstants.PatientRoleName))
                                                     {
-                                                        <li><a href="/Users/BecomePatient">Регистрирай нужда от кръв</a></li>
-                                                        <li><a href="/Users/">Намери нуждаещ се</a></li>
+                                                        <li><a href="/Users/FindDonor">Намери кръводарител</a></li>
+                                                        <li><a href="/Users/FindPatient">Намери нуждаещ се</a></li>
                                                     }
                                                     else if (this.User.IsInRole(GlobalConstants.PatientRoleName))
                                                     {
                                                         <li><a href="/Users/BecomeDonor">Стани Кръводарител</a></li>
-                                                        <li><a href="/Users/">Намери кръводарител</a></li>
+                                                        <li><a href="/Users/FindDonor">Намери кръводарител</a></li>
+                                                    }
+                                                    else if (this.User.IsInRole(GlobalConstants.DonorRoleName))
+                                                    {
+                                                        <li><a href="/Users/BecomePatient">Регистрирай нужда от кръв</a></li>
+                                                        <li><a href="/Users/FindPatient">Намери нуждаещ се</a></li>
                                                     }
                                                     else
                                                     {
@@ -157,7 +162,7 @@
                             </div>
                             <div class="col-xl-2 col-lg-2 d-none d-lg-block">
                                 <div class="donate_now">
-                                    <a href="/Identity/Account/Logout" class="boxed-btn">Logout</a>
+                                    <a href="/Identity/Account/Logout" class="boxed-btn">Изход</a>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -211,7 +216,7 @@
                             </div>
                             <div class="col-xl-2 col-lg-2 d-none d-lg-block">
                                 <div class="donate_now">
-                                    <a href="/Identity/Account/Login" class="boxed-btn">Login</a>
+                                    <a href="/Identity/Account/Login" class="boxed-btn">Вход</a>
                                 </div>
                             </div>
                             <div class="col-12">

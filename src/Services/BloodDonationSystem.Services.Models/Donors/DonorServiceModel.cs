@@ -2,6 +2,7 @@
 {
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Services.Mapping;
+    using BloodDonationSystem.Services.Models.Cities;
     using BloodDonationSystem.Services.Models.Users;
 
     public class DonorServiceModel : IMapFrom<Donor>, IMapTo<Donor>
@@ -19,5 +20,9 @@
         public string UserId { get; set; }
 
         public UserServiceModel User { get; set; }
+
+        public int CityId{ get; set; }
+
+        public CityServiceModel City { get; set; }
     }
 }

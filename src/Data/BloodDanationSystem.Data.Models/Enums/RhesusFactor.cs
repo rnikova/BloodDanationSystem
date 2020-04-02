@@ -2,9 +2,9 @@
 {
     public enum RhesusFactor
     {
-        Plus = 1,
-        Minus = 2,
-        NoMatter = 3,
-        Unknown = 4,
+        Плюс = 1,
+        Минус = 2,
+        БезЗначение = 3,
+        Неизвестен = 4,
     }
 }

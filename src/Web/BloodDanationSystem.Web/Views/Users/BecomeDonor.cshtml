@@ -22,16 +22,22 @@
             <span asp-validation-for="Age" class="text-warning"></span>
         </div>
         <div class="form-group">
-            <label asp-for="BloodType" class="control-label"></label>
+            <label asp-for="City" class="control-label"></label>
+            <select asp-for="City" class="form-control" asp-items="@(new SelectList(Model.Cities,"Id","Name"))">
+            </select>
+            <action selected=""></action>
+        </div>
+        <div class="form-group">
+            <label asp-for="BloodType.ABOGroupName" class="control-label"></label>
             <select asp-for="BloodType.ABOGroupName" class="form-control" asp-items="Html.GetEnumSelectList<ABOGroup>()"></select>
             <action selected=""></action>
         </div>
         <div class="form-group">
-            <label asp-for="BloodType" class="control-label"></label>
+            <label asp-for="BloodType.RhesusFactor" class="control-label"></label>
             <select asp-for="BloodType.RhesusFactor" class="form-control" asp-items="Html.GetEnumSelectList<RhesusFactor>()"></select>
             <action selected=""></action>
         </div>
-        <div class="form-group col-md-6 offset-4">
+        <div class="form-group col-md-6 offset-3">
             <input type="submit" value="Create" class="btn btn-success" />
         </div>
     </form>

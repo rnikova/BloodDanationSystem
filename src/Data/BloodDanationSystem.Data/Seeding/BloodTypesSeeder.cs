@@ -21,83 +21,83 @@
             {
                 new BloodType
                 {
-                    ABOGroupName = ABOGroup.O,
-                    RhesusFactor = RhesusFactor.Plus,
+                    ABOGroupName = ABOGroup.О,
+                    RhesusFactor = RhesusFactor.Плюс,
                 },
                 new BloodType
                 {
-                    ABOGroupName = ABOGroup.O,
-                    RhesusFactor = RhesusFactor.Minus,
+                    ABOGroupName = ABOGroup.О,
+                    RhesusFactor = RhesusFactor.Минус,
                 },
                 new BloodType
                 {
-                    ABOGroupName = ABOGroup.O,
-                    RhesusFactor = RhesusFactor.NoMatter,
+                    ABOGroupName = ABOGroup.О,
+                    RhesusFactor = RhesusFactor.БезЗначение,
                 },
                 new BloodType
                 {
-                    ABOGroupName = ABOGroup.O,
-                    RhesusFactor = RhesusFactor.Unknown,
+                    ABOGroupName = ABOGroup.О,
+                    RhesusFactor = RhesusFactor.Неизвестен,
                 },
                 new BloodType
                 {
-                    ABOGroupName = ABOGroup.A,
-                    RhesusFactor = RhesusFactor.Plus,
+                    ABOGroupName = ABOGroup.А,
+                    RhesusFactor = RhesusFactor.Плюс,
                 },
                 new BloodType
                 {
-                    ABOGroupName = ABOGroup.A,
-                    RhesusFactor = RhesusFactor.Minus,
+                    ABOGroupName = ABOGroup.А,
+                    RhesusFactor = RhesusFactor.Минус,
                 },
                 new BloodType
                 {
-                    ABOGroupName = ABOGroup.A,
-                    RhesusFactor = RhesusFactor.NoMatter,
+                    ABOGroupName = ABOGroup.А,
+                    RhesusFactor = RhesusFactor.БезЗначение,
                 },
                 new BloodType
                 {
-                    ABOGroupName = ABOGroup.A,
-                    RhesusFactor = RhesusFactor.Unknown,
+                    ABOGroupName = ABOGroup.А,
+                    RhesusFactor = RhesusFactor.Неизвестен,
                 },
                 new BloodType
                 {
-                    ABOGroupName = ABOGroup.B,
-                    RhesusFactor = RhesusFactor.Plus,
+                    ABOGroupName = ABOGroup.В,
+                    RhesusFactor = RhesusFactor.Плюс,
                 },
                 new BloodType
                 {
-                    ABOGroupName = ABOGroup.B,
-                    RhesusFactor = RhesusFactor.Minus,
+                    ABOGroupName = ABOGroup.В,
+                    RhesusFactor = RhesusFactor.Минус,
                 },
                 new BloodType
                 {
-                    ABOGroupName = ABOGroup.B,
-                    RhesusFactor = RhesusFactor.NoMatter,
+                    ABOGroupName = ABOGroup.В,
+                    RhesusFactor = RhesusFactor.БезЗначение,
                 },
                 new BloodType
                 {
-                    ABOGroupName = ABOGroup.B,
-                    RhesusFactor = RhesusFactor.Unknown,
+                    ABOGroupName = ABOGroup.В,
+                    RhesusFactor = RhesusFactor.Неизвестен,
                 },
                 new BloodType
                 {
-                    ABOGroupName = ABOGroup.AB,
-                    RhesusFactor = RhesusFactor.Plus,
+                    ABOGroupName = ABOGroup.АВ,
+                    RhesusFactor = RhesusFactor.Плюс,
                 },
                 new BloodType
                 {
-                    ABOGroupName = ABOGroup.AB,
-                    RhesusFactor = RhesusFactor.Minus,
+                    ABOGroupName = ABOGroup.АВ,
+                    RhesusFactor = RhesusFactor.Минус,
                 },
                 new BloodType
                 {
-                    ABOGroupName = ABOGroup.AB,
-                    RhesusFactor = RhesusFactor.NoMatter,
+                    ABOGroupName = ABOGroup.АВ,
+                    RhesusFactor = RhesusFactor.БезЗначение,
                 },
                 new BloodType
                 {
-                    ABOGroupName = ABOGroup.AB,
-                    RhesusFactor = RhesusFactor.Unknown,
+                    ABOGroupName = ABOGroup.АВ,
+                    RhesusFactor = RhesusFactor.Неизвестен,
                 },
             };
 

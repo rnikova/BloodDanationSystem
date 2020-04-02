@@ -10,6 +10,7 @@
     using BloodDanationSystem.Data.Models.Enums;
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models;
+    using BloodDonationSystem.Services.Models.Cities;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
@@ -54,6 +55,11 @@
         public IQueryable<DonorServiceModel> All()
         {
             return this.context.Donors.To<DonorServiceModel>();
+        }
+
+        public IQueryable<CityServiceModel> AllCities()
+        {
+            return this.context.Cities.OrderBy(x => x.Name).To<CityServiceModel>();
         }
     }
 }

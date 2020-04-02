@@ -6,7 +6,10 @@
     using BloodDanationSystem.Services;
     using BloodDanationSystem.Services.Mapping;
     using BloodDanationSystem.Web.ViewModels;
+    using BloodDanationSystem.Web.ViewModels.Donors;
+    using BloodDanationSystem.Web.ViewModels.Patients;
     using BloodDonationSystem.Services.Models;
+    using BloodDonationSystem.Services.Models.Cities;
     using BloodDonationSystem.Services.Models.Patients;
     using BloodDonationSystem.Web.InputModels.Donors;
     using BloodDonationSystem.Web.InputModels.Hospitals;
@@ -14,6 +17,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
 
     [Authorize]
     public class UsersController : BaseController
@@ -32,7 +36,13 @@
         [HttpGet]
         public IActionResult BecomeDonor()
         {
-            return this.View();
+            var cities = this.donorService.AllCities();
+            var inputModel = new DonorsCreateInputModel
+            {
+                Cities = cities,
+            };
+
+            return this.View(inputModel);
         }
 
         [HttpPost]
@@ -50,8 +60,16 @@
                 Id = donorsCreateInputModel.Id,
                 FullName = donorsCreateInputModel.FullName,
                 Age = donorsCreateInputModel.Age,
-                BloodType = donorsCreateInputModel.BloodType,
+                BloodType = new BloodTypeServiceModel
+                {
+                    ABOGroupName = donorsCreateInputModel.BloodType.ABOGroupName,
+                    RhesusFactor = donorsCreateInputModel.BloodType.RhesusFactor,
+                },
                 UserId = user.Id,
+                City = new CityServiceModel
+                {
+                    Name = donorsCreateInputModel.City.Name,
+                },
             };
 
             await this.donorService.CreateAsync(model);
@@ -76,7 +94,13 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View("Error", new ErrorViewModel { Message = "Моля въведете коректни данни" });
+                var hospitals = this.patientService.AllHospitals();
+                var inputModel = new PatientsCreateInputModel
+                {
+                    Hospitals = hospitals,
+                };
+
+                return this.View(inputModel);
             }
 
             var user = await this.userManager.GetUserAsync(this.HttpContext.User);
@@ -86,7 +110,11 @@
                 FullName = patientCreateInputModel.FullName,
                 Age = patientCreateInputModel.Age,
                 HospitalId = patientCreateInputModel.HospitalId,
-                BloodType = patientCreateInputModel.BloodType,
+                BloodType = new BloodTypeServiceModel
+                {
+                    ABOGroupName = patientCreateInputModel.BloodType.ABOGroupName,
+                    RhesusFactor = patientCreateInputModel.BloodType.RhesusFactor,
+                },
                 UserId = user.Id,
                 Ward = patientCreateInputModel.Ward,
             };
@@ -94,6 +122,20 @@
             await this.patientService.CreateAsync(model);
 
             return this.Redirect("/");
+        }
+
+        public async Task<IActionResult> FindPatient()
+        {
+            var patients = await this.patientService.All().To<PatientViewModel>().ToListAsync();
+
+            return this.View(patients);
+        }
+
+        public async Task<IActionResult> FindDonor()
+        {
+            var donors = await this.donorService.All().To<DonorViewModel>().ToListAsync();
+
+            return this.View(donors);
         }
     }
 }
