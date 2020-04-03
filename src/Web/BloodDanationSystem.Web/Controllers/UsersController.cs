@@ -10,6 +10,7 @@
     using BloodDanationSystem.Web.ViewModels.Patients;
     using BloodDonationSystem.Services.Models;
     using BloodDonationSystem.Services.Models.Cities;
+    using BloodDonationSystem.Services.Models.DonorsPatientsServiceModel;
     using BloodDonationSystem.Services.Models.Patients;
     using BloodDonationSystem.Web.InputModels.Donors;
     using BloodDonationSystem.Web.InputModels.Hospitals;
@@ -17,6 +18,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
 
     [Authorize]
@@ -25,18 +27,30 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IDonorService donorService;
         private readonly IPatientService patientService;
+        private readonly ICityService cityService;
+        private readonly IHospitalService hospitalService;
+        private readonly IDonorsPatientsService donorsPatientsService;
 
-        public UsersController(UserManager<ApplicationUser> userManager, IDonorService donorService, IPatientService patientService)
+        public UsersController(
+            UserManager<ApplicationUser> userManager,
+            IDonorService donorService,
+            IPatientService patientService,
+            ICityService cityService,
+            IHospitalService hospitalService,
+            IDonorsPatientsService donorsPatientsService)
         {
             this.userManager = userManager;
             this.donorService = donorService;
             this.patientService = patientService;
+            this.cityService = cityService;
+            this.hospitalService = hospitalService;
+            this.donorsPatientsService = donorsPatientsService;
         }
 
         [HttpGet]
         public IActionResult BecomeDonor()
         {
-            var cities = this.donorService.AllCities();
+            var cities = this.cityService.AllCities();
             var inputModel = new DonorsCreateInputModel
             {
                 Cities = cities,
@@ -50,7 +64,13 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View();
+                var cities = this.cityService.AllCities();
+                var inputModel = new DonorsCreateInputModel
+                {
+                    Cities = cities,
+                };
+
+                return this.View(inputModel);
             }
 
             var user = await this.userManager.GetUserAsync(this.HttpContext.User);
@@ -66,10 +86,7 @@
                     RhesusFactor = donorsCreateInputModel.BloodType.RhesusFactor,
                 },
                 UserId = user.Id,
-                City = new CityServiceModel
-                {
-                    Name = donorsCreateInputModel.City.Name,
-                },
+                CityId = donorsCreateInputModel.CityId,
             };
 
             await this.donorService.CreateAsync(model);
@@ -80,10 +97,12 @@
         [HttpGet]
         public IActionResult BecomePatient()
         {
-            var hospitals = this.patientService.AllHospitals();
+            var hospitals = this.hospitalService.AllHospitals();
+            var cities = this.cityService.AllCities();
             var inputModel = new PatientsCreateInputModel
             {
                 Hospitals = hospitals,
+                Cities = cities,
             };
 
             return this.View(inputModel);
@@ -94,10 +113,10 @@
         {
             if (!this.ModelState.IsValid)
             {
-                var hospitals = this.patientService.AllHospitals();
+                var hospitals = this.cityService.AllCities();
                 var inputModel = new PatientsCreateInputModel
                 {
-                    Hospitals = hospitals,
+                    Cities = hospitals,
                 };
 
                 return this.View(inputModel);
@@ -117,11 +136,35 @@
                 },
                 UserId = user.Id,
                 Ward = patientCreateInputModel.Ward,
+                NeededBloodBanks = patientCreateInputModel.NeededBloodBanks,
             };
 
             await this.patientService.CreateAsync(model);
 
             return this.Redirect("/");
+        }
+
+        public async Task<IActionResult> AddToMyPatients(PatientViewModel id)
+        {
+            var patient = this.patientService.FindByIdAsync(id.Id);
+            var patientId = patient.Id;
+            var user = await this.userManager.GetUserAsync(this.HttpContext.User);
+            var donor = this.donorService.GetByUserId(user.Id);
+
+            var donorPatient = new DonorsPatientsServiceModel
+            {
+                //PatientId = patientId,
+               // DonorId = donor.Id,
+            };
+
+            await this.donorsPatientsService.CreateAsync(donorPatient);
+
+            return this.RedirectToAction("MyPatients");
+        }
+
+        public async Task<IActionResult> MyPatients()
+        {
+            return this.View();
         }
 
         public async Task<IActionResult> FindPatient()

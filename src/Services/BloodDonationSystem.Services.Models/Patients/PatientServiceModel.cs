@@ -7,6 +7,8 @@
 
     public class PatientServiceModel : IMapFrom<Patient>, IMapTo<Patient>
     {
+        public string Id { get; set; }
+
         public string FullName { get; set; }
 
         public int Age { get; set; }
@@ -24,5 +26,7 @@
         public HospitalServiceModel Hospital { get; set; }
 
         public string Ward { get; set; }
+
+        public int NeededBloodBanks { get; set; }
     }
 }

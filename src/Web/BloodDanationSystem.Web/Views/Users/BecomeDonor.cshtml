@@ -18,12 +18,12 @@
         </div>
         <div class="form-group">
             <label asp-for="Age"></label>
-            <input asp-for="Age" min="18" max="65" class="form-control" />
+            <input asp-for="Age" min="18" max="65" class="form-control" placeholder="18" />
             <span asp-validation-for="Age" class="text-warning"></span>
         </div>
         <div class="form-group">
-            <label asp-for="City" class="control-label"></label>
-            <select asp-for="City" class="form-control" asp-items="@(new SelectList(Model.Cities,"Id","Name"))">
+            <label asp-for="CityId" class="control-label"></label>
+            <select asp-for="CityId" class="form-control" asp-items="@(new SelectList(Model.Cities,"Id","Name"))">
             </select>
             <action selected=""></action>
         </div>

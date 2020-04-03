@@ -33,14 +33,25 @@
             <action selected=""></action>
         </div>
         <div class="form-group">
-            <label asp-for="HospitalId" class="control-label"></label>
-            <select asp-for="HospitalId" class="form-control" asp-items="@(new SelectList(Model.Hospitals,"Id","Name"))">
-            </select>
+            <label asp-for="CityId" class="control-label"></label>
+            <select asp-for="CityId" class="form-control firstList selectFilter" asp-items="@(new SelectList(Model.Cities,"Id","Name"))"></select>
             <action selected=""></action>
         </div>
-        <label asp-for="Ward" class="control-label"></label>
-        <input asp-for="Ward" class="form-control" />
-        <span asp-validation-for="Ward" class="text-warning"></span>
+        <div>
+            <label asp-for="HospitalId" class="control-label"></label>
+            <select asp-for="HospitalId" class="form-control secondList selectFilter" asp-items="@(new SelectList(Model.Hospitals,"Id","Name"))"></select>
+            <action selected=""></action>
+        </div>
+        <div>
+            <label asp-for="Ward" class="control-label"></label>
+            <input asp-for="Ward" class="form-control" />
+            <span asp-validation-for="Ward" class="text-warning"></span>
+        </div>
+        <div>
+            <label asp-for="NeededBloodBanks" class="control-label"></label>
+            <input asp-for="NeededBloodBanks" class="form-control" min="1" placeholder="1" />
+            <span asp-validation-for="NeededBloodBanks" class="text-warning"></span>
+        </div>
         <div class="form-group col-md-8 offset-2">
             <input type="submit" value="Create" class="btn btn-success" />
         </div>

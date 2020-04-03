@@ -12,7 +12,7 @@
 
         public string Ward { get; set; }
 
-        public string CityId { get; set; }
+        public int CityId { get; set; }
 
         public CityServiceModel City { get; set; }
     }

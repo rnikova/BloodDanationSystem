@@ -10,7 +10,6 @@
     using BloodDanationSystem.Data.Models.Enums;
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models;
-    using BloodDonationSystem.Services.Models.Cities;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
@@ -57,9 +56,12 @@
             return this.context.Donors.To<DonorServiceModel>();
         }
 
-        public IQueryable<CityServiceModel> AllCities()
+        public async Task<DonorServiceModel> GetByUserId(string userId)
         {
-            return this.context.Cities.OrderBy(x => x.Name).To<CityServiceModel>();
+            var donor = await this.context.Donors.SingleOrDefaultAsync(x => x.UserId == userId);
+            var model = donor.To<DonorServiceModel>();
+
+            return model;
         }
     }
 }

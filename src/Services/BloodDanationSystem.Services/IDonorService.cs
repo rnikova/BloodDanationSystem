@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
 
     using BloodDonationSystem.Services.Models;
-    using BloodDonationSystem.Services.Models.Cities;
 
     public interface IDonorService
     {
@@ -12,6 +11,6 @@
 
         IQueryable<DonorServiceModel> All();
 
-        IQueryable<CityServiceModel> AllCities();
+        Task<DonorServiceModel> GetByUserId(string userId);
     }
 }

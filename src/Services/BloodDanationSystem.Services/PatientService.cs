@@ -6,10 +6,10 @@
 
     using BloodDanationSystem.Common;
     using BloodDanationSystem.Data;
+    using BloodDanationSystem.Data.Common.Repositories;
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Data.Models.Enums;
     using BloodDanationSystem.Services.Mapping;
-    using BloodDonationSystem.Services.Models.Hospitals;
     using BloodDonationSystem.Services.Models.Patients;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -58,9 +58,12 @@
             return this.context.Patients.To<PatientServiceModel>();
         }
 
-        public IQueryable<HospitalServiceModel> AllHospitals()
+        public async Task<PatientServiceModel> FindByIdAsync(string id)
         {
-            return this.context.Hospitals.To<HospitalServiceModel>();
+            var patient = await this.context.Patients.FirstOrDefaultAsync(x => x.Id == id);
+            var model = patient.To<PatientServiceModel>();
+
+            return model;
         }
     }
 }

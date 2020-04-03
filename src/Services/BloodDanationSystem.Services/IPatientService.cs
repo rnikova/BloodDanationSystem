@@ -3,7 +3,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using BloodDonationSystem.Services.Models.Hospitals;
     using BloodDonationSystem.Services.Models.Patients;
 
     public interface IPatientService
@@ -12,6 +11,6 @@
 
         IQueryable<PatientServiceModel> All();
 
-        IQueryable<HospitalServiceModel> AllHospitals();
+        Task<PatientServiceModel> FindByIdAsync(string id);
     }
 }
