@@ -150,6 +150,12 @@
             return this.View();
         }
 
+        [HttpPost]
+        public IActionResult MyPatients(byte[] photo)
+        {
+            return this.View();
+        }
+
         [HttpGet]
         public async Task<IActionResult> FindPatient()
         {
