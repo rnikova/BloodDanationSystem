@@ -41,6 +41,7 @@
                 BloodTypeId = bloodType.Id,
                 User = user,
                 UserId = user.Id,
+                CityId = donorServiceModel.CityId,
             };
 
             await this.userManager.AddToRoleAsync(user, GlobalConstants.DonorRoleName);
@@ -59,7 +60,15 @@
         public async Task<DonorServiceModel> GetByUserId(string userId)
         {
             var donor = await this.context.Donors.SingleOrDefaultAsync(x => x.UserId == userId);
-            var model = donor.To<DonorServiceModel>();
+            var model = new DonorServiceModel
+            {
+                Id = donor.Id,
+                FullName = donor.FullName,
+                Age = donor.Age,
+                BloodTypeId = donor.BloodTypeId,
+                CityId = donor.CityId,
+                UserId = donor.UserId,
+            };
 
             return model;
         }

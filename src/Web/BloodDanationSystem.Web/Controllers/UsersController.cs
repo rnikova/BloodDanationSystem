@@ -144,34 +144,35 @@
             return this.Redirect("/");
         }
 
-        public async Task<IActionResult> AddToMyPatients(PatientViewModel id)
-        {
-            var patient = this.patientService.FindByIdAsync(id.Id);
-            var patientId = patient.Id;
-            var user = await this.userManager.GetUserAsync(this.HttpContext.User);
-            var donor = this.donorService.GetByUserId(user.Id);
-
-            var donorPatient = new DonorsPatientsServiceModel
-            {
-                //PatientId = patientId,
-               // DonorId = donor.Id,
-            };
-
-            await this.donorsPatientsService.CreateAsync(donorPatient);
-
-            return this.RedirectToAction("MyPatients");
-        }
-
-        public async Task<IActionResult> MyPatients()
+        [HttpGet]
+        public IActionResult MyPatients()
         {
             return this.View();
         }
 
+        [HttpGet]
         public async Task<IActionResult> FindPatient()
         {
             var patients = await this.patientService.All().To<PatientViewModel>().ToListAsync();
 
             return this.View(patients);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DonorAddPatient(string patientId)
+        {
+            var user = await this.userManager.GetUserAsync(this.HttpContext.User);
+            var donor = await this.donorService.GetByUserId(user.Id);
+
+            var donorPatient = new DonorsPatientsServiceModel
+            {
+                PatientId = patientId,
+                DonorId = donor.Id,
+            };
+
+            await this.donorsPatientsService.CreateAsync(donorPatient);
+
+            return this.RedirectToAction("MyPatients");
         }
 
         public async Task<IActionResult> FindDonor()

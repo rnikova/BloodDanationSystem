@@ -11,6 +11,6 @@
 
         IQueryable<PatientServiceModel> All();
 
-        Task<PatientServiceModel> FindByIdAsync(string id);
+        Task<PatientServiceModel> FindByUserIdAsync(string id);
     }
 }

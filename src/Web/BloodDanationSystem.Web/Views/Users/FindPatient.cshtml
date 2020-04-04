@@ -13,31 +13,34 @@
             <!-- Grid column -->
         </div>
         <div class="row custyle">
-            <table class="table table-striped text-light table-hover" id="all">
-                <!--Table head-->
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Град</th>
-                        <th>Кръвна група</th>
-                        <th>Резус фактор</th>
-                        <th>Действие</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (var i = 1; i <= Model.Count(); i++)
-                    {
+                <table class="table table-striped text-light table-hover" id="all">
+                    <!--Table head-->
+                    <thead>
                         <tr>
-                            <th scope="row">@i</th>
-                            <td>@Model[i - 1].Hospital.City.Name</td>
-                            <td>@Model[i - 1].BloodType.ABOGroupName </td>
-                            <td>@Model[i - 1].BloodType.RhesusFactor </td>
-                            <td><a href="/Users/AddToMyPatients" class="btn btn-danger"><i class="fa fa-heart" aria-hidden="true"></i></a></td>
+                            <th>#</th>
+                            <th>Град</th>
+                            <th>Кръвна група</th>
+                            <th>Резус фактор</th>
+                            <th>Действие</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @for (var i = 1; i <= Model.Count(); i++)
+                        {
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td>@Model[i - 1].Hospital.City.Name</td>
+                                <td>@Model[i - 1].BloodType.ABOGroupName </td>
+                                <td>@Model[i - 1].BloodType.RhesusFactor </td>
+                                <td><form asp-action="DonorAddPatient" asp-controller="Users" method="post">
+                                    <input type="hidden" value="@Model[i-1].Id" name="patientId" />
+                                    <button type="submit" class="btn btn-danger fa fa-heart"></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
         </div>
     </div>
 </div>
-

@@ -58,10 +58,20 @@
             return this.context.Patients.To<PatientServiceModel>();
         }
 
-        public async Task<PatientServiceModel> FindByIdAsync(string id)
+        public async Task<PatientServiceModel> FindByUserIdAsync(string id)
         {
-            var patient = await this.context.Patients.FirstOrDefaultAsync(x => x.Id == id);
-            var model = patient.To<PatientServiceModel>();
+            var patient = await this.context.Patients.FirstOrDefaultAsync(x => x.UserId == id);
+            var model = new PatientServiceModel
+            {
+                Id = patient.Id,
+                FullName = patient.FullName,
+                Age = patient.Age,
+                BloodTypeId = patient.BloodTypeId,
+                HospitalId = patient.HospitalId,
+                Ward = patient.Ward,
+                UserId = patient.UserId,
+                NeededBloodBanks = patient.NeededBloodBanks,
+            };
 
             return model;
         }
