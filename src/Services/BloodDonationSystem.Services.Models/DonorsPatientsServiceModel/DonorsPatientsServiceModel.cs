@@ -13,5 +13,7 @@
         public string PatientId { get; set; }
 
         public PatientServiceModel Patient { get; set; }
+
+        public string Image { get; set; }
     }
 }

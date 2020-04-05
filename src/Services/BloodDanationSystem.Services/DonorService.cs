@@ -57,7 +57,7 @@
             return this.context.Donors.To<DonorServiceModel>();
         }
 
-        public async Task<DonorServiceModel> GetByUserId(string userId)
+        public async Task<DonorServiceModel> GetByUserIdAsync(string userId)
         {
             var donor = await this.context.Donors.SingleOrDefaultAsync(x => x.UserId == userId);
             var model = new DonorServiceModel

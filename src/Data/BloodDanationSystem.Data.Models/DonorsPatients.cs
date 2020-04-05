@@ -9,5 +9,9 @@
         public string PatientId { get; set; }
 
         public virtual Patient Patient { get; set; }
+
+        public string Image { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

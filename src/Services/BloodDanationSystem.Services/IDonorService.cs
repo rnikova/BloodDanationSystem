@@ -11,6 +11,6 @@
 
         IQueryable<DonorServiceModel> All();
 
-        Task<DonorServiceModel> GetByUserId(string userId);
+        Task<DonorServiceModel> GetByUserIdAsync(string userId);
     }
 }

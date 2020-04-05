@@ -4,22 +4,13 @@
 
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Services;
-    using BloodDanationSystem.Services.Mapping;
-    using BloodDanationSystem.Web.ViewModels;
-    using BloodDanationSystem.Web.ViewModels.Donors;
-    using BloodDanationSystem.Web.ViewModels.Patients;
     using BloodDonationSystem.Services.Models;
-    using BloodDonationSystem.Services.Models.Cities;
-    using BloodDonationSystem.Services.Models.DonorsPatientsServiceModel;
     using BloodDonationSystem.Services.Models.Patients;
     using BloodDonationSystem.Web.InputModels.Donors;
-    using BloodDonationSystem.Web.InputModels.Hospitals;
     using BloodDonationSystem.Web.InputModels.Patients;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
-    using Microsoft.EntityFrameworkCore;
 
     [Authorize]
     public class UsersController : BaseController
@@ -29,22 +20,19 @@
         private readonly IPatientService patientService;
         private readonly ICityService cityService;
         private readonly IHospitalService hospitalService;
-        private readonly IDonorsPatientsService donorsPatientsService;
 
         public UsersController(
             UserManager<ApplicationUser> userManager,
             IDonorService donorService,
             IPatientService patientService,
             ICityService cityService,
-            IHospitalService hospitalService,
-            IDonorsPatientsService donorsPatientsService)
+            IHospitalService hospitalService)
         {
             this.userManager = userManager;
             this.donorService = donorService;
             this.patientService = patientService;
             this.cityService = cityService;
             this.hospitalService = hospitalService;
-            this.donorsPatientsService = donorsPatientsService;
         }
 
         [HttpGet]
@@ -142,50 +130,6 @@
             await this.patientService.CreateAsync(model);
 
             return this.Redirect("/");
-        }
-
-        [HttpGet]
-        public IActionResult MyPatients()
-        {
-            return this.View();
-        }
-
-        [HttpPost]
-        public IActionResult MyPatients(byte[] photo)
-        {
-            return this.View();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> FindPatient()
-        {
-            var patients = await this.patientService.All().To<PatientViewModel>().ToListAsync();
-
-            return this.View(patients);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> DonorAddPatient(string patientId)
-        {
-            var user = await this.userManager.GetUserAsync(this.HttpContext.User);
-            var donor = await this.donorService.GetByUserId(user.Id);
-
-            var donorPatient = new DonorsPatientsServiceModel
-            {
-                PatientId = patientId,
-                DonorId = donor.Id,
-            };
-
-            await this.donorsPatientsService.CreateAsync(donorPatient);
-
-            return this.RedirectToAction("MyPatients");
-        }
-
-        public async Task<IActionResult> FindDonor()
-        {
-            var donors = await this.donorService.All().To<DonorViewModel>().ToListAsync();
-
-            return this.View(donors);
         }
     }
 }

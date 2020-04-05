@@ -36,6 +36,7 @@
         public string Ward { get; set; }
 
         [Required]
+        [Range(0, 10)]
         public int NeededBloodBanks { get; set; }
     }
 }

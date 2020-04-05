@@ -58,9 +58,32 @@
             return this.context.Patients.To<PatientServiceModel>();
         }
 
-        public async Task<PatientServiceModel> FindByUserIdAsync(string id)
+        public IQueryable<PatientServiceModel> AllActive()
         {
-            var patient = await this.context.Patients.FirstOrDefaultAsync(x => x.UserId == id);
+            return this.context.Patients.Where(x => x.NeededBloodBanks > 0).To<PatientServiceModel>();
+        }
+
+        public async Task<PatientServiceModel> GetByUserIdAsync(string userId)
+        {
+            var patient = await this.context.Patients.FirstOrDefaultAsync(x => x.UserId == userId);
+            var model = new PatientServiceModel
+            {
+                Id = patient.Id,
+                FullName = patient.FullName,
+                Age = patient.Age,
+                BloodTypeId = patient.BloodTypeId,
+                HospitalId = patient.HospitalId,
+                Ward = patient.Ward,
+                UserId = patient.UserId,
+                NeededBloodBanks = patient.NeededBloodBanks,
+            };
+
+            return model;
+        }
+
+        public async Task<PatientServiceModel> GetByPatientIdAsync(string patientId)
+        {
+            var patient = await this.context.Patients.FirstOrDefaultAsync(x => x.Id == patientId);
             var model = new PatientServiceModel
             {
                 Id = patient.Id,

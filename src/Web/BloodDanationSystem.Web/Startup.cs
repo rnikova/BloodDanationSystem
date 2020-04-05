@@ -14,6 +14,7 @@
     using BloodDanationSystem.Services.Messaging;
     using BloodDanationSystem.Web.ViewModels;
     using BloodDonationSystem.Services.Models;
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -39,6 +40,15 @@
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+            Account cloudinaryCredentials = new Account(
+                this.configuration["Cloudinary:CloudName"],
+                this.configuration["Cloudinary:ApiKey"],
+                this.configuration["Cloudinary:ApiSecret"]);
+
+            Cloudinary cloudinaryUtility = new Cloudinary(cloudinaryCredentials);
+
+            services.AddSingleton(cloudinaryUtility);
 
             services.Configure<CookiePolicyOptions>(
                 options =>
@@ -66,6 +76,7 @@
             services.AddTransient<ICityService, CityService>();
             services.AddTransient<IHospitalService, HospitalService>();
             services.AddTransient<IDonorsPatientsService, DonorsPatientsService>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
