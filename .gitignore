@@ -353,3 +353,5 @@ MigrationBackup/
 .ionide/
 *.json
 *.json
+src/Web/BloodDanationSystem.Web/appsettings.json
+src/Web/BloodDanationSystem.Web/appsettings.Development.json
