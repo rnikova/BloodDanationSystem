@@ -12,6 +12,7 @@
     {
         private const string InvalidFullNameMessage = "Моля въведете трите имена";
         private const int MinValueNeededBloodBanks = 1;
+        private const int MaxValueNeededBloodBanks = 10;
 
         [Required]
         [Display(Name = "Трите имена")]
@@ -36,7 +37,7 @@
         public string Ward { get; set; }
 
         [Display(Name = "Нужни банки кръв")]
-        [Range(1, 10)]
+        [Range(MinValueNeededBloodBanks, MaxValueNeededBloodBanks)]
         public int NeededBloodBanks { get; set; }
 
         public IQueryable<HospitalServiceModel> Hospitals { get; set; }

@@ -34,12 +34,12 @@
         </div>
         <div class="form-group">
             <label asp-for="CityId" class="control-label"></label>
-            <select asp-for="CityId" class="form-control firstList selectFilter" asp-items="@(new SelectList(Model.Cities,"Id","Name"))"></select>
+            <select asp-for="CityId" class="form-control" asp-items="@(new SelectList(Model.Cities,"Id","Name"))"></select>
             <action selected=""></action>
         </div>
         <div>
             <label asp-for="HospitalId" class="control-label"></label>
-            <select asp-for="HospitalId" class="form-control secondList selectFilter" asp-items="@(new SelectList(Model.Hospitals,"Id","Name"))"></select>
+            <select asp-for="HospitalId" class="form-control" asp-items="@(new SelectList(Model.Hospitals,"Id","Name"))"></select>
             <action selected=""></action>
         </div>
         <div>

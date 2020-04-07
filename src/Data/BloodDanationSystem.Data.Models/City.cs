@@ -10,6 +10,7 @@
         {
             this.Hospitals = new HashSet<Hospital>();
             this.BloodCentres = new HashSet<BloodCenter>();
+            this.Donors = new HashSet<Donor>();
         }
 
         public int Id { get; set; }
