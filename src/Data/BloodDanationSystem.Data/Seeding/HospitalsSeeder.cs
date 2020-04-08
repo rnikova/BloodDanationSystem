@@ -360,11 +360,6 @@
                 },
                 new Hospital
                 {
-                    Name = "МБАЛ - Берковица ЕООД",
-                    CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Берковица").Id,
-                },
-                new Hospital
-                {
                     Name = "МБАЛ Велинград ЕООД",
                     CityId = dbContext.Cities.FirstOrDefault(c => c.Name == "Велинград").Id,
                 },

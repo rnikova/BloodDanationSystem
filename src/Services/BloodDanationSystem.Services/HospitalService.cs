@@ -21,9 +21,9 @@
             return this.context.Hospitals.To<HospitalServiceModel>();
         }
 
-        public IEnumerable<HospitalServiceModel> HospitalsInCity(int id)
+        public IEnumerable<HospitalServiceModel> HospitalsInCity(int cityId)
         {
-            return this.context.Hospitals.Where(x => x.CityId == id).To<HospitalServiceModel>();
+            return this.context.Hospitals.Where(x => x.CityId == cityId).To<HospitalServiceModel>();
         }
     }
 }

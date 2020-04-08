@@ -1,16 +1,20 @@
 ﻿namespace BloodDanationSystem.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Services;
     using BloodDonationSystem.Services.Models;
+    using BloodDonationSystem.Services.Models.Hospitals;
     using BloodDonationSystem.Services.Models.Patients;
     using BloodDonationSystem.Web.InputModels.Donors;
     using BloodDonationSystem.Web.InputModels.Patients;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     [Authorize]
     public class UsersController : BaseController
@@ -85,15 +89,20 @@
         [HttpGet]
         public IActionResult BecomePatient()
         {
-            var hospitals = this.hospitalService.AllHospitals();
             var cities = this.cityService.AllCities();
             var inputModel = new PatientsCreateInputModel
             {
-                Hospitals = hospitals,
                 Cities = cities,
             };
 
             return this.View(inputModel);
+        }
+
+        public JsonResult GetHospitals(int cityId)
+        {
+            List<HospitalServiceModel> hospitals = this.hospitalService.HospitalsInCity(cityId).ToList();
+
+            return this.Json(new SelectList(hospitals, "Id", "Name"));
         }
 
         [HttpPost]

@@ -20,7 +20,7 @@
         public string FullName { get; set; }
 
         [Required]
-        [Display(Name ="Възраст")]
+        [Display(Name = "Възраст")]
         public int Age { get; set; }
 
         public string BloodTypeId { get; set; }
@@ -29,7 +29,7 @@
 
         public string UserId { get; set; }
 
-        [Display(Name ="Лечебно заведение")]
+        [Display(Name = "Лечебно заведение")]
         public int HospitalId { get; set; }
 
         [Required]
@@ -42,6 +42,7 @@
 
         public IQueryable<HospitalServiceModel> Hospitals { get; set; }
 
+        [Display(Name = "Град")]
         public int CityId { get; set; }
 
         public IQueryable<CityServiceModel> Cities { get; set; }
