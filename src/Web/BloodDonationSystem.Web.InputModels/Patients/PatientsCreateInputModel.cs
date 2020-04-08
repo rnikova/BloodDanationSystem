@@ -2,7 +2,6 @@
 {
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models.Cities;
-    using BloodDonationSystem.Services.Models.Hospitals;
     using BloodDonationSystem.Services.Models.Patients;
     using BloodDonationSystem.Web.InputModels.BloodTypees;
     using System.ComponentModel.DataAnnotations;
@@ -39,8 +38,6 @@
         [Display(Name = "Нужни банки кръв")]
         [Range(MinValueNeededBloodBanks, MaxValueNeededBloodBanks)]
         public int NeededBloodBanks { get; set; }
-
-        public IQueryable<HospitalServiceModel> Hospitals { get; set; }
 
         [Display(Name = "Град")]
         public int CityId { get; set; }

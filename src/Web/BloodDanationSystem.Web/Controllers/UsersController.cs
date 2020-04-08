@@ -110,10 +110,10 @@
         {
             if (!this.ModelState.IsValid)
             {
-                var hospitals = this.cityService.AllCities();
+                var cities = this.cityService.AllCities();
                 var inputModel = new PatientsCreateInputModel
                 {
-                    Cities = hospitals,
+                    Cities = cities,
                 };
 
                 return this.View(inputModel);
