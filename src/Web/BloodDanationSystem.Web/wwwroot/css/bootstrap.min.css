@@ -276,7 +276,6 @@ textarea {
 button,
 input {
     overflow: visible;
-    width: 100%;
 }
 
 button,
@@ -2803,7 +2802,7 @@ select.form-control-lg:not([size]):not([multiple]) {
     }
 
     .btn:not(:disabled):not(.disabled) {
-        cursor: pointer
+        cursor: pointer;
     }
 
         .btn:not(:disabled):not(.disabled).active,
@@ -10017,14 +10016,22 @@ a.text-dark:hover {
 }
 
 .register-form {
-    width: 340px;
-    margin: 30px auto;
+    width: 500px;
+    margin: 20px auto;
     background: #521219;
+}
+
+.card-body-register {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 3.25rem
 }
 
 .card-header-name {
     color: white;
     text-align: center;
+    padding-top: 30px;
 }
 
 .patient-form {
