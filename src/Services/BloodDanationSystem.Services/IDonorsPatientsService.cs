@@ -10,6 +10,8 @@
 
         Task<DonorsPatientsServiceModel> GetDonorsPatientsByDonorIdAsync(string donorId);
 
+        Task<DonorsPatientsServiceModel> GetDonorsPatientsByPatientIdAsync(string patientId);
+
         Task<bool> AddImageAsync(DonorsPatientsServiceModel donorsPatientsServiceModel, string imageUrl);
     }
 }

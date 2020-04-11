@@ -136,11 +136,14 @@
                                                     {
                                                         <li><a href="/Patients/FindDonor">Намери кръводарител</a></li>
                                                         <li><a href="/Donors/FindPatient">Намери нуждаещ се</a></li>
+                                                        <li><a href="/Patients/MyDonors">Вземи снимка</a></li>
+                                                        <li><a href="/Donors/MyPatients">Качи снимка</a></li>
                                                     }
                                                     else if (this.User.IsInRole(GlobalConstants.PatientRoleName))
                                                     {
                                                         <li><a href="/Users/BecomeDonor">Стани Кръводарител</a></li>
                                                         <li><a href="/Patients/FindDonor">Намери кръводарител</a></li>
+                                                        <li><a href="/Patients/MyDonors">Вземи снимка</a></li>
                                                     }
                                                     else if (this.User.IsInRole(GlobalConstants.DonorRoleName))
                                                     {

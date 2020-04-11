@@ -32,7 +32,7 @@
                                 <td>@Model[i - 1].Hospital.City.Name</td>
                                 <td>@Model[i - 1].BloodType.ABOGroupName </td>
                                 <td>@Model[i - 1].BloodType.RhesusFactor </td>
-                                <td><form asp-action="DonorAddPatient" asp-controller="Users" method="post">
+                                <td><form asp-action="DonorAddPatient" asp-controller="Donors" method="post">
                                     <input type="hidden" value="@Model[i-1].Id" name="patientId" />
                                     <button type="submit" class="btn btn-danger fa fa-heart"></button>
                                     </form>

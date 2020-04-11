@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "MyDonors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (this.ViewData["Photo"] != null)
+{
+    <a href="@this.ViewData["Photo"]" download>
+        <img src="@this.ViewData["Photo"]">
+    </a>
+}
+

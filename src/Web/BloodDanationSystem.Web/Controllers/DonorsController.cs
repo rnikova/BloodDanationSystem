@@ -39,16 +39,8 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> MyPatients()
+        public IActionResult MyPatients()
         {
-            var user = await this.userManager.GetUserAsync(this.HttpContext.User);
-            var donorPatient = await this.donorsPatientsService.GetDonorsPatientsByDonorIdAsync(user.Id);
-
-            if (donorPatient == null || donorPatient.Image != string.Empty)
-            {
-                return this.RedirectToAction("Error", "Home");
-            }
-
             return this.View();
         }
 

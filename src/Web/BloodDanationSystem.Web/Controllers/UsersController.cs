@@ -98,13 +98,6 @@
             return this.View(inputModel);
         }
 
-        public JsonResult GetHospitals(int cityId)
-        {
-            List<HospitalServiceModel> hospitals = this.hospitalService.HospitalsInCity(cityId).ToList();
-
-            return this.Json(new SelectList(hospitals, "Id", "Name"));
-        }
-
         [HttpPost]
         public async Task<IActionResult> BecomePatient(PatientsCreateInputModel patientCreateInputModel)
         {
@@ -139,6 +132,13 @@
             await this.patientService.CreateAsync(model);
 
             return this.Redirect("/");
+        }
+
+        public JsonResult GetHospitals(int cityId)
+        {
+            List<HospitalServiceModel> hospitals = this.hospitalService.HospitalsInCity(cityId).ToList();
+
+            return this.Json(new SelectList(hospitals, "Id", "Name"));
         }
     }
 }

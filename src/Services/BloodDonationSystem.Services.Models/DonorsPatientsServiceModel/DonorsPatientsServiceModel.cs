@@ -4,7 +4,7 @@
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models.Patients;
 
-    public class DonorsPatientsServiceModel : IMapFrom<DonorsPatients>, IMapTo<DonorsPatients>
+    public class DonorsPatientsServiceModel : IMapFrom<DonorsPatients>, IMapTo<DonorsPatients>, IMapFrom<Patient>, IMapTo<Patient>
     {
         public string DonorId { get; set; }
 

@@ -51,9 +51,23 @@
             var model = new DonorsPatientsServiceModel
             {
                 PatientId = donorPatient.PatientId,
-                Patient = donorPatient.Patient.To<PatientServiceModel>(),
+                Patient = this.context.Patients.Find(donorPatient.PatientId).To<PatientServiceModel>(),
                 DonorId = donorPatient.DonorId,
-                Donor = donorPatient.Donor.To<DonorServiceModel>(),
+                Donor = this.context.Donors.Find(donorId).To<DonorServiceModel>(),
+                Image = donorPatient.Image,
+            };
+
+            return model;
+        }
+
+        public async Task<DonorsPatientsServiceModel> GetDonorsPatientsByPatientIdAsync(string patientId)
+        {
+            var donorPatient = await this.context.DonorsPatients.Where(x => x.Patient.UserId == patientId && x.IsDeleted == false).SingleOrDefaultAsync();
+            var model = new DonorsPatientsServiceModel
+            {
+                PatientId = donorPatient.PatientId,
+                DonorId = donorPatient.DonorId,
+                Image = donorPatient.Image,
             };
 
             return model;
