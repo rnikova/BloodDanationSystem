@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BloodDanationSystem.Web.Vie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BloodDonationSystem.Services.Models", "Services\BloodDonationSystem.Services.Models\BloodDonationSystem.Services.Models.csproj", "{ECE6BC6E-FBDC-471F-98F9-7AF71C5EEFD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonationSystem.Web.InputModels", "Web\BloodDonationSystem.Web.InputModels\BloodDonationSystem.Web.InputModels.csproj", "{59574720-F73F-44EA-A61D-2BE505CCA168}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BloodDonationSystem.Web.InputModels", "Web\BloodDonationSystem.Web.InputModels\BloodDonationSystem.Web.InputModels.csproj", "{59574720-F73F-44EA-A61D-2BE505CCA168}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

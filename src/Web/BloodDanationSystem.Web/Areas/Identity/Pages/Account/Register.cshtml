@@ -12,6 +12,7 @@
                 <div class="card-body-register">
                     <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
                         <div asp-validation-summary="All" class="text-warning"></div>
+                        <a class="btn btn-primary btn-block" id="facebook-button"><i class="fa fa-facebook"></i> Sign in with <b>Facebook</b></a>
                         <div class="form-group">
                             <label asp-for="Input.Username"></label>
                             <input asp-for="Input.Username" class="form-control" />
