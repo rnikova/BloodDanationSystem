@@ -8322,7 +8322,7 @@ button.bg-dark:hover {
 .py-3 {
     background-color: #450000;
     padding-top: 120px;
-    padding-bottom: 400px !important
+    padding-bottom: 460px !important
 }
 
 .pl-3,
@@ -10178,17 +10178,26 @@ a.text-dark:hover {
         position: relative;
     }
 
-/*
-*
-* ==========================================
-* FOR DEMO PURPOSES
-* ==========================================
-*
-*/
-body {
-    min-height: 100vh;
-    background-color: #757f9a;
-    background-image: linear-gradient(147deg, #757f9a 0%, #d7dde8 100%);
+.card-forgot-password {
+    margin-left: 130px;
+    margin-right: 130px;
+    text-align: center;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #450000;
+    background-clip: border-box;
+    border: 6px solid rgba(0, 0, 0, .125);
+    border-radius: 9.25rem
 }
 
-/*
+.donors-image{
+    text-align: center;
+}

@@ -6,9 +6,11 @@
 
 @if (this.ViewData["Photo"] != null)
 {
-    <a href="@this.ViewData["Photo"]" download>
-        <img src="@this.ViewData["Photo"]">
-    </a>
+    <div class="donors-image">
+        <a href="@this.ViewData["Photo"]" download>
+            <img src="@this.ViewData["Photo"]">
+        </a>
+    </div>
 }
 else
 {
