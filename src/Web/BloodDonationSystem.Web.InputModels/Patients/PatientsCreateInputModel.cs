@@ -7,6 +7,8 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
+    using BloodDanationSystem.Common;
+
     public class PatientsCreateInputModel : IMapTo<PatientServiceModel>, IMapFrom<PatientServiceModel>
     {
         private const string InvalidFullNameMessage = "Моля въведете трите имена";
@@ -20,9 +22,10 @@
 
         [Required]
         [Display(Name = "Възраст")]
+        [Range(GlobalConstants.PatientMinAge, GlobalConstants.PatientMaxAge)]
         public int Age { get; set; }
 
-        public string BloodTypeId { get; set; }
+        public int BloodTypeId { get; set; }
 
         public BloodTypeInputModel BloodType { get; set; }
 

@@ -7,14 +7,19 @@
 
     public class Patient : BaseDeletableModel<string>
     {
+        private const int MinValueNeededBloodBanks = 1;
+        private const int MaxValueNeededBloodBanks = 10;
+
         public Patient()
         {
             this.Id = Guid.NewGuid().ToString();
         }
 
         [Required]
+        [RegularExpression(@"[\u0410-\u042F\u0430-\u044F]+ [\u0410-\u042F\u0430-\u044F]+ [\u0410-\u042F\u0430-\u044F]+")]
         public string FullName { get; set; }
 
+        [Required]
         public int Age { get; set; }
 
         [Required]
@@ -36,7 +41,7 @@
         public string Ward { get; set; }
 
         [Required]
-        [Range(0, 10)]
+        [Range(MinValueNeededBloodBanks, MaxValueNeededBloodBanks)]
         public int NeededBloodBanks { get; set; }
     }
 }

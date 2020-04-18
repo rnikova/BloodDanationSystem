@@ -6,7 +6,6 @@
 
     using BloodDanationSystem.Common;
     using BloodDanationSystem.Data;
-    using BloodDanationSystem.Data.Common.Repositories;
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Data.Models.Enums;
     using BloodDanationSystem.Services.Mapping;
@@ -43,6 +42,7 @@
                 UserId = user.Id,
                 HospitalId = patientServiceModel.HospitalId,
                 Ward = patientServiceModel.Ward,
+                NeededBloodBanks = patientServiceModel.NeededBloodBanks,
             };
 
             await this.userManager.AddToRoleAsync(user, GlobalConstants.PatientRoleName);
@@ -66,7 +66,7 @@
         public async Task<PatientServiceModel> GetByUserIdAsync(string userId)
         {
             var patient = await this.context.Patients.FirstOrDefaultAsync(x => x.UserId == userId);
-            var model = new PatientServiceModel
+            var patientModel = new PatientServiceModel
             {
                 Id = patient.Id,
                 FullName = patient.FullName,
@@ -78,13 +78,13 @@
                 NeededBloodBanks = patient.NeededBloodBanks,
             };
 
-            return model;
+            return patientModel;
         }
 
         public async Task<PatientServiceModel> GetByPatientIdAsync(string patientId)
         {
             var patient = await this.context.Patients.FirstOrDefaultAsync(x => x.Id == patientId);
-            var model = new PatientServiceModel
+            var patientModel = new PatientServiceModel
             {
                 Id = patient.Id,
                 FullName = patient.FullName,
@@ -96,7 +96,7 @@
                 NeededBloodBanks = patient.NeededBloodBanks,
             };
 
-            return model;
+            return patientModel;
         }
     }
 }

@@ -11,5 +11,8 @@
 
         public const int DonorMinAge = 18;
         public const int DonorMaxAge = 65;
+
+        public const int PatientMinAge = 0;
+        public const int PatientMaxAge = 130;
     }
 }
