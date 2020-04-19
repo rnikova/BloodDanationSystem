@@ -8,9 +8,9 @@
     {
         Task<bool> CreateAsync(DonorsPatientsServiceModel donorsPatientsServiceModel);
 
-        Task<DonorsPatientsServiceModel> GetDonorsPatientsByDonorIdAsync(string donorId);
+        Task<DonorsPatientsServiceModel> GetDonorsPatientsByDonorsUserIdAsync(string donorId);
 
-        Task<DonorsPatientsServiceModel> GetDonorsPatientsByPatientIdAsync(string patientId);
+        Task<DonorsPatientsServiceModel> GetDonorsPatientsByPatientsUserIdAsync(string patientId);
 
         Task<bool> AddImageAsync(DonorsPatientsServiceModel donorsPatientsServiceModel, string imageUrl);
     }

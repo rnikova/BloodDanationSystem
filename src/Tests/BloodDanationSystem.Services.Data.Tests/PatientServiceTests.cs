@@ -7,7 +7,6 @@
     using BloodDanationSystem.Data;
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Services;
-    using BloodDanationSystem.Services.Mapping;
     using BloodDanationSystem.Services.Tests.Common;
     using BloodDanationSystem.Services.Tests.Seeders;
     using BloodDonationSystem.Services.Models.Patients;

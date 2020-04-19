@@ -88,5 +88,107 @@
             await context.Patients.AddRangeAsync(patients);
             await context.SaveChangesAsync();
         }
+
+        public async Task SeedCities(ApplicationDbContext context)
+        {
+            var cities = new List<City>
+            {
+                new City
+                {
+                    Name = "София",
+                },
+                new City
+                {
+                    Name = "Пловдив",
+                },
+            };
+
+            await context.Cities.AddRangeAsync(cities);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task SeedDonorAsync(ApplicationDbContext context)
+        {
+            var donors = new List<Donor>
+            {
+                new Donor
+                {
+                    FullName = "First User",
+                    Age = 22,
+                    BloodTypeId = 1,
+                    UserId = "userId1",
+                    CityId = 1,
+                },
+                new Donor
+                {
+                    FullName = "Second User",
+                    Age = 22,
+                    BloodTypeId = 1,
+                    UserId = "userId2",
+                    CityId = 2,
+                },
+            };
+
+            await context.Donors.AddRangeAsync(donors);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task SeedDonorsPatientsAsync(ApplicationDbContext context)
+        {
+            var donorsPatients = new List<DonorsPatients>
+            {
+                new DonorsPatients
+                {
+                    DonorId = "donorId1",
+                    Donor = new Donor
+                    {
+                        FullName = "First User",
+                        Age = 22,
+                        BloodTypeId = 1,
+                        UserId = "userId1",
+                        CityId = 1,
+                    },
+                    PatientId = "patientId1",
+                    Patient = new Patient
+                    {
+                        FullName = "Second User",
+                        Age = 22,
+                        BloodTypeId = 1,
+                        UserId = "userId3",
+                        HospitalId = 2,
+                        Ward = "ward2",
+                        NeededBloodBanks = 3,
+                    },
+                    Image = "image",
+                },
+                new DonorsPatients
+                {
+                    DonorId = "donorId2",
+                    Donor = new Donor
+                    {
+                        FullName = "Second User",
+                        Age = 22,
+                        BloodTypeId = 1,
+                        UserId = "userId2",
+                        CityId = 2,
+                    },
+                    PatientId = "patientId2",
+                    Patient = new Patient
+                    {
+                        FullName = "Second User",
+                        Age = 22,
+                        BloodTypeId = 1,
+                        UserId = "userId2",
+                        HospitalId = 2,
+                        Ward = "ward2",
+                        NeededBloodBanks = 3,
+                    },
+                    Image = "image2",
+                },
+            };
+
+            await context.DonorsPatients.AddRangeAsync(donorsPatients);
+            await context.SaveChangesAsync();
+        }
     }
 }

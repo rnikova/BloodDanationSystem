@@ -5,19 +5,18 @@
 
     using BloodDanationSystem.Data;
     using BloodDanationSystem.Data.Models;
-    using BloodDanationSystem.Services.Mapping;
-    using BloodDonationSystem.Services.Models;
     using BloodDonationSystem.Services.Models.DonorsPatientsServiceModel;
-    using BloodDonationSystem.Services.Models.Patients;
     using Microsoft.EntityFrameworkCore;
 
     public class DonorsPatientsService : IDonorsPatientsService
     {
         private readonly ApplicationDbContext context;
+        private readonly IPatientService patientService;
 
-        public DonorsPatientsService(ApplicationDbContext context)
+        public DonorsPatientsService(ApplicationDbContext context, IPatientService patientService)
         {
             this.context = context;
+            this.patientService = patientService;
         }
 
         public async Task<bool> AddImageAsync(DonorsPatientsServiceModel donorsPatientsServiceModel, string imageUrl)
@@ -45,22 +44,22 @@
             return result > 0;
         }
 
-        public async Task<DonorsPatientsServiceModel> GetDonorsPatientsByDonorIdAsync(string donorId)
+        public async Task<DonorsPatientsServiceModel> GetDonorsPatientsByDonorsUserIdAsync(string donorId)
         {
-            var donorPatient = await this.context.DonorsPatients.Where(x => x.Donor.UserId == donorId && x.IsDeleted == false).SingleOrDefaultAsync();
+            var donorPatient = await this.context.DonorsPatients.Where(x => x.Donor.UserId == donorId && x.IsDeleted == false).Include(x => x.Patient).SingleOrDefaultAsync();
+            var patient = await this.patientService.GetByPatientIdAsync(donorPatient.PatientId);
             var model = new DonorsPatientsServiceModel
             {
                 PatientId = donorPatient.PatientId,
-                Patient = this.context.Patients.Find(donorPatient.PatientId).To<PatientServiceModel>(),
+                Patient = patient,
                 DonorId = donorPatient.DonorId,
-                Donor = this.context.Donors.Find(donorId).To<DonorServiceModel>(),
                 Image = donorPatient.Image,
             };
 
             return model;
         }
 
-        public async Task<DonorsPatientsServiceModel> GetDonorsPatientsByPatientIdAsync(string patientId)
+        public async Task<DonorsPatientsServiceModel> GetDonorsPatientsByPatientsUserIdAsync(string patientId)
         {
             var donorPatient = await this.context.DonorsPatients.Where(x => x.Patient.UserId == patientId && x.IsDeleted == false).SingleOrDefaultAsync();
             var model = new DonorsPatientsServiceModel

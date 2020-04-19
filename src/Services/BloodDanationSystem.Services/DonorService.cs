@@ -27,7 +27,6 @@
         public async Task<bool> CreateAsync(DonorServiceModel donorServiceModel)
         {
             var user = await this.context.Users.FirstOrDefaultAsync(x => x.Id == donorServiceModel.UserId);
-            var role = await this.context.Roles.FirstOrDefaultAsync(x => x.Name == "Donor");
             var aboGroup = Enum.Parse<ABOGroup>(donorServiceModel.BloodType.ABOGroupName);
             var rhesusFactor = Enum.Parse<RhesusFactor>(donorServiceModel.BloodType.RhesusFactor);
 

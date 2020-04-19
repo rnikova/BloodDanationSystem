@@ -56,7 +56,7 @@
             var photoUrl = await this.cloudinaryService.UploadImageAsync(photo.Image, photoName);
 
             var user = await this.userManager.GetUserAsync(this.HttpContext.User);
-            var donorPatient = await this.donorsPatientsService.GetDonorsPatientsByDonorIdAsync(user.Id);
+            var donorPatient = await this.donorsPatientsService.GetDonorsPatientsByDonorsUserIdAsync(user.Id);
             donorPatient.Patient.NeededBloodBanks--;
 
             await this.donorsPatientsService.AddImageAsync(donorPatient, photoUrl);

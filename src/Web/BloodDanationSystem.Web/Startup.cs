@@ -14,6 +14,7 @@
     using BloodDanationSystem.Services.Messaging;
     using BloodDanationSystem.Web.ViewModels;
     using BloodDonationSystem.Services.Models;
+    using BloodDonationSystem.Services.Models.Patients;
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -90,7 +91,8 @@
         {
             AutoMapperConfig.RegisterMappings(
                 typeof(ErrorViewModel).GetTypeInfo().Assembly,
-                typeof(DonorServiceModel).GetTypeInfo().Assembly);
+                typeof(DonorServiceModel).GetTypeInfo().Assembly,
+                typeof(PatientServiceModel).GetTypeInfo().Assembly);
 
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())

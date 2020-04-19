@@ -39,7 +39,7 @@
         public async Task<IActionResult> MyDonors()
         {
             var user = await this.userManager.GetUserAsync(this.HttpContext.User);
-            var donorPatient = await this.donorsPatientsService.GetDonorsPatientsByPatientIdAsync(user.Id);
+            var donorPatient = await this.donorsPatientsService.GetDonorsPatientsByPatientsUserIdAsync(user.Id);
 
             if (donorPatient != null || !string.IsNullOrEmpty(donorPatient.Image))
             {
