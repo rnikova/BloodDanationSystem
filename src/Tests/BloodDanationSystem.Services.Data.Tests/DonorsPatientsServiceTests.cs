@@ -26,7 +26,7 @@
             await seeder.SeedPatientAsync(context);
             var userManager = this.GetUserManagerMock(context);
             var patientService = new PatientService(context, userManager.Object);
-            var donorsPatientsService = new DonorsPatientsService(context, patientService);
+            var donorsPatientsService = new DonorsPatientsService(context, patientService, userManager.Object);
             var donor = context.Donors.First();
             var patient = context.Patients.First();
 
@@ -54,7 +54,7 @@
             await seeder.SeedDonorsPatientsAsync(context);
             var userManager = this.GetUserManagerMock(context);
             var patientService = new PatientService(context, userManager.Object);
-            var donorsPatientsService = new DonorsPatientsService(context, patientService);
+            var donorsPatientsService = new DonorsPatientsService(context, patientService, userManager.Object);
 
             var actualResult = await donorsPatientsService.GetDonorsPatientsByDonorsUserIdAsync("userId1");
             var expectedResult = context.DonorsPatients.Where(x => x.Donor.UserId == "userId1" && x.IsDeleted == false).FirstOrDefault();
@@ -72,7 +72,7 @@
             await seeder.SeedDonorsPatientsAsync(context);
             var userManager = this.GetUserManagerMock(context);
             var patientService = new PatientService(context, userManager.Object);
-            var donorsPatientsService = new DonorsPatientsService(context, patientService);
+            var donorsPatientsService = new DonorsPatientsService(context, patientService, userManager.Object);
 
             await Assert.ThrowsAsync<NullReferenceException>(async () =>
             {
@@ -89,7 +89,7 @@
             await seeder.SeedDonorsPatientsAsync(context);
             var userManager = this.GetUserManagerMock(context);
             var patientService = new PatientService(context, userManager.Object);
-            var donorsPatientsService = new DonorsPatientsService(context, patientService);
+            var donorsPatientsService = new DonorsPatientsService(context, patientService, userManager.Object);
 
             var actualResult = await donorsPatientsService.GetDonorsPatientsByPatientsUserIdAsync("userId2");
             var expectedResult = context.DonorsPatients.Where(x => x.Patient.UserId == "userId2" && x.IsDeleted == false).FirstOrDefault();
@@ -108,7 +108,7 @@
             await seeder.SeedDonorsPatientsAsync(context);
             var userManager = this.GetUserManagerMock(context);
             var patientService = new PatientService(context, userManager.Object);
-            var donorsPatientsService = new DonorsPatientsService(context, patientService);
+            var donorsPatientsService = new DonorsPatientsService(context, patientService, userManager.Object);
 
             await Assert.ThrowsAsync<NullReferenceException>(async () =>
             {
@@ -124,7 +124,7 @@
             await seeder.SeedDonorsPatientsAsync(context);
             var userManager = this.GetUserManagerMock(context);
             var patientService = new PatientService(context, userManager.Object);
-            var donorsPatientsService = new DonorsPatientsService(context, patientService);
+            var donorsPatientsService = new DonorsPatientsService(context, patientService, userManager.Object);
             var donorPatient = context.DonorsPatients.First();
             var donorsPatientsServiceModel = new DonorsPatientsServiceModel
             {

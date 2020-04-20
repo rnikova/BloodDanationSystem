@@ -3,20 +3,27 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using BloodDanationSystem.Common;
     using BloodDanationSystem.Data;
     using BloodDanationSystem.Data.Models;
     using BloodDonationSystem.Services.Models.DonorsPatientsServiceModel;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     public class DonorsPatientsService : IDonorsPatientsService
     {
         private readonly ApplicationDbContext context;
         private readonly IPatientService patientService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public DonorsPatientsService(ApplicationDbContext context, IPatientService patientService)
+        public DonorsPatientsService(
+            ApplicationDbContext context,
+            IPatientService patientService,
+            UserManager<ApplicationUser> userManager)
         {
             this.context = context;
             this.patientService = patientService;
+            this.userManager = userManager;
         }
 
         public async Task<bool> AddImageAsync(DonorsPatientsServiceModel donorsPatientsServiceModel, string imageUrl)
@@ -39,6 +46,21 @@
             };
 
             await this.context.DonorsPatients.AddAsync(donorPatient);
+            var result = await this.context.SaveChangesAsync();
+
+            return result > 0;
+        }
+
+        public async Task<bool> DeleteDonorsPatient(DonorsPatientsServiceModel donorsPatientsServiceModel)
+        {
+            var donorsPatients = await this.context.DonorsPatients.SingleOrDefaultAsync(x => x.PatientId == donorsPatientsServiceModel.PatientId && x.DonorId == donorsPatientsServiceModel.DonorId);
+            donorsPatients.IsDeleted = true;
+            var donor = donorsPatients.Donor;
+            var patient = donorsPatients.Patient;
+
+            await this.userManager.RemoveFromRoleAsync(donor.User, GlobalConstants.DonorRoleName);
+            await this.userManager.RemoveFromRoleAsync(patient.User, GlobalConstants.PatientRoleName);
+
             var result = await this.context.SaveChangesAsync();
 
             return result > 0;

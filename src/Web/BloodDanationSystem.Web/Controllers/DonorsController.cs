@@ -58,8 +58,9 @@
             var user = await this.userManager.GetUserAsync(this.HttpContext.User);
             var donorPatient = await this.donorsPatientsService.GetDonorsPatientsByDonorsUserIdAsync(user.Id);
             donorPatient.Patient.NeededBloodBanks--;
+            donorPatient.ImageId = photoUrl.PublicId;
 
-            await this.donorsPatientsService.AddImageAsync(donorPatient, photoUrl);
+            await this.donorsPatientsService.AddImageAsync(donorPatient, photoUrl?.SecureUri.AbsoluteUri);
 
             return this.Redirect("/");
         }

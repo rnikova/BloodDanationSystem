@@ -18,15 +18,18 @@
         private readonly IDonorService donorService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IDonorsPatientsService donorsPatientsService;
+        private readonly ICloudinaryService cloudinaryService;
 
         public PatientsController(
             IDonorService donorService,
             UserManager<ApplicationUser> userManager,
-            IDonorsPatientsService donorsPatientsService)
+            IDonorsPatientsService donorsPatientsService,
+            ICloudinaryService cloudinaryService)
         {
             this.donorService = donorService;
             this.userManager = userManager;
             this.donorsPatientsService = donorsPatientsService;
+            this.cloudinaryService = cloudinaryService;
         }
 
         public async Task<IActionResult> FindDonor()
@@ -44,6 +47,12 @@
             if (donorPatient != null || !string.IsNullOrEmpty(donorPatient.Image))
             {
                 this.ViewData["Photo"] = donorPatient.Image;
+            }
+
+            if (donorPatient.Patient.NeededBloodBanks == 0)
+            {
+                await this.donorsPatientsService.DeleteDonorsPatient(donorPatient);
+                await this.cloudinaryService.DeleteImageAsync(donorPatient.ImageId);
             }
 
             return this.View();

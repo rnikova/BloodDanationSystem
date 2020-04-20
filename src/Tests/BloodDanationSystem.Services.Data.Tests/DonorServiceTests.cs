@@ -6,11 +6,9 @@
 
     using BloodDanationSystem.Data;
     using BloodDanationSystem.Data.Models;
-    using BloodDanationSystem.Services.Mapping;
     using BloodDanationSystem.Services.Tests.Common;
     using BloodDanationSystem.Services.Tests.Seeders;
     using BloodDonationSystem.Services.Models;
-    using BloodDonationSystem.Services.Models.Users;
     using Microsoft.AspNetCore.Identity;
     using Moq;
     using Xunit;

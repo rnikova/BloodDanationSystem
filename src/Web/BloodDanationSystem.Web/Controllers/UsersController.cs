@@ -135,7 +135,7 @@
 
         public JsonResult GetHospitals(int cityId)
         {
-            List<HospitalServiceModel> hospitals = this.hospitalService.HospitalsInCity(cityId).ToList();
+            var hospitals = this.hospitalService.HospitalsInCity(cityId).ToList();
 
             return this.Json(new SelectList(hospitals, "Id", "Name"));
         }

@@ -66,7 +66,7 @@
         [InlineData(null, 33, "А", "Плюс", 2, 1, "Отделение")]
         [InlineData("Ivan", 33, null, "Плюс", 2, 1, "Отделение")]
         [InlineData("Ivan", 33, "А", null, 2, 1, "Отделение")]
-        [InlineData("Ivan", 33, "А", "Плюс", 2, 10, "Отделение")]
+        [InlineData("Ivan", 33, "А", "Плюс", 2, 11, "Отделение")]
         [InlineData("Ivan", 33, "А", "Плюс", 2, 0, "Отделение")]
         [InlineData("Ivan", 33, "А", "Плюс", 2, 1, "")]
         [InlineData("Ivan", 33, "А", "Плюс", 2, 1, null)]

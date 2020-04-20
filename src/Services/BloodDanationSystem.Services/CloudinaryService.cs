@@ -16,7 +16,7 @@
             this.cloudinary = cloudinary;
         }
 
-        public async Task<string> UploadImageAsync(IFormFile image, string fileName)
+        public async Task<UploadResult> UploadImageAsync(IFormFile image, string fileName)
         {
             byte[] destinationData;
 
@@ -39,7 +39,15 @@
                 uploadResult = this.cloudinary.Upload(uploadParams);
             }
 
-            return uploadResult?.SecureUri.AbsoluteUri;
+            return uploadResult;
+        }
+
+        public async Task<bool> DeleteImageAsync(string imageId)
+        {
+            var deletionParams = new DeletionParams(imageId);
+            var deletionResult = await this.cloudinary.DestroyAsync(deletionParams);
+
+            return true;
         }
     }
 }
