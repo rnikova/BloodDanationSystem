@@ -18,7 +18,7 @@
     {
         [Theory]
         [InlineData("Иван Иванов Иванов", 33, "А", "Плюс", 2, 3, "Отделение")]
-        [InlineData("Иван Иванов Иванов", 33, "А", "Плюс", 2, 0, "Отделение")]
+        [InlineData("Иван Иванов Иванов", 33, "А", "Плюс", 2, 1, "Отделение")]
         [InlineData("Иван Иванов Иванов", 33, "А", "Плюс", 2, 10, "Отделение")]
         public async Task CreateAsync_WithCorectData_ShouldReturnCorectResult(string fullName, int age, string aboGroup, string rhesusFactor, int hospitalId, int neededBloodBanks, string ward)
         {
@@ -59,6 +59,45 @@
             Assert.True(actualResult.NeededBloodBanks == expectedResult.NeededBloodBanks, errorMessage + "NeededBloodBanks");
             Assert.True(actualResult.Ward == expectedResult.Ward, errorMessage + "Ward");
             Assert.True(actualResult.UserId == expectedResult.UserId, errorMessage + "UserId");
+        }
+
+        [Theory]
+        [InlineData("", 33, "А", "Плюс", 2, 1, "Отделение")]
+        [InlineData(null, 33, "А", "Плюс", 2, 1, "Отделение")]
+        [InlineData("Ivan", 33, null, "Плюс", 2, 1, "Отделение")]
+        [InlineData("Ivan", 33, "А", null, 2, 1, "Отделение")]
+        [InlineData("Ivan", 33, "А", "Плюс", 2, 10, "Отделение")]
+        [InlineData("Ivan", 33, "А", "Плюс", 2, 0, "Отделение")]
+        [InlineData("Ivan", 33, "А", "Плюс", 2, 1, "")]
+        [InlineData("Ivan", 33, "А", "Плюс", 2, 1, null)]
+        public async Task CreateAsync_ShouldThrowException_WithInvalidData(string fullName, int age, string aboGroup, string rhesusFactor, int hospitalId, int neededBloodBanks, string ward)
+        {
+            var context = ApplicationDbContextInMemoryFactory.InitializeContext();
+            var seeder = new Seeder();
+            await seeder.SeedUsersAsync(context);
+            await seeder.SeedBloodTypesAsync(context);
+            var userManager = this.GetUserManagerMock(context);
+            var patientService = new PatientService(context, userManager.Object);
+
+            var patientServiceModel = new PatientServiceModel
+            {
+                FullName = fullName,
+                Age = age,
+                BloodType = new BloodDonationSystem.Services.Models.BloodTypeServiceModel
+                {
+                    ABOGroupName = aboGroup,
+                    RhesusFactor = rhesusFactor,
+                },
+                HospitalId = hospitalId,
+                NeededBloodBanks = neededBloodBanks,
+                Ward = ward,
+                UserId = context.Users.First().Id,
+            };
+
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await patientService.CreateAsync(patientServiceModel);
+            });
         }
 
         [Fact]

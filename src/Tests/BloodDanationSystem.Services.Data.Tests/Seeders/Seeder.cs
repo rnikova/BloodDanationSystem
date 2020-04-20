@@ -95,15 +95,39 @@
             {
                 new City
                 {
+                    Id = 1,
                     Name = "София",
                 },
                 new City
                 {
+                    Id = 2,
                     Name = "Пловдив",
                 },
             };
 
             await context.Cities.AddRangeAsync(cities);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task SeedHospitals(ApplicationDbContext context)
+        {
+            var hospitals = new List<Hospital>
+            {
+                new Hospital
+                {
+                    Id = 1,
+                    Name = "Hospital1",
+                    CityId = 1,
+                },
+                new Hospital
+                {
+                    Id = 2,
+                    Name = "hospital2",
+                    CityId = 2,
+                },
+            };
+
+            await context.Hospitals.AddRangeAsync(hospitals);
             await context.SaveChangesAsync();
         }
 

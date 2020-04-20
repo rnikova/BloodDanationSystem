@@ -15,6 +15,9 @@
 
     public class PatientService : IPatientService
     {
+        private const int MinValueNeededBloodBanks = 1;
+        private const int MaxValueNeededBloodBanks = 10;
+
         private readonly ApplicationDbContext context;
         private readonly UserManager<ApplicationUser> userManager;
 
@@ -26,6 +29,16 @@
 
         public async Task<bool> CreateAsync(PatientServiceModel patientServiceModel)
         {
+            if (string.IsNullOrWhiteSpace(patientServiceModel.FullName)
+                || string.IsNullOrWhiteSpace(patientServiceModel.UserId)
+                || patientServiceModel.BloodType == null
+                || string.IsNullOrWhiteSpace(patientServiceModel.Ward)
+                || patientServiceModel.NeededBloodBanks < MinValueNeededBloodBanks
+                || patientServiceModel.NeededBloodBanks > MaxValueNeededBloodBanks)
+            {
+                throw new ArgumentNullException();
+            }
+
             var user = await this.context.Users.FirstOrDefaultAsync(x => x.Id == patientServiceModel.UserId);
             var aboGroup = Enum.Parse<ABOGroup>(patientServiceModel.BloodType.ABOGroupName);
             var rhesusFactor = Enum.Parse<RhesusFactor>(patientServiceModel.BloodType.RhesusFactor);

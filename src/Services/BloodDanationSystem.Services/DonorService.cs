@@ -26,7 +26,15 @@
 
         public async Task<bool> CreateAsync(DonorServiceModel donorServiceModel)
         {
-            var user = await this.context.Users.FirstOrDefaultAsync(x => x.Id == donorServiceModel.UserId);
+            if (string.IsNullOrWhiteSpace(donorServiceModel.FullName)
+                || string.IsNullOrWhiteSpace(donorServiceModel.UserId)
+                || donorServiceModel.BloodType == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var user = await this.context.Users.SingleOrDefaultAsync(x => x.Id == donorServiceModel.UserId);
+
             var aboGroup = Enum.Parse<ABOGroup>(donorServiceModel.BloodType.ABOGroupName);
             var rhesusFactor = Enum.Parse<RhesusFactor>(donorServiceModel.BloodType.RhesusFactor);
 
@@ -59,6 +67,12 @@
         public async Task<DonorServiceModel> GetByUserIdAsync(string userId)
         {
             var donor = await this.context.Donors.SingleOrDefaultAsync(x => x.UserId == userId);
+
+            if (donor == null)
+            {
+                throw new InvalidOperationException();
+            }
+
             var model = new DonorServiceModel
             {
                 Id = donor.Id,

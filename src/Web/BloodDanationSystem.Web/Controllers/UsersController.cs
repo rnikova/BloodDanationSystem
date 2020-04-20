@@ -69,7 +69,6 @@
 
             var model = new DonorServiceModel()
             {
-                Id = donorsCreateInputModel.Id,
                 FullName = donorsCreateInputModel.FullName,
                 Age = donorsCreateInputModel.Age,
                 BloodType = new BloodTypeServiceModel
