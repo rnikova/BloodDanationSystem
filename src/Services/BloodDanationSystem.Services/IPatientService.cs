@@ -2,7 +2,7 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BloodDonationSystem.Services.Models.DonorsPatientsServiceModel;
     using BloodDonationSystem.Services.Models.Patients;
 
     public interface IPatientService
@@ -16,5 +16,7 @@
         Task<PatientServiceModel> GetByUserIdAsync(string userId);
 
         Task<PatientServiceModel> GetByPatientIdAsync(string patientId);
+
+        Task<bool> SendEmailWithPhotoAsync(DonorsPatientsServiceModel donorPatient);
     }
 }

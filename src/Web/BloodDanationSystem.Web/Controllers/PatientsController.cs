@@ -1,5 +1,6 @@
 ﻿namespace BloodDanationSystem.Web.Controllers
 {
+    using System.Net;
     using System.Threading.Tasks;
 
     using BloodDanationSystem.Common;
@@ -19,17 +20,20 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IDonorsPatientsService donorsPatientsService;
         private readonly ICloudinaryService cloudinaryService;
+        private readonly IPatientService patientService;
 
         public PatientsController(
             IDonorService donorService,
             UserManager<ApplicationUser> userManager,
             IDonorsPatientsService donorsPatientsService,
-            ICloudinaryService cloudinaryService)
+            ICloudinaryService cloudinaryService,
+            IPatientService patientService)
         {
             this.donorService = donorService;
             this.userManager = userManager;
             this.donorsPatientsService = donorsPatientsService;
             this.cloudinaryService = cloudinaryService;
+            this.patientService = patientService;
         }
 
         public async Task<IActionResult> FindDonor()
@@ -47,6 +51,7 @@
             if (donorPatient != null || !string.IsNullOrEmpty(donorPatient.Image))
             {
                 this.ViewData["Photo"] = donorPatient.Image;
+                var image = await this.patientService.SendEmailWithPhotoAsync(donorPatient);
             }
 
             if (donorPatient.Patient.NeededBloodBanks == 0)

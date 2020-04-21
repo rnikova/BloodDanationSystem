@@ -13,10 +13,7 @@
     using BloodDanationSystem.Services.Mapping;
     using BloodDanationSystem.Services.Messaging;
     using BloodDanationSystem.Web.ViewModels;
-    using BloodDanationSystem.Web.ViewModels.Administration.User;
-    using BloodDonationSystem.Services.Models;
     using BloodDonationSystem.Services.Models.Patients;
-    using BloodDonationSystem.Services.Models.Users;
     using BloodDonationSystem.Web.InputModels.Patients;
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
