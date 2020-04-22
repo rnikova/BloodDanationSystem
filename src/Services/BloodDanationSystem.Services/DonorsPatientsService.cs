@@ -99,6 +99,7 @@
                 },
                 DonorId = donorPatient.DonorId,
                 Image = donorPatient.Image,
+                ImageId = donorPatient.ImageId,
             };
 
             return model;
