@@ -7,6 +7,8 @@
     using BloodDanationSystem.Data;
     using BloodDanationSystem.Data.Models;
     using BloodDonationSystem.Services.Models.DonorsPatientsServiceModel;
+    using BloodDonationSystem.Services.Models.Patients;
+    using BloodDonationSystem.Services.Models.Users;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
@@ -83,10 +85,17 @@
 
         public async Task<DonorsPatientsServiceModel> GetDonorsPatientsByPatientsUserIdAsync(string patientId)
         {
-            var donorPatient = await this.context.DonorsPatients.Where(x => x.Patient.UserId == patientId && x.IsDeleted == false).SingleOrDefaultAsync();
+            var donorPatient = await this.context.DonorsPatients.Include(x => x.Patient.User).Where(x => x.Patient.UserId == patientId && x.IsDeleted == false).SingleOrDefaultAsync();
             var model = new DonorsPatientsServiceModel
             {
                 PatientId = donorPatient.PatientId,
+                Patient = new PatientServiceModel
+                {
+                    User = new UserServiceModel
+                    {
+                        Email = donorPatient.Patient.User.Email,
+                    },
+                },
                 DonorId = donorPatient.DonorId,
                 Image = donorPatient.Image,
             };

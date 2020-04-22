@@ -57,6 +57,9 @@
                 facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
             });
 
+            var emailConfig = this.configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+
             services.Configure<CookiePolicyOptions>(
                 options =>
                     {
@@ -76,6 +79,7 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IDonorService, DonorService>();
             services.AddTransient<IPatientService, PatientService>();

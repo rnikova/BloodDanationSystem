@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\BloodDanationSystem.Data\BloodDanationSystem.Data.csproj" />
     <ProjectReference Include="..\BloodDanationSystem.Services.Mapping\BloodDanationSystem.Services.Mapping.csproj" />
+    <ProjectReference Include="..\BloodDanationSystem.Services.Messaging\BloodDanationSystem.Services.Messaging.csproj" />
     <ProjectReference Include="..\BloodDonationSystem.Services.Models\BloodDonationSystem.Services.Models.csproj" />
   </ItemGroup>
 

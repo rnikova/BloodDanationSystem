@@ -1,10 +1,8 @@
 ﻿namespace BloodDanationSystem.Services
 {
     using System;
-    using System.IO;
     using System.Linq;
     using System.Net;
-    using System.Net.Mail;
     using System.Threading.Tasks;
 
     using BloodDanationSystem.Common;
@@ -116,37 +114,15 @@
             return patientModel;
         }
 
-        public async Task<bool> SendEmailWithPhotoAsync(DonorsPatientsServiceModel donorPatient)
+        public async Task<byte[]> DownloadPhotoAsync(string image)
         {
             byte[] photo;
             using (var client = new WebClient())
             {
-                photo = await client.DownloadDataTaskAsync(donorPatient.Image);
+                photo = await client.DownloadDataTaskAsync(image);
             }
 
-            MailAddress to = new MailAddress(donorPatient.Patient.User.Email);
-            MailAddress from = new MailAddress(email);
-            MailMessage mail = new MailMessage(from, to);
-            mail.Subject = "Служебна бележка кръводаряване";
-            mail.Body = "Приложено Ви изпращаме служебна бележка за кръводаряване";
-
-            using (MemoryStream fileStream = new MemoryStream(photo, 0, photo.Length))
-            {
-                Attachment attachment = new Attachment(fileStream, donorPatient.Image);
-                mail.Attachments.Add(attachment);
-
-                SmtpClient smtpServer = new SmtpClient("smtp.gmail.com", 587)
-                {
-                    Host = "smtp.gmail.com",
-                    UseDefaultCredentials = true,
-                    Credentials = new System.Net.NetworkCredential(email, password),
-                    EnableSsl = true,
-                    Port = 587,
-                };
-                smtpServer.Send(mail);
-            }
-
-            return true;
+            return photo;
         }
     }
 }
