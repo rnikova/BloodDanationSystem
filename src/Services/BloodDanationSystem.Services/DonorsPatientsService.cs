@@ -55,10 +55,10 @@
 
         public async Task<bool> DeleteDonorsPatient(DonorsPatientsServiceModel donorsPatientsServiceModel)
         {
-            var donorsPatients = await this.context.DonorsPatients.SingleOrDefaultAsync(x => x.PatientId == donorsPatientsServiceModel.PatientId && x.DonorId == donorsPatientsServiceModel.DonorId);
+            var donorsPatients = await this.context.DonorsPatients.Include(x => x.Donor.User).SingleOrDefaultAsync(x => x.PatientId == donorsPatientsServiceModel.PatientId && x.DonorId == donorsPatientsServiceModel.DonorId);
             donorsPatients.IsDeleted = true;
-            var donor = donorsPatients.Donor;
             var patient = donorsPatients.Patient;
+            var donor = donorsPatients.Donor;
 
             await this.userManager.RemoveFromRoleAsync(donor.User, GlobalConstants.DonorRoleName);
             await this.userManager.RemoveFromRoleAsync(patient.User, GlobalConstants.PatientRoleName);
@@ -95,6 +95,7 @@
                     {
                         Email = donorPatient.Patient.User.Email,
                     },
+                    NeededBloodBanks = donorPatient.Patient.NeededBloodBanks,
                 },
                 DonorId = donorPatient.DonorId,
                 Image = donorPatient.Image,
