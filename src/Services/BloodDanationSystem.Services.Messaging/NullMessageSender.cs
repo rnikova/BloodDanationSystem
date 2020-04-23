@@ -1,6 +1,5 @@
 ﻿namespace BloodDanationSystem.Services.Messaging
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class NullMessageSender : IEmailSender
@@ -11,6 +10,11 @@
             byte[] attachment = null)
         {
             return Task.CompletedTask;
+        }
+
+        public Task SendEmailConfirmationAsync(string to, string subject, string message)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

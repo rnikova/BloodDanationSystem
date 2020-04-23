@@ -42,12 +42,10 @@
             return uploadResult;
         }
 
-        public async Task<bool> DeleteImageAsync(string imageId)
+        public async Task DeleteImageAsync(string imageId)
         {
             var deletionParams = new DeletionParams(imageId);
             var deletionResult = await this.cloudinary.DestroyAsync(deletionParams);
-
-            return true;
         }
     }
 }

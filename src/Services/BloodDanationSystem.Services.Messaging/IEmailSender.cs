@@ -1,6 +1,5 @@
 ﻿namespace BloodDanationSystem.Services.Messaging
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public interface IEmailSender
@@ -9,5 +8,10 @@
             string to,
             string subject,
             byte[] attachment = null);
+
+        Task SendEmailConfirmationAsync(
+            string to,
+            string subject,
+            string message);
     }
 }

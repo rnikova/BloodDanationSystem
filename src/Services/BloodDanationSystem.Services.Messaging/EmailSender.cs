@@ -35,5 +35,27 @@
                 await client.SendAsync(emailMessage);
             }
         }
+
+        public async Task SendEmailConfirmationAsync(string to, string subject, string message)
+        {
+            var emailMessage = new MimeMessage();
+            emailMessage.From.Add(new MailboxAddress(this.emailConfiguration.From));
+            emailMessage.To.Add(new MailboxAddress(to));
+            emailMessage.Subject = subject;
+
+            var builder = new BodyBuilder();
+            builder.HtmlBody = message;
+
+            emailMessage.Body = builder.ToMessageBody();
+
+            using (var client = new SmtpClient())
+            {
+                await client.ConnectAsync(this.emailConfiguration.SmtpServer, this.emailConfiguration.Port, false);
+                client.AuthenticationMechanisms.Remove("HOAUTH2");
+                await client.AuthenticateAsync(this.emailConfiguration.UserName, this.emailConfiguration.Password);
+
+                await client.SendAsync(emailMessage);
+            }
+        }
     }
 }

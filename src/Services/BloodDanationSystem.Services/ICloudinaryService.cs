@@ -9,6 +9,6 @@
     {
         Task<UploadResult> UploadImageAsync(IFormFile image, string fileName);
 
-        Task<bool> DeleteImageAsync(string imageId);
+        Task DeleteImageAsync(string imageId);
     }
 }
