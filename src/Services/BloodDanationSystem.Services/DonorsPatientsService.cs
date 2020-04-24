@@ -53,10 +53,12 @@
             return result > 0;
         }
 
-        public async Task<bool> DeleteDonorsPatient(DonorsPatientsServiceModel donorsPatientsServiceModel)
+        public async Task<bool> DeleteDonorsPatientAsync(DonorsPatientsServiceModel donorsPatientsServiceModel)
         {
             var donorsPatients = await this.context.DonorsPatients.Include(x => x.Donor.User).SingleOrDefaultAsync(x => x.PatientId == donorsPatientsServiceModel.PatientId && x.DonorId == donorsPatientsServiceModel.DonorId);
             donorsPatients.IsDeleted = true;
+            donorsPatients.ImageId = string.Empty;
+            donorsPatients.Image = string.Empty;
             var patient = donorsPatients.Patient;
             var donor = donorsPatients.Donor;
 

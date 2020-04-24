@@ -11,7 +11,8 @@
 
     public class PatientsCreateInputModel : IMapTo<PatientServiceModel>, IMapFrom<PatientServiceModel>
     {
-        private const string InvalidFullNameMessage = "Моля въведете трите имена";
+        private const string InvalidFullNameMessage = "Моля въведете трите имена на български език";
+        private const string InvalidRangeNeededBloodBankMessage = "Нужните банки кръв трябва да са между 1 и 10";
         private const int MinValueNeededBloodBanks = 1;
         private const int MaxValueNeededBloodBanks = 10;
 
@@ -39,7 +40,7 @@
         public string Ward { get; set; }
 
         [Display(Name = "Нужни банки кръв")]
-        [Range(MinValueNeededBloodBanks, MaxValueNeededBloodBanks)]
+        [Range(MinValueNeededBloodBanks, MaxValueNeededBloodBanks, ErrorMessage = InvalidRangeNeededBloodBankMessage)]
         public int NeededBloodBanks { get; set; }
 
         [Display(Name = "Град")]

@@ -1,13 +1,11 @@
 ﻿namespace BloodDanationSystem.Web.Controllers
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Services;
     using BloodDonationSystem.Services.Models;
-    using BloodDonationSystem.Services.Models.Hospitals;
     using BloodDonationSystem.Services.Models.Patients;
     using BloodDonationSystem.Web.InputModels.Donors;
     using BloodDonationSystem.Web.InputModels.Patients;
@@ -81,7 +79,6 @@
             };
 
             await this.donorService.CreateAsync(model);
-
             return this.Redirect("/");
         }
 

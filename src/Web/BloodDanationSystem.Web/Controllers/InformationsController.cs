@@ -6,12 +6,13 @@
     using Aspose.Words.Saving;
     using BloodDanationSystem.Services;
     using BloodDanationSystem.Services.Mapping;
-    using BloodDanationSystem.Web.ViewModels.Administration.Patient;
     using BloodDanationSystem.Web.ViewModels.BloodCenters;
     using BloodDonationSystem.Services.Models.Informations;
     using BloodDonationSystem.Web.InputModels.Informations;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [AllowAnonymous]
     public class InformationsController : BaseController
     {
         private readonly IInformationsService informationsService;

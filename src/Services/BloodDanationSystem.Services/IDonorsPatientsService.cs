@@ -3,7 +3,6 @@
     using System.Threading.Tasks;
 
     using BloodDonationSystem.Services.Models.DonorsPatientsServiceModel;
-    using CloudinaryDotNet.Actions;
 
     public interface IDonorsPatientsService
     {
@@ -15,6 +14,6 @@
 
         Task<bool> AddImageAsync(DonorsPatientsServiceModel donorsPatientsServiceModel, string imageUrl);
 
-        Task<bool> DeleteDonorsPatient(DonorsPatientsServiceModel donorsPatientsServiceModel);
+        Task<bool> DeleteDonorsPatientAsync(DonorsPatientsServiceModel donorsPatientsServiceModel);
     }
 }

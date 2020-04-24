@@ -6,9 +6,9 @@
     using System.Threading.Tasks;
 
     using BloodDanationSystem.Data.Models;
+    using BloodDanationSystem.Services.Messaging;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
@@ -45,7 +45,7 @@
                 if (user == null || !(await this.userManager.IsEmailConfirmedAsync(user)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return this.RedirectToPage("./ForgotPasswordConfirmation");
+                    return this.Page();
                 }
 
                 // For more information on how to enable account confirmation and password reset please
@@ -58,15 +58,15 @@
                     values: new { area = "Identity", code },
                     protocol: this.Request.Scheme);
 
-                await this.emailSender.SendEmailAsync(
+                await this.emailSender.SendEmailConfirmationAsync(
                     this.Input.Email,
                     "Reset Password",
                     $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                return this.RedirectToPage("./ForgotPasswordConfirmation");
+                return this.Page();
             }
 
-            return this.Page();
+            return this.RedirectToAction("Home", "Index");
         }
     }
 }

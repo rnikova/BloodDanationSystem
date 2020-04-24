@@ -64,7 +64,7 @@
 
             if (donorPatient.Patient.NeededBloodBanks == 0)
             {
-                await this.donorsPatientsService.DeleteDonorsPatient(donorPatient);
+                await this.donorsPatientsService.DeleteDonorsPatientAsync(donorPatient);
                 await this.cloudinaryService.DeleteImageAsync(donorPatient.ImageId);
             }
 

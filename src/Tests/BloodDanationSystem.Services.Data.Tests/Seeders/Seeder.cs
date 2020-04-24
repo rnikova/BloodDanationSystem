@@ -169,7 +169,12 @@
                         FullName = "First User",
                         Age = 22,
                         BloodTypeId = 1,
-                        UserId = "userId1",
+                        UserId = "userId4",
+                        User = new ApplicationUser
+                        {
+                            Id = "userId4",
+                            Email = "user4@user.com",
+                        },
                         CityId = 1,
                     },
                     PatientId = "patientId1",
@@ -179,11 +184,17 @@
                         Age = 22,
                         BloodTypeId = 1,
                         UserId = "userId3",
+                        User = new ApplicationUser
+                        {
+                            Id = "userId3",
+                            Email = "user1@user.com",
+                        },
                         HospitalId = 2,
                         Ward = "ward2",
                         NeededBloodBanks = 3,
                     },
                     Image = "image",
+                    IsDeleted = false,
                 },
                 new DonorsPatients
                 {
@@ -193,7 +204,12 @@
                         FullName = "Second User",
                         Age = 22,
                         BloodTypeId = 1,
-                        UserId = "userId2",
+                        UserId = "userId1",
+                        User = new ApplicationUser
+                        {
+                            Id = "userId1",
+                            Email = "user1@user.com",
+                        },
                         CityId = 2,
                     },
                     PatientId = "patientId2",
@@ -203,11 +219,17 @@
                         Age = 22,
                         BloodTypeId = 1,
                         UserId = "userId2",
+                        User = new ApplicationUser
+                        {
+                            Id = "userId2",
+                            Email = "user2@user.com",
+                        },
                         HospitalId = 2,
                         Ward = "ward2",
                         NeededBloodBanks = 3,
                     },
                     Image = "image2",
+                    IsDeleted = false,
                 },
             };
 

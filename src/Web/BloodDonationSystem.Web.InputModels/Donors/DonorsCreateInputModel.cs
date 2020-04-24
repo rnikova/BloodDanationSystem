@@ -11,7 +11,7 @@
 
     public class DonorsCreateInputModel : IMapTo<DonorServiceModel>, IMapFrom<DonorServiceModel>
     {
-        private const string InvalidFullNameMessage = "Моля въведете трите си имена";
+        private const string InvalidFullNameMessage = "Моля въведете трите си имена на български език";
 
         public string Id { get; set; }
 

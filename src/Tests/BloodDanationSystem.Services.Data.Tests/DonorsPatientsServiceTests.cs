@@ -8,8 +8,12 @@
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Services.Tests.Common;
     using BloodDanationSystem.Services.Tests.Seeders;
+    using BloodDonationSystem.Services.Models;
     using BloodDonationSystem.Services.Models.DonorsPatientsServiceModel;
+    using BloodDonationSystem.Services.Models.Patients;
+    using BloodDonationSystem.Services.Models.Users;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
     using Moq;
     using Xunit;
 
@@ -134,6 +138,43 @@
 
             var actualResult = await donorsPatientsService.AddImageAsync(donorsPatientsServiceModel, "url");
             var expectedResult = donorsPatientsServiceModel;
+
+            Assert.True(actualResult);
+        }
+
+        [Fact]
+        public async Task DeleteDonorsPatientAsync_ShouldDeleteSuccessfully()
+        {
+            var context = ApplicationDbContextInMemoryFactory.InitializeContext();
+            var seeder = new Seeder();
+            await seeder.SeedDonorsPatientsAsync(context);
+            var userManager = this.GetUserManagerMock(context);
+            var patientService = new PatientService(context, userManager.Object);
+            var donorsPatientsService = new DonorsPatientsService(context, patientService, userManager.Object);
+            var donorPatient = context.DonorsPatients.First();
+            await userManager.Object.AddToRoleAsync(donorPatient.Donor.User, "Donor");
+            await userManager.Object.AddToRoleAsync(donorPatient.Patient.User, "Patient");
+            var donorsPatientsServiceModel = new DonorsPatientsServiceModel
+            {
+                DonorId = donorPatient.DonorId,
+                PatientId = donorPatient.PatientId,
+                Donor = new DonorServiceModel
+                {
+                    User = new UserServiceModel
+                    {
+                        Id = donorPatient.Donor.User.Id,
+                    },
+                },
+                Patient = new PatientServiceModel
+                {
+                    User = new UserServiceModel
+                    {
+                        Id = donorPatient.Patient.User.Id,
+                    },
+                },
+            };
+
+            var actualResult = await donorsPatientsService.DeleteDonorsPatientAsync(donorsPatientsServiceModel);
 
             Assert.True(actualResult);
         }
