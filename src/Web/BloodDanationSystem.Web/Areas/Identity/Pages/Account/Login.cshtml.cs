@@ -14,18 +14,17 @@
     using Microsoft.Extensions.Logging;
 
     [AllowAnonymous]
+#pragma warning disable SA1649 // File name should match first type name
     public class LoginModel : PageModel
+#pragma warning restore SA1649 // File name should match first type name
     {
-        private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<LoginModel> logger;
 
         public LoginModel(
             SignInManager<ApplicationUser> signInManager,
-            ILogger<LoginModel> logger,
-            UserManager<ApplicationUser> userManager)
+            ILogger<LoginModel> logger)
         {
-            this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
         }
@@ -53,26 +52,28 @@
             public bool RememberMe { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
-            if (this.User.Identity.IsAuthenticated)
+            if (!this.User.Identity.IsAuthenticated)
             {
-                this.Response.Redirect("/");
+                if (!string.IsNullOrEmpty(this.ErrorMessage))
+                {
+                    this.ModelState.AddModelError(string.Empty, this.ErrorMessage);
+                }
+
+                returnUrl = returnUrl ?? this.Url.Content("~/");
+
+                // Clear the existing external cookie to ensure a clean login process
+                await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+                this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+                this.ReturnUrl = returnUrl;
+
+                return this.Page();
             }
 
-            if (!string.IsNullOrEmpty(this.ErrorMessage))
-            {
-                this.ModelState.AddModelError(string.Empty, this.ErrorMessage);
-            }
-
-            returnUrl = returnUrl ?? this.Url.Content("~/");
-
-            // Clear the existing external cookie to ensure a clean login process
-            await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
-            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
-            this.ReturnUrl = returnUrl;
+            return this.Redirect("/");
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)

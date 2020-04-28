@@ -47,7 +47,12 @@
                 DonorId = donorsPatientsServiceModel.DonorId,
             };
 
-            await this.context.DonorsPatients.AddAsync(donorPatient);
+            if (!await this.context.DonorsPatients.ContainsAsync(donorPatient))
+            {
+                await this.context.DonorsPatients.AddAsync(donorPatient);
+            }
+
+            donorPatient.IsDeleted = false;
             var result = await this.context.SaveChangesAsync();
 
             return result > 0;

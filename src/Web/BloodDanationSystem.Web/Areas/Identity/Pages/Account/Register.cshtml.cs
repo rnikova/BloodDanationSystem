@@ -19,7 +19,9 @@
     using Microsoft.Extensions.Logging;
 
     [AllowAnonymous]
+#pragma warning disable SA1649 // File name should match first type name
     public class RegisterModel : PageModel
+#pragma warning restore SA1649 // File name should match first type name
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
@@ -76,16 +78,26 @@
             public string ConfirmPassword { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
-            this.ReturnUrl = "/Identity/Account/Login";
-            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                this.ReturnUrl = "/Identity/Account/Login";
+                this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+                return this.Page();
+            }
+            else
+            {
+                return this.Redirect("/");
+            }
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = "/Identity/Account/Login";
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (this.ModelState.IsValid)
             {
                 var user = new ApplicationUser
@@ -97,30 +109,46 @@
                     Age = this.Input.Age,
                 };
 
-                var result = await this.userManager.CreateAsync(user, this.Input.Password);
-                if (result.Succeeded)
+                var emailExist = await this.userManager.GetEmailAsync(user);
+                var usernameExist = await this.userManager.GetUserNameAsync(user);
+
+                if (emailExist != null)
                 {
-                    this.logger.LogInformation("User created a new account with password.");
-
-                    var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = this.Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code },
-                        protocol: this.Request.Scheme);
-
-                    string htmlMessage = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
-                    await this.emailSender.SendEmailConfirmationAsync(this.Input.Email, "Confirm your email", htmlMessage);
-
-                    await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
-
-                    return this.LocalRedirect(returnUrl);
+                    this.ModelState.AddModelError(string.Empty, "User with email addresss already exists");
                 }
 
-                foreach (var error in result.Errors)
+                if (usernameExist != null)
                 {
-                    this.ModelState.AddModelError(string.Empty, error.Description);
+                    this.ModelState.AddModelError(string.Empty, "User with this username already exists");
+                }
+                else
+                {
+                    var result = await this.userManager.CreateAsync(user, this.Input.Password);
+
+                    if (result.Succeeded)
+                    {
+                        this.logger.LogInformation("User created a new account with password.");
+
+                        var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
+                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                        var callbackUrl = this.Url.Page(
+                            "/Account/ConfirmEmail",
+                            pageHandler: null,
+                            values: new { area = "Identity", userId = user.Id, code = code },
+                            protocol: this.Request.Scheme);
+
+                        string htmlMessage = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
+                        await this.emailSender.SendEmailConfirmationAsync(this.Input.Email, "Confirm your email", htmlMessage);
+
+                        await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
+
+                        return this.LocalRedirect(returnUrl);
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        this.ModelState.AddModelError(string.Empty, error.Description);
+                    }
                 }
             }
 
