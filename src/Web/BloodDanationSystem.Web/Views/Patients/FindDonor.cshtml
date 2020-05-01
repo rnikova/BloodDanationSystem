@@ -27,13 +27,18 @@
                 <tbody>
                     @for (var i = 1; i <= Model.Count(); i++)
                     {
-                        <tr>
-                            <th scope="row">@i</th>
-                            <td>@Model[i - 1].City.Name</td>
-                            <td>@Model[i - 1].BloodType.ABOGroupName </td>
-                            <td>@Model[i - 1].BloodType.RhesusFactor </td>
-                            <td><button type="button" class="btn btn-danger"><i class="fa fa-heart" aria-hidden="true"></i></button></td>
-                        </tr>
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>@Model[i - 1].City.Name</td>
+                        <td>@Model[i - 1].BloodType.ABOGroupName </td>
+                        <td>@Model[i - 1].BloodType.RhesusFactor </td>
+                        <td>
+                            <form asp-action="WantYourHelp" asp-controller="Patients" method="post">
+                                <input type="hidden" value="@Model[i-1].Id" name="donorId" />
+                                <button type="submit" class="btn btn-danger fa fa-heart" data-toggle="tooltip" title="Имам нужда от твоята помощ"></button>
+                            </form>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

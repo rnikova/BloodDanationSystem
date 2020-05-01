@@ -1,4 +1,4 @@
-﻿@model IList<BloodDanationSystem.Web.ViewModels.Administration.Patient.PatientAllViewModel>;
+﻿@model IList<BloodDonationSystem.Services.Models.Patients.PatientServiceModel>;
 
 @{
     ViewData["Title"] = "All";
@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (var i = 1; i <= Model.Count; i++)
+                    @for (var i = 1; i <= Model.Count(); i++)
                     {
                         <tr>
                             <th scope="row">@i</th>

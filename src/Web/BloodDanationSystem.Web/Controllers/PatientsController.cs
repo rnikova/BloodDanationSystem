@@ -70,5 +70,10 @@
 
             return this.View();
         }
+
+        public async Task<IActionResult> WantYourHelp(string donorId)
+        {
+            return this.View();
+        }
     }
 }

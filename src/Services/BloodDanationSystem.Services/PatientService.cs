@@ -10,6 +10,8 @@
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Data.Models.Enums;
     using BloodDanationSystem.Services.Mapping;
+    using BloodDonationSystem.Services.Models;
+    using BloodDonationSystem.Services.Models.Hospitals;
     using BloodDonationSystem.Services.Models.Patients;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -74,8 +76,7 @@
 
         public IQueryable<PatientServiceModel> AllActive()
         {
-            var patients = this.context.Patients.Where(x => x.NeededBloodBanks > 0);
-            return patients.To<PatientServiceModel>();
+            return this.All().Where(x => x.NeededBloodBanks > 0);
         }
 
         public async Task<PatientServiceModel> GetByUserIdAsync(string userId)

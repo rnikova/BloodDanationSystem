@@ -1,5 +1,5 @@
 ﻿@using System.Linq;
-@model IList<BloodDanationSystem.Web.ViewModels.Patients.PatientViewModel>;
+@model IList<BloodDonationSystem.Services.Models.Patients.PatientServiceModel>;
 @{
     ViewData["Title"] = "FindPatients";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,34 +13,35 @@
             <!-- Grid column -->
         </div>
         <div class="row custyle">
-                <table class="table table-striped text-light table-hover" id="all">
-                    <!--Table head-->
-                    <thead>
+            <table class="table table-striped text-light table-hover" id="all">
+                <!--Table head-->
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Град</th>
+                        <th>Кръвна група</th>
+                        <th>Резус фактор</th>
+                        <th>Действие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 1; i <= Model.Count(); i++)
+                    {
                         <tr>
-                            <th>#</th>
-                            <th>Град</th>
-                            <th>Кръвна група</th>
-                            <th>Резус фактор</th>
-                            <th>Действие</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for (var i = 1; i <= Model.Count(); i++)
-                        {
-                            <tr>
-                                <th scope="row">@i</th>
-                                <td>@Model[i - 1].Hospital.City.Name</td>
-                                <td>@Model[i - 1].BloodType.ABOGroupName </td>
-                                <td>@Model[i - 1].BloodType.RhesusFactor </td>
-                                <td><form asp-action="DonorAddPatient" asp-controller="Donors" method="post">
+                            <th scope="row">@i</th>
+                            <td>@Model[i - 1].Hospital.City.Name</td>
+                            <td>@Model[i - 1].BloodType.ABOGroupName </td>
+                            <td>@Model[i - 1].BloodType.RhesusFactor </td>
+                            <td>
+                                <form asp-action="DonorAddPatient" asp-controller="Donors" method="post">
                                     <input type="hidden" value="@Model[i-1].Id" name="patientId" />
-                                    <button type="submit" class="btn btn-danger fa fa-heart"></button>
-                                    </form>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                                    <button type="submit" class="btn btn-danger fa fa-heart" data-toggle="tooltip" title="Ще даря за теб"></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
