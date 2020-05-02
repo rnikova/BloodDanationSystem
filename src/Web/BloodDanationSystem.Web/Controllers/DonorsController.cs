@@ -6,8 +6,6 @@
     using BloodDanationSystem.Common;
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Services;
-    using BloodDanationSystem.Services.Mapping;
-    using BloodDanationSystem.Web.ViewModels.Patients;
     using BloodDonationSystem.Services.Models.DonorsPatientsServiceModel;
     using BloodDonationSystem.Web.InputModels.DonorsPatients;
     using Microsoft.AspNetCore.Authorization;

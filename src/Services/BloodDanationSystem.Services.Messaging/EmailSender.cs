@@ -14,7 +14,7 @@
             this.emailConfiguration = emailConfiguration;
         }
 
-        public async Task SendEmailAsync(string to, string subject, byte[] attachment = null)
+        public async Task SendEmailAsync(string to, string subject, string body, byte[] attachment = null)
         {
             var emailMessage = new MimeMessage();
             emailMessage.From.Add(new MailboxAddress(this.emailConfiguration.From));
@@ -22,7 +22,13 @@
             emailMessage.Subject = subject;
 
             var builder = new BodyBuilder();
-            builder.Attachments.Add("служебна бележка.jpeg", attachment, new ContentType("image", "jpeg"));
+
+            if (attachment != null)
+            {
+                builder.Attachments.Add("служебна бележка.jpeg", attachment, new ContentType("image", "jpeg"));
+            }
+
+            builder.HtmlBody = body;
 
             emailMessage.Body = builder.ToMessageBody();
 

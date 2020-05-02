@@ -7,6 +7,7 @@
         Task SendEmailAsync(
             string to,
             string subject,
+            string body,
             byte[] attachment = null);
 
         Task SendEmailConfirmationAsync(

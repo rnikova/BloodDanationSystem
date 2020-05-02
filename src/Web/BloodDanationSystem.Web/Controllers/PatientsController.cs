@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Net;
+    using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
     using BloodDanationSystem.Common;
@@ -13,6 +14,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
 
     [Authorize(Roles = GlobalConstants.PatientRoleName)]
@@ -58,8 +60,9 @@
                 this.ViewData["Photo"] = donorPatient.Image;
 
                 var photo = await this.patientService.DownloadPhotoAsync(donorPatient.Image);
+                var body = "Изпращаме ви служебна бележка за кръводаряване";
 
-                await this.emailSender.SendEmailAsync(donorPatient.Patient.User.Email, "Служебна бележка кръводаряване", photo);
+                await this.emailSender.SendEmailAsync(donorPatient.Patient.User.Email, "Служебна бележка кръводаряване", body, photo);
             }
 
             if (donorPatient.Patient.NeededBloodBanks == 0)
@@ -71,8 +74,19 @@
             return this.View();
         }
 
+        [HttpPost]
         public async Task<IActionResult> WantYourHelp(string donorId)
         {
+            var donor = await this.donorService.GetByIdAsync(donorId);
+            var user = await this.userManager.GetUserAsync(this.HttpContext.User);
+            var patien = await this.patientService.GetByUserIdAsync(user.Id);
+            var callbackUrl = this.Url.Action(
+                action: "DonorAndPatient",
+                controller: "Donors");
+            var body = $@"Здравей, имам нужда от твоята помощ. <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'> Кликни тук,</a> за да дариш кръв.";
+
+            await this.emailSender.SendEmailAsync(donor.User.Email, "Имам нужда от твоята помощ", body);
+
             return this.View();
         }
     }

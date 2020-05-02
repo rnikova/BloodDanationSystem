@@ -10,6 +10,7 @@
     using BloodDanationSystem.Data.Models.Enums;
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models;
+    using BloodDonationSystem.Services.Models.Users;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
@@ -81,6 +82,27 @@
                 BloodTypeId = donor.BloodTypeId,
                 CityId = donor.CityId,
                 UserId = donor.UserId,
+            };
+
+            return model;
+        }
+
+        public async Task<DonorServiceModel> GetByIdAsync(string donorId)
+        {
+            var donor = await this.context.Donors.Include(x => x.User).SingleOrDefaultAsync(x => x.Id == donorId);
+
+            var model = new DonorServiceModel
+            {
+                Id = donor.Id,
+                FullName = donor.FullName,
+                Age = donor.Age,
+                BloodTypeId = donor.BloodTypeId,
+                CityId = donor.CityId,
+                UserId = donor.UserId,
+                User = new UserServiceModel
+                {
+                    Email = donor.User.Email,
+                },
             };
 
             return model;
