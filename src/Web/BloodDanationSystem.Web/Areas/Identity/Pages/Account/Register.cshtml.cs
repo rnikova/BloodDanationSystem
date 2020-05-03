@@ -78,7 +78,9 @@
             public string ConfirmPassword { get; set; }
         }
 
+#pragma warning disable SA1201 // Elements should appear in the correct order
         public async Task<IActionResult> OnGetAsync(string returnUrl = null)
+#pragma warning restore SA1201 // Elements should appear in the correct order
         {
             if (!this.User.Identity.IsAuthenticated)
             {

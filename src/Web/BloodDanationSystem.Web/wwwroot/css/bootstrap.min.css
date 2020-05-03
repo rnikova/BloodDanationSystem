@@ -185,7 +185,7 @@ a {
 }
 
     a:hover {
-        color: #0056b3;
+        color: #df2335;
         text-decoration: underline
     }
 
@@ -4298,7 +4298,7 @@ tbody.collapse.show {
     .nav-pills .nav-link.active,
     .nav-pills .show > .nav-link {
         color: #fff;
-        background-color: #007bff
+        background-color: #dc3545
     }
 
 .nav-fill .nav-item {
@@ -5507,7 +5507,7 @@ tbody.collapse.show {
 
 .alert-danger {
     color: #721c24;
-    background-color: #f8d7da;
+    background-color: #b98a8e;
     border-color: #f5c6cb
 }
 

@@ -50,7 +50,7 @@ a,
     }
 
 a, button {
-    color: #450000;
+    color: #ebc3c3;
     outline: medium none
 }
 
@@ -590,6 +590,7 @@ h3 {
     top: 0;
     background: #450000;
     z-index: 999;
+    background: border-box;
 }
 
     .header-area .main-header-area {

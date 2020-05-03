@@ -45,7 +45,9 @@
             public string Code { get; set; }
         }
 
+#pragma warning disable SA1201 // Elements should appear in the correct order
         public IActionResult OnGet(string code = null)
+#pragma warning restore SA1201 // Elements should appear in the correct order
         {
             if (code == null)
             {

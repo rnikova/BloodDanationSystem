@@ -80,10 +80,10 @@
             var donor = await this.donorService.GetByIdAsync(donorId);
             var user = await this.userManager.GetUserAsync(this.HttpContext.User);
             var patien = await this.patientService.GetByUserIdAsync(user.Id);
-            var callbackUrl = this.Url.Action(
-                action: "DonorAndPatient",
+            var callbackUrl = this.Url.ActionLink(
+                action: "DonorAddPatient",
                 controller: "Donors");
-            var body = $@"Здравей, имам нужда от твоята помощ. <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'> Кликни тук,</a> за да дариш кръв.";
+            var body = $@"<form asp-action='DonorAddPatient' asp-controller='Donors' method='post'>Здравей, имам нужда от твоята помощ. <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'> Кликни тук,</a> за да дариш кръв.<input type='hidden' value='{patien.Id}' name='patientId/></form>";
 
             await this.emailSender.SendEmailAsync(donor.User.Email, "Имам нужда от твоята помощ", body);
 
