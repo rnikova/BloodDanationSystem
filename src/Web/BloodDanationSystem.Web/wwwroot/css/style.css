@@ -4792,9 +4792,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .want-your-help {
     background-image: url(../img/wantYourHelp/wantYourHelp.jpg);
-    background-size: 30%;
+    background-size: 20%;
     background-repeat: no-repeat;
     background-position:center;
     margin: 40px;
     height: 30rem;
+}
+
+.email-details{
+    text-align: -webkit-center;
+}
+
+.button-contactForm{
+    margin-left: 15px;
 }

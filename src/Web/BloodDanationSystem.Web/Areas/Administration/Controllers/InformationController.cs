@@ -4,6 +4,7 @@
 
     using BloodDanationSystem.Services;
     using BloodDanationSystem.Services.Mapping;
+    using BloodDanationSystem.Services.Messaging;
     using BloodDanationSystem.Web.ViewModels.Administration.Information;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -13,10 +14,14 @@
     public class InformationController : AdministrationController
     {
         private readonly IInformationsService informationsService;
+        private readonly IEmailSender emailSender;
 
-        public InformationController(IInformationsService informationsService)
+        public InformationController(
+            IInformationsService informationsService,
+            IEmailSender emailSender)
         {
             this.informationsService = informationsService;
+            this.emailSender = emailSender;
         }
 
         public async Task<IActionResult> Emails()
@@ -27,7 +32,7 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Details(string id)
         {
             var email = await this.informationsService.GetByIdAsync(id);
             var model = new DetailsViewModel
@@ -40,6 +45,14 @@
             };
 
             return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Reply(DetailsViewModel detailsViewModel)
+        {
+            await this.emailSender.SendEmailAsync(detailsViewModel.Email, detailsViewModel.Subject, detailsViewModel.Answer);
+
+            return this.RedirectToAction("Emails");
         }
     }
 }

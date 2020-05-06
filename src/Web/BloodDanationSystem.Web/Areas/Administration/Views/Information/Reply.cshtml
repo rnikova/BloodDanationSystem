@@ -1,18 +1,21 @@
 ﻿@model BloodDanationSystem.Web.ViewModels.Administration.Information.DetailsViewModel;
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Reply";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
-    <h4>Details</h4>
-    <hr />
+<div class="email-details">
     <div class="col-lg-8">
-        <form action="Edit">
+        <form action="Reply">
             <div class="row">
                 <div class="col-12">
                     <div class="form-group">
                         <textarea class="form-control w-100" name="message" asp-for="Message" readonly cols="30" rows="9"></textarea>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <textarea class="form-control w-100" name="answer" asp-for="Answer" cols="30" rows="9"></textarea>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -32,9 +35,9 @@
                 </div>
             </div>
             <div class="form-group mt-3">
-                <button asp-action="Emails" class="button button-contactForm boxed-btn">Back to List</button>
+                <button asp-action="Details" class="button button-contactForm boxed-btn">Back</button>
+                <button asp-action="Reply" class="button button-contactForm boxed-btn">Send</button>
             </div>
         </form>
     </div>
 </div>
-
