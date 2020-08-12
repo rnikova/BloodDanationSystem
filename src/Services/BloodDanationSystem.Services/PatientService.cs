@@ -10,8 +10,6 @@
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Data.Models.Enums;
     using BloodDanationSystem.Services.Mapping;
-    using BloodDonationSystem.Services.Models;
-    using BloodDonationSystem.Services.Models.Hospitals;
     using BloodDonationSystem.Services.Models.Patients;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
