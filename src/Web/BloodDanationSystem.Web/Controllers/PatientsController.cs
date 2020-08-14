@@ -55,15 +55,17 @@
             var user = await this.userManager.GetUserAsync(this.HttpContext.User);
             var donorPatient = await this.donorsPatientsService.GetDonorsPatientsByPatientsUserIdAsync(user.Id);
 
-            if (donorPatient != null || !string.IsNullOrEmpty(donorPatient.Image))
+            if (donorPatient == null || string.IsNullOrEmpty(donorPatient.Image))
             {
-                this.ViewData["Photo"] = donorPatient.Image;
-
-                var photo = await this.patientService.DownloadPhotoAsync(donorPatient.Image);
-                var body = "Изпращаме ви служебна бележка за кръводаряване";
-
-                await this.emailSender.SendEmailAsync(donorPatient.Patient.User.Email, "Служебна бележка кръводаряване", body, photo);
+                return this.RedirectToAction("NoImage");
             }
+
+            this.ViewData["Photo"] = donorPatient.Image;
+
+            var photo = await this.patientService.DownloadPhotoAsync(donorPatient.Image);
+            var body = "Изпращаме ви служебна бележка за кръводаряване";
+
+            await this.emailSender.SendEmailAsync(donorPatient.Patient.User.Email, "Служебна бележка кръводаряване", body, photo);
 
             if (donorPatient.Patient.NeededBloodBanks == 0)
             {
@@ -87,6 +89,11 @@
 
             await this.emailSender.SendEmailAsync(donor.User.Email, "Имам нужда от твоята помощ", body);
 
+            return this.View();
+        }
+
+        public IActionResult NoImage()
+        {
             return this.View();
         }
     }

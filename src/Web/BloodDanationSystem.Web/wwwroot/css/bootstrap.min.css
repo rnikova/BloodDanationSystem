@@ -8321,8 +8321,8 @@ button.bg-dark:hover {
 .pb-3,
 .py-3 {
     background-color: #450000;
-    padding-top: 120px;
-    padding-bottom: 460px !important
+    padding-top: 20px;
+    padding-bottom: 60px !important
 }
 
 .pl-3,

@@ -1,5 +1,6 @@
 ﻿namespace BloodDanationSystem.Services
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -93,6 +94,12 @@
         public async Task<DonorsPatientsServiceModel> GetDonorsPatientsByPatientsUserIdAsync(string patientId)
         {
             var donorPatient = await this.context.DonorsPatients.Include(x => x.Patient.User).Where(x => x.Patient.UserId == patientId && x.IsDeleted == false).SingleOrDefaultAsync();
+
+            if (donorPatient == null)
+            {
+                return null;
+            }
+
             var model = new DonorsPatientsServiceModel
             {
                 PatientId = donorPatient.PatientId,
