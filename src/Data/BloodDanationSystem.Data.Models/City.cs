@@ -3,7 +3,9 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class City
+    using BloodDanationSystem.Data.Common.Models;
+
+    public class City : BaseDeletableModel<int>
     {
         public City()
         {
@@ -11,8 +13,6 @@
             this.BloodCentres = new HashSet<BloodCenter>();
             this.Donors = new HashSet<Donor>();
         }
-
-        public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }

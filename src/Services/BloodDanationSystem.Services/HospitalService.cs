@@ -2,28 +2,39 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using BloodDanationSystem.Data;
+    using BloodDanationSystem.Data.Models;
+    using BloodDanationSystem.Data.Repositories;
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models.Hospitals;
+    using Microsoft.EntityFrameworkCore;
 
     public class HospitalService : IHospitalService
     {
-        private readonly ApplicationDbContext context;
+        private readonly EfDeletableEntityRepository<Hospital> hospitalsRepository;
 
-        public HospitalService(ApplicationDbContext context)
+        public HospitalService(EfDeletableEntityRepository<Hospital> hospitalsRepository)
         {
-            this.context = context;
+            this.hospitalsRepository = hospitalsRepository;
         }
 
-        public IQueryable<HospitalServiceModel> AllHospitals()
+        public async Task<IEnumerable<HospitalServiceModel>> AllHospitals()
         {
-            return this.context.Hospitals.To<HospitalServiceModel>();
+            return await this.hospitalsRepository
+                .AllAsNoTracking()
+                .To<HospitalServiceModel>()
+                .ToListAsync();
         }
 
-        public IEnumerable<HospitalServiceModel> HospitalsInCity(int cityId)
+        public async Task<IEnumerable<HospitalServiceModel>> HospitalsInCity(int cityId)
         {
-            return this.context.Hospitals.Where(x => x.CityId == cityId).To<HospitalServiceModel>();
+            return await this.hospitalsRepository
+                .AllAsNoTracking()
+                .Where(x => x.CityId == cityId)
+                .To<HospitalServiceModel>()
+                .ToListAsync();
         }
     }
 }
