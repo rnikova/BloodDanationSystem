@@ -1,17 +1,16 @@
 ﻿namespace BloodDanationSystem.Services
 {
     using System;
-    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using BloodDanationSystem.Common;
     using BloodDanationSystem.Data;
-    using BloodDanationSystem.Data.Common.Repositories;
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Data.Models.Enums;
-    using BloodDanationSystem.Data.Repositories;
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models;
+    using BloodDonationSystem.Services.Models.Users;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
@@ -19,11 +18,9 @@
     {
         private readonly ApplicationDbContext context;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly IDeletableEntityRepository<Donor> donorsRepository;
 
-        public DonorService(EfDeletableEntityRepository<Donor> donorsRepository, ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public DonorService(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
-            this.donorsRepository = donorsRepository;
             this.context = context;
             this.userManager = userManager;
         }
@@ -57,60 +54,58 @@
 
             await this.userManager.AddToRoleAsync(user, GlobalConstants.DonorRoleName);
 
-            await this.donorsRepository.AddAsync(donor);
-            var result = await this.donorsRepository.SaveChangesAsync();
+            await this.context.Donors.AddAsync(donor);
+            var result = await this.context.SaveChangesAsync();
 
             return result > 0;
         }
 
-        public async Task<IEnumerable<DonorServiceModel>> All()
+        public IQueryable<DonorServiceModel> All()
         {
-            return await this.donorsRepository
-                .AllAsNoTracking()
-                .To<DonorServiceModel>()
-                .ToListAsync();
+            return this.context.Donors.To<DonorServiceModel>();
         }
 
         public async Task<DonorServiceModel> GetByUserIdAsync(string userId)
         {
-            var donor = await this.donorsRepository.GetByIdWithDeletedAsync(userId);
+            var donor = await this.context.Donors.SingleOrDefaultAsync(x => x.UserId == userId);
 
             if (donor == null)
             {
                 throw new InvalidOperationException();
             }
 
-            // var model = new DonorServiceModel
-            // {
-            //    Id = donor.Id,
-            //    FullName = donor.FullName,
-            //    Age = donor.Age,
-            //    BloodTypeId = donor.BloodTypeId,
-            //    CityId = donor.CityId,
-            //    UserId = donor.UserId,
-            // };
-            return donor.To<DonorServiceModel>();
+            var model = new DonorServiceModel
+            {
+                Id = donor.Id,
+                FullName = donor.FullName,
+                Age = donor.Age,
+                BloodTypeId = donor.BloodTypeId,
+                CityId = donor.CityId,
+                UserId = donor.UserId,
+            };
+
+            return model;
         }
 
         public async Task<DonorServiceModel> GetByIdAsync(string donorId)
         {
-            var donor = await this.donorsRepository.GetByIdWithDeletedAsync(donorId);
+            var donor = await this.context.Donors.Include(x => x.User).SingleOrDefaultAsync(x => x.Id == donorId);
 
-            // var donor = await this.context.Donors.Include(x => x.User).SingleOrDefaultAsync(x => x.Id == donorId);
-            // var model = new DonorServiceModel
-            // {
-            //    Id = donor.Id,
-            //    FullName = donor.FullName,
-            //    Age = donor.Age,
-            //    BloodTypeId = donor.BloodTypeId,
-            //    CityId = donor.CityId,
-            //    UserId = donor.UserId,
-            //    User = new UserServiceModel
-            //    {
-            //        Email = donor.User.Email,
-            //    },
-            // };
-            return donor.To<DonorServiceModel>();
+            var model = new DonorServiceModel
+            {
+                Id = donor.Id,
+                FullName = donor.FullName,
+                Age = donor.Age,
+                BloodTypeId = donor.BloodTypeId,
+                CityId = donor.CityId,
+                UserId = donor.UserId,
+                User = new UserServiceModel
+                {
+                    Email = donor.User.Email,
+                },
+            };
+
+            return model;
         }
     }
 }

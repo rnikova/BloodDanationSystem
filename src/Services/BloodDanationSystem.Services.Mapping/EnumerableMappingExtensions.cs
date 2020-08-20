@@ -13,12 +13,10 @@
                 throw new ArgumentNullException(nameof(source));
             }
 
-            return AutoMapperConfig.MapperInstance.Map<IEnumerable<TDestination>>(source);
-
-            // foreach (var src in source)
-            // {
-            //    yield return AutoMapper.Mapper.Map<TDestination>(src);
-            // }
+            foreach (var src in source)
+            {
+                yield return AutoMapper.Mapper.Map<TDestination>(src);
+            }
         }
     }
 }

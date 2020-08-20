@@ -1,32 +1,23 @@
 ﻿namespace BloodDanationSystem.Services
 {
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
 
     using BloodDanationSystem.Data;
-    using BloodDanationSystem.Data.Models;
-    using BloodDanationSystem.Data.Repositories;
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models.Cities;
-    using Microsoft.EntityFrameworkCore;
 
     public class CityService : ICityService
     {
-        private readonly EfDeletableEntityRepository<City> citiesRepository;
+        private readonly ApplicationDbContext context;
 
-        public CityService(EfDeletableEntityRepository<City> citiesRepository)
+        public CityService(ApplicationDbContext context)
         {
-            this.citiesRepository = citiesRepository;
+            this.context = context;
         }
 
-        public async Task<IEnumerable<CityServiceModel>> AllCities()
+        public IQueryable<CityServiceModel> AllCities()
         {
-            return await this.citiesRepository
-                .AllAsNoTracking()
-                .OrderBy(x => x.Name)
-                .To<CityServiceModel>()
-                .ToListAsync();
+            return this.context.Cities.OrderBy(x => x.Name).To<CityServiceModel>();
         }
     }
 }
