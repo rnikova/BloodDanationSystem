@@ -3,7 +3,6 @@
     using BloodDanationSystem.Services.Mapping;
     using BloodDanationSystem.Web.ViewModels.Cities;
     using BloodDonationSystem.Services.Models;
-    using BloodDonationSystem.Services.Models.Users;
 
     public class DonorViewModel : IMapFrom<DonorServiceModel>, IMapTo<DonorServiceModel>
     {
@@ -18,8 +17,6 @@
         public BloodTypeServiceModel BloodType { get; set; }
 
         public string UserId { get; set; }
-
-        public UserServiceModel User { get; set; }
 
         public int CityId { get; set; }
 

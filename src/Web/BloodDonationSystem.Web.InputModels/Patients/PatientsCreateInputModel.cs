@@ -5,9 +5,9 @@
     using BloodDonationSystem.Services.Models.Patients;
     using BloodDonationSystem.Web.InputModels.BloodTypees;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
 
     using BloodDanationSystem.Common;
+    using System.Collections.Generic;
 
     public class PatientsCreateInputModel : IMapTo<PatientServiceModel>, IMapFrom<PatientServiceModel>
     {
@@ -46,6 +46,6 @@
         [Display(Name = "Град")]
         public int CityId { get; set; }
 
-        public IQueryable<CityServiceModel> Cities { get; set; }
+        public IEnumerable<CityServiceModel> Cities { get; set; }
     }
 }

@@ -1,18 +1,17 @@
 ﻿namespace BloodDanationSystem.Services
 {
-    using System.Linq;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using BloodDonationSystem.Services.Models.DonorsPatientsServiceModel;
     using BloodDonationSystem.Services.Models.Patients;
 
     public interface IPatientService
     {
         Task<bool> CreateAsync(PatientServiceModel patientServiceModel);
 
-        IQueryable<PatientServiceModel> All();
+        Task<IEnumerable<PatientServiceModel>> All();
 
-        IQueryable<PatientServiceModel> AllActive();
+        Task<IEnumerable<PatientServiceModel>> AllActive();
 
         Task<PatientServiceModel> GetByUserIdAsync(string userId);
 

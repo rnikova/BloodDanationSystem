@@ -1,6 +1,5 @@
 ﻿namespace BloodDanationSystem.Web.Controllers
 {
-    using System.Linq;
     using System.Threading.Tasks;
 
     using BloodDanationSystem.Data.Models;
@@ -40,7 +39,7 @@
         [HttpGet]
         public IActionResult BecomeDonor()
         {
-            var cities = this.cityService.AllCities();
+            var cities = this.cityService.AllCities().Result;
             var inputModel = new DonorsCreateInputModel
             {
                 Cities = cities,
@@ -54,7 +53,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                var cities = this.cityService.AllCities();
+                var cities = this.cityService.AllCities().Result;
                 var inputModel = new DonorsCreateInputModel
                 {
                     Cities = cities,
@@ -85,7 +84,7 @@
         [HttpGet]
         public IActionResult BecomePatient()
         {
-            var cities = this.cityService.AllCities();
+            var cities = this.cityService.AllCities().Result;
             var inputModel = new PatientsCreateInputModel
             {
                 Cities = cities,
@@ -99,7 +98,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                var cities = this.cityService.AllCities();
+                var cities = this.cityService.AllCities().Result;
                 var inputModel = new PatientsCreateInputModel
                 {
                     Cities = cities,
@@ -130,9 +129,9 @@
             return this.Redirect("/");
         }
 
-        public JsonResult GetHospitals(int cityId)
+        public async Task<JsonResult> GetHospitals(int cityId)
         {
-            var hospitals = this.hospitalService.HospitalsInCity(cityId).ToList();
+            var hospitals = await this.hospitalService.HospitalsInCity(cityId);
 
             return this.Json(new SelectList(hospitals, "Id", "Name"));
         }

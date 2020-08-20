@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using BloodDanationSystem.Common;
@@ -12,6 +13,7 @@
     using BloodDanationSystem.Data.Repositories;
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models;
+    using BloodDonationSystem.Services.Models.Users;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +23,10 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IDeletableEntityRepository<Donor> donorsRepository;
 
-        public DonorService(EfDeletableEntityRepository<Donor> donorsRepository, ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public DonorService(
+            EfDeletableEntityRepository<Donor> donorsRepository,
+            ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager)
         {
             this.donorsRepository = donorsRepository;
             this.context = context;
@@ -66,9 +71,9 @@
         public async Task<IEnumerable<DonorServiceModel>> All()
         {
             return await this.donorsRepository
-                .AllAsNoTracking()
-                .To<DonorServiceModel>()
-                .ToListAsync();
+               .AllAsNoTracking()
+               .To<DonorServiceModel>()
+               .ToListAsync();
         }
 
         public async Task<DonorServiceModel> GetByUserIdAsync(string userId)

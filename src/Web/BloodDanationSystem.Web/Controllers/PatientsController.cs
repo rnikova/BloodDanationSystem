@@ -57,7 +57,7 @@
 
             if (donorPatient == null || string.IsNullOrEmpty(donorPatient.Image))
             {
-                return this.View("NoImage");
+                return this.RedirectToAction("NoImage");
             }
 
             this.ViewData["Photo"] = donorPatient.Image;
@@ -89,6 +89,11 @@
 
             await this.emailSender.SendEmailAsync(donor.User.Email, "Имам нужда от твоята помощ", body);
 
+            return this.View();
+        }
+
+        public IActionResult NoImage()
+        {
             return this.View();
         }
     }

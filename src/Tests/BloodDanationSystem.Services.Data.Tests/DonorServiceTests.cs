@@ -1,11 +1,13 @@
 ﻿namespace BloodDanationSystem.Services.Tests
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using BloodDanationSystem.Data;
     using BloodDanationSystem.Data.Models;
+    using BloodDanationSystem.Data.Repositories;
     using BloodDanationSystem.Services.Tests.Common;
     using BloodDanationSystem.Services.Tests.Seeders;
     using BloodDonationSystem.Services.Models;
@@ -27,7 +29,8 @@
             await seeder.SeedBloodTypesAsync(context);
             await seeder.SeedCities(context);
             var userManager = this.GetUserManagerMock(context);
-            var donorService = new DonorService(context, userManager.Object);
+            var donorRepository = new EfDeletableEntityRepository<Donor>(context);
+            var donorService = new DonorService(donorRepository, context, userManager.Object);
 
             var donorServiceModel = new DonorServiceModel
             {
@@ -70,7 +73,8 @@
             await seeder.SeedBloodTypesAsync(context);
             await seeder.SeedCities(context);
             var userManager = this.GetUserManagerMock(context);
-            var donorService = new DonorService(context, userManager.Object);
+            var donorRepository = new EfDeletableEntityRepository<Donor>(context);
+            var donorService = new DonorService(donorRepository, context, userManager.Object);
 
             var donorServiceModel = new DonorServiceModel
             {
@@ -99,13 +103,14 @@
             var seeder = new Seeder();
             await seeder.SeedDonorAsync(context);
             var userManager = this.GetUserManagerMock(context);
-            var donorService = new DonorService(context, userManager.Object);
+            var donorRepository = new EfDeletableEntityRepository<Donor>(context);
+            var donorService = new DonorService(donorRepository, context, userManager.Object);
 
-            var actualResult = donorService.All();
+            var actualResult = donorService.All().Result;
             var expectedResult = context.Donors;
 
             Assert.True(actualResult.Count() == expectedResult.Count());
-            Assert.IsAssignableFrom<IQueryable<DonorServiceModel>>(actualResult);
+            Assert.IsAssignableFrom<IEnumerable<DonorServiceModel>>(actualResult);
         }
 
         [Fact]
@@ -116,7 +121,8 @@
             var seeder = new Seeder();
             await seeder.SeedDonorAsync(context);
             var userManager = this.GetUserManagerMock(context);
-            var donorService = new DonorService(context, userManager.Object);
+            var donorRepository = new EfDeletableEntityRepository<Donor>(context);
+            var donorService = new DonorService(donorRepository, context, userManager.Object);
 
             var actualResult = await donorService.GetByUserIdAsync("userId1");
 
@@ -131,7 +137,8 @@
             var seeder = new Seeder();
             await seeder.SeedDonorAsync(context);
             var userManager = this.GetUserManagerMock(context);
-            var donorService = new DonorService(context, userManager.Object);
+            var donorRepository = new EfDeletableEntityRepository<Donor>(context);
+            var donorService = new DonorService(donorRepository, context, userManager.Object);
 
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
             {

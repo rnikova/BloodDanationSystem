@@ -21,10 +21,10 @@
         private readonly EfDeletableEntityRepository<DonorsPatients> donorsPatientsRepository;
 
         public DonorsPatientsService(
+            EfDeletableEntityRepository<DonorsPatients> donorsPatientsRepository,
             ApplicationDbContext context,
             IPatientService patientService,
-            UserManager<ApplicationUser> userManager,
-            EfDeletableEntityRepository<DonorsPatients> donorsPatientsRepository)
+            UserManager<ApplicationUser> userManager)
         {
             this.context = context;
             this.patientService = patientService;
@@ -90,7 +90,7 @@
 
         public async Task<DonorsPatientsServiceModel> GetDonorsPatientsByDonorsUserIdAsync(string donorId)
         {
-           // var donorPatient = await this.donorsPatientsRepository.GetByIdWithDeletedAsync(donorId);
+            // var donorPatient = await this.donorsPatientsRepository.GetByIdWithDeletedAsync(donorId);
             var donorPatient = await this.context.DonorsPatients.Where(x => x.Donor.UserId == donorId && x.IsDeleted == false).Include(x => x.Patient).SingleOrDefaultAsync();
             var patient = await this.patientService.GetByPatientIdAsync(donorPatient.PatientId);
             var model = new DonorsPatientsServiceModel

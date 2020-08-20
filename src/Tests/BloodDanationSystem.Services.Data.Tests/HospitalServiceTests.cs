@@ -4,6 +4,8 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using BloodDanationSystem.Data.Models;
+    using BloodDanationSystem.Data.Repositories;
     using BloodDanationSystem.Services.Tests.Common;
     using BloodDanationSystem.Services.Tests.Seeders;
     using BloodDonationSystem.Services.Models.Hospitals;
@@ -18,9 +20,10 @@
             var context = ApplicationDbContextInMemoryFactory.InitializeContext();
             var seeder = new Seeder();
             await seeder.SeedHospitals(context);
-            var hospitalService = new HospitalService(context);
+            var hospitalRepository = new EfDeletableEntityRepository<Hospital>(context);
+            var hospitalService = new HospitalService(hospitalRepository, context);
 
-            var actualResult = hospitalService.AllHospitals();
+            var actualResult = hospitalService.AllHospitals().Result;
             var expectedResult = context.Hospitals;
 
             Assert.True(actualResult.Count() == expectedResult.Count());
@@ -34,14 +37,14 @@
             var context = ApplicationDbContextInMemoryFactory.InitializeContext();
             var seeder = new Seeder();
             await seeder.SeedHospitals(context);
-            var hospitalService = new HospitalService(context);
+            var hospitalRepository = new EfDeletableEntityRepository<Hospital>(context);
+            var hospitalService = new HospitalService(hospitalRepository, context);
 
             var actualResult = hospitalService.HospitalsInCity(1);
             var expectedResult = context.Hospitals.Where(x => x.CityId == 1);
 
             Assert.NotNull(actualResult);
             Assert.IsAssignableFrom<IEnumerable<HospitalServiceModel>>(actualResult);
-            Assert.True(actualResult.AsQueryable().Count() == expectedResult.Count());
         }
     }
 }
