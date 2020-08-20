@@ -3,14 +3,9 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using BloodDanationSystem.Data;
-    using BloodDanationSystem.Data.Models;
-    using BloodDanationSystem.Data.Repositories;
     using BloodDanationSystem.Services.Tests.Common;
     using BloodDanationSystem.Services.Tests.Seeders;
     using BloodDonationSystem.Services.Models.Cities;
-    using Microsoft.Data.Sqlite;
-    using Microsoft.EntityFrameworkCore;
     using Xunit;
 
     public class CityServiceTests
@@ -22,14 +17,13 @@
             var context = ApplicationDbContextInMemoryFactory.InitializeContext();
             var seeder = new Seeder();
             await seeder.SeedCities(context);
-            var cityRepository = new EfDeletableEntityRepository<City>(context);
-            var cityService = new CityService(cityRepository);
+            var cityService = new CityService(context);
 
             var actualResult = cityService.AllCities();
             var expectedResult = context.Cities;
 
             Assert.NotNull(actualResult);
-            Assert.True(actualResult.Result.Count() == expectedResult.Count());
+            Assert.True(actualResult.Count() == expectedResult.Count());
             Assert.IsAssignableFrom<IQueryable<CityServiceModel>>(actualResult);
         }
     }

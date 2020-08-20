@@ -6,7 +6,6 @@
 
     using BloodDanationSystem.Data;
     using BloodDanationSystem.Data.Models;
-    using BloodDanationSystem.Data.Repositories;
     using BloodDanationSystem.Services;
     using BloodDanationSystem.Services.Tests.Common;
     using BloodDanationSystem.Services.Tests.Seeders;
@@ -30,8 +29,7 @@
             await seeder.SeedUsersAsync(context);
             await seeder.SeedBloodTypesAsync(context);
             var userManager = this.GetUserManagerMock(context);
-            var patientRepository = new EfDeletableEntityRepository<Patient>(context);
-            var patientService = new PatientService(patientRepository, context, userManager.Object);
+            var patientService = new PatientService(context, userManager.Object);
 
             var patientServiceModel = new PatientServiceModel
             {
@@ -79,8 +77,7 @@
             await seeder.SeedUsersAsync(context);
             await seeder.SeedBloodTypesAsync(context);
             var userManager = this.GetUserManagerMock(context);
-            var patientRepository = new EfDeletableEntityRepository<Patient>(context);
-            var patientService = new PatientService(patientRepository, context, userManager.Object);
+            var patientService = new PatientService(context, userManager.Object);
 
             var patientServiceModel = new PatientServiceModel
             {
@@ -111,10 +108,9 @@
             var seeder = new Seeder();
             await seeder.SeedPatientAsync(context);
             var userManager = this.GetUserManagerMock(context);
-            var patientRepository = new EfDeletableEntityRepository<Patient>(context);
-            var patientService = new PatientService(patientRepository, context, userManager.Object);
+            var patientService = new PatientService(context, userManager.Object);
 
-            var actualResult = patientService.All().Result;
+            var actualResult = patientService.All();
             var expectedResult = context.Patients;
 
             Assert.True(actualResult.Count() == expectedResult.Count());
@@ -129,10 +125,9 @@
             var seeder = new Seeder();
             await seeder.SeedPatientAsync(context);
             var userManager = this.GetUserManagerMock(context);
-            var patientRepository = new EfDeletableEntityRepository<Patient>(context);
-            var patientService = new PatientService(patientRepository, context, userManager.Object);
+            var patientService = new PatientService(context, userManager.Object);
 
-            var actualResult = patientService.AllActive().Result;
+            var actualResult = patientService.AllActive();
             var expectedResult = context.Patients.Where(x => x.NeededBloodBanks > 0);
 
             Assert.True(actualResult.Count() == expectedResult.Count());
@@ -147,8 +142,7 @@
             var seeder = new Seeder();
             await seeder.SeedPatientAsync(context);
             var userManager = this.GetUserManagerMock(context);
-            var patientRepository = new EfDeletableEntityRepository<Patient>(context);
-            var patientService = new PatientService(patientRepository, context, userManager.Object);
+            var patientService = new PatientService(context, userManager.Object);
 
             var actualResult = await patientService.GetByUserIdAsync("userId1");
 
@@ -163,8 +157,7 @@
             var seeder = new Seeder();
             await seeder.SeedPatientAsync(context);
             var userManager = this.GetUserManagerMock(context);
-            var patientRepository = new EfDeletableEntityRepository<Patient>(context);
-            var patientService = new PatientService(patientRepository, context, userManager.Object);
+            var patientService = new PatientService(context, userManager.Object);
 
             await Assert.ThrowsAsync<NullReferenceException>(async () =>
             {
@@ -180,8 +173,7 @@
             var seeder = new Seeder();
             await seeder.SeedPatientAsync(context);
             var userManager = this.GetUserManagerMock(context);
-            var patientRepository = new EfDeletableEntityRepository<Patient>(context);
-            var patientService = new PatientService(patientRepository, context, userManager.Object);
+            var patientService = new PatientService(context, userManager.Object);
 
             var expectedResult = context.Patients.First();
             var actualResult = await patientService.GetByPatientIdAsync(expectedResult.Id);
@@ -199,8 +191,7 @@
             var seeder = new Seeder();
             await seeder.SeedPatientAsync(context);
             var userManager = this.GetUserManagerMock(context);
-            var patientRepository = new EfDeletableEntityRepository<Patient>(context);
-            var patientService = new PatientService(patientRepository, context, userManager.Object);
+            var patientService = new PatientService(context, userManager.Object);
 
             await Assert.ThrowsAsync<NullReferenceException>(async () =>
             {

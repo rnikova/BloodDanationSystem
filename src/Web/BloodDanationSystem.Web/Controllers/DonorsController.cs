@@ -66,7 +66,7 @@
         [HttpGet]
         public async Task<IActionResult> FindPatient()
         {
-            var patients = await this.patientService.AllActive();
+            var patients = await this.patientService.AllActive().ToListAsync();
 
             return this.View(patients);
         }

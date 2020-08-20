@@ -14,12 +14,10 @@
     public class HospitalService : IHospitalService
     {
         private readonly EfDeletableEntityRepository<Hospital> hospitalsRepository;
-        private readonly ApplicationDbContext context;
 
-        public HospitalService(EfDeletableEntityRepository<Hospital> hospitalsRepository, ApplicationDbContext context)
+        public HospitalService(EfDeletableEntityRepository<Hospital> hospitalsRepository)
         {
             this.hospitalsRepository = hospitalsRepository;
-            this.context = context;
         }
 
         public async Task<IEnumerable<HospitalServiceModel>> AllHospitals()
@@ -33,10 +31,10 @@
         public async Task<IEnumerable<HospitalServiceModel>> HospitalsInCity(int cityId)
         {
             return await this.hospitalsRepository
-               .AllAsNoTracking()
-               .Where(x => x.CityId == cityId)
-               .To<HospitalServiceModel>()
-               .ToListAsync();
+                .AllAsNoTracking()
+                .Where(x => x.CityId == cityId)
+                .To<HospitalServiceModel>()
+                .ToListAsync();
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace BloodDanationSystem.Services
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
@@ -10,7 +9,6 @@
     using BloodDanationSystem.Data;
     using BloodDanationSystem.Data.Models;
     using BloodDanationSystem.Data.Models.Enums;
-    using BloodDanationSystem.Data.Repositories;
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models.Patients;
     using Microsoft.AspNetCore.Identity;
@@ -20,16 +18,12 @@
     {
         private const int MinValueNeededBloodBanks = 1;
         private const int MaxValueNeededBloodBanks = 10;
-        private readonly EfDeletableEntityRepository<Patient> patientRepository;
+
         private readonly ApplicationDbContext context;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public PatientService(
-            EfDeletableEntityRepository<Patient> patientRepository,
-            ApplicationDbContext context,
-            UserManager<ApplicationUser> userManager)
+        public PatientService(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
-            this.patientRepository = patientRepository;
             this.context = context;
             this.userManager = userManager;
         }
@@ -67,27 +61,20 @@
 
             await this.userManager.AddToRoleAsync(user, GlobalConstants.PatientRoleName);
 
-            await this.patientRepository.AddAsync(patient);
-            var result = await this.patientRepository.SaveChangesAsync();
+            await this.context.Patients.AddAsync(patient);
+            var result = await this.context.SaveChangesAsync();
 
             return result > 0;
         }
 
-        public async Task<IEnumerable<PatientServiceModel>> All()
+        public IQueryable<PatientServiceModel> All()
         {
-            return await this.patientRepository
-                .AllAsNoTracking()
-                .To<PatientServiceModel>()
-                .ToListAsync();
+            return this.context.Patients.To<PatientServiceModel>();
         }
 
-        public async Task<IEnumerable<PatientServiceModel>> AllActive()
+        public IQueryable<PatientServiceModel> AllActive()
         {
-            return await this.patientRepository
-                .AllAsNoTracking()
-                .Where(x => x.NeededBloodBanks > 0)
-                .To<PatientServiceModel>()
-                .ToListAsync();
+            return this.All().Where(x => x.NeededBloodBanks > 0);
         }
 
         public async Task<PatientServiceModel> GetByUserIdAsync(string userId)
@@ -110,7 +97,7 @@
 
         public async Task<PatientServiceModel> GetByPatientIdAsync(string patientId)
         {
-            var patient = await this.patientRepository.GetByIdWithDeletedAsync(patientId);
+            var patient = await this.context.Patients.FirstOrDefaultAsync(x => x.Id == patientId);
             var patientModel = new PatientServiceModel
             {
                 Id = patient.Id,

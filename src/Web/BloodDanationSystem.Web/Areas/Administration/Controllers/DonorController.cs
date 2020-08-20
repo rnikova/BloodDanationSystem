@@ -21,7 +21,7 @@
 
         public async Task<IActionResult> All()
         {
-            var allDonors = await this.donorService.All();
+            var allDonors = await this.donorService.All().To<DonorAllViewModel>().ToListAsync();
 
             return this.View(allDonors);
         }
