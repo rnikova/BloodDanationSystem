@@ -19,7 +19,7 @@
             await seeder.SeedCities(context);
             var cityService = new CityService(context);
 
-            var actualResult = cityService.AllCities();
+            var actualResult = cityService.AllCities().Result;
             var expectedResult = context.Cities;
 
             Assert.NotNull(actualResult);

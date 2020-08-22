@@ -1,11 +1,12 @@
 ﻿namespace BloodDanationSystem.Services
 {
-    using System.Linq;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using BloodDonationSystem.Services.Models.Cities;
 
     public interface ICityService
     {
-        IQueryable<CityServiceModel> AllCities();
+        Task<IEnumerable<CityServiceModel>> AllCities();
     }
 }

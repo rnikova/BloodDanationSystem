@@ -110,7 +110,7 @@
             var userManager = this.GetUserManagerMock(context);
             var patientService = new PatientService(context, userManager.Object);
 
-            var actualResult = patientService.All();
+            var actualResult = patientService.All().Result;
             var expectedResult = context.Patients;
 
             Assert.True(actualResult.Count() == expectedResult.Count());
@@ -127,7 +127,7 @@
             var userManager = this.GetUserManagerMock(context);
             var patientService = new PatientService(context, userManager.Object);
 
-            var actualResult = patientService.AllActive();
+            var actualResult = patientService.AllActive().Result;
             var expectedResult = context.Patients.Where(x => x.NeededBloodBanks > 0);
 
             Assert.True(actualResult.Count() == expectedResult.Count());

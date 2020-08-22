@@ -1,6 +1,7 @@
 ﻿namespace BloodDanationSystem.Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
@@ -67,14 +68,23 @@
             return result > 0;
         }
 
-        public IQueryable<PatientServiceModel> All()
+        public async Task<IEnumerable<PatientServiceModel>> All()
         {
-            return this.context.Patients.To<PatientServiceModel>();
+            return await this.context
+                .Patients
+                .AsNoTracking()
+                .To<PatientServiceModel>()
+                .ToListAsync();
         }
 
-        public IQueryable<PatientServiceModel> AllActive()
+        public async Task<IEnumerable<PatientServiceModel>> AllActive()
         {
-            return this.All().Where(x => x.NeededBloodBanks > 0);
+            return await this.context
+                .Patients
+                .Where(x => x.NeededBloodBanks > 0)
+                .AsNoTracking()
+                .To<PatientServiceModel>()
+                .ToListAsync();
         }
 
         public async Task<PatientServiceModel> GetByUserIdAsync(string userId)

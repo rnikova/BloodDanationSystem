@@ -45,9 +45,9 @@
 
         public async Task<IActionResult> FindDonor()
         {
-            var donors = await this.donorService.All().To<DonorViewModel>().ToListAsync();
+            var donors = await this.donorService.All();
 
-            return this.View(donors);
+            return this.View(donors.To<DonorViewModel>());
         }
 
         public async Task<IActionResult> MyDonors()

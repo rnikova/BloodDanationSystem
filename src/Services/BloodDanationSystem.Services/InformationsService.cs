@@ -9,6 +9,7 @@
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models;
     using BloodDonationSystem.Services.Models.Informations;
+    using Microsoft.EntityFrameworkCore;
 
     public class InformationsService : IInformationsService
     {
@@ -36,9 +37,13 @@
             return result > 0;
         }
 
-        public IQueryable<ContactFormServiceModel> AllMessages()
+        public async Task<IEnumerable<ContactFormServiceModel>> AllMessages()
         {
-            return this.context.ContactForms.To<ContactFormServiceModel>();
+            return await this.context
+                .ContactForms
+                .AsNoTracking()
+                .To<ContactFormServiceModel>()
+                .ToListAsync();
         }
 
         public async Task<ContactFormServiceModel> GetByIdAsync(string id)
@@ -56,9 +61,14 @@
             return model;
         }
 
-        public IQueryable<BloodCentersServiceModel> AllBloodCenters()
+        public async Task<IEnumerable<BloodCentersServiceModel>> AllBloodCenters()
         {
-            return this.context.BloodCenters.OrderBy(x => x.City.Name).To<BloodCentersServiceModel>();
+            return await this.context
+                .BloodCenters
+                .AsNoTracking()
+                .OrderBy(x => x.City.Name)
+                .To<BloodCentersServiceModel>()
+                .ToListAsync();
         }
     }
 }

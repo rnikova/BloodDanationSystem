@@ -1,8 +1,9 @@
-﻿@model IList<BloodDanationSystem.Web.ViewModels.Administration.Donor.DonorAllViewModel>;
+﻿@model IEnumerable<BloodDanationSystem.Web.ViewModels.Administration.Donor.DonorAllViewModel>;
 
 @{
     ViewData["Title"] = "All";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int counter = 1;
 }
 
 <div class="card mb-4">
@@ -25,16 +26,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (var i = 1; i <= Model.Count; i++)
+                    @foreach(var donor in Model)
                     {
                         <tr class="active">
-                            <th scope="row">@i</th>
-                            <td>@Model[i - 1].FullName</td>
-                            <td>@Model[i - 1].Age</td>
-                            <td>@Model[i - 1].BloodType.ABOGroupName </td>
-                            <td>@Model[i - 1].BloodType.RhesusFactor </td>
-                            <td>@Model[i - 1].User.Username </td>
+                            <th scope="row">@counter</th>
+                            <td>@donor.FullName</td>
+                            <td>@donor.Age</td>
+                            <td>@donor.BloodType.ABOGroupName </td>
+                            <td>@donor.BloodType.RhesusFactor </td>
+                            <td>@donor.User.Username </td>
                         </tr>
+                        counter++;
                     }
                 </tbody>
             </table>

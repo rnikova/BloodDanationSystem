@@ -1,5 +1,6 @@
 ﻿namespace BloodDanationSystem.Services
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -10,9 +11,9 @@
     {
         Task<bool> CreateAsync(PatientServiceModel patientServiceModel);
 
-        IQueryable<PatientServiceModel> All();
+        Task<IEnumerable<PatientServiceModel>> All();
 
-        IQueryable<PatientServiceModel> AllActive();
+        Task<IEnumerable<PatientServiceModel>> AllActive();
 
         Task<PatientServiceModel> GetByUserIdAsync(string userId);
 

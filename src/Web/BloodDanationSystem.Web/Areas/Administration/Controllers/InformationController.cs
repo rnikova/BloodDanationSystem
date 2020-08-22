@@ -8,7 +8,6 @@
     using BloodDanationSystem.Web.ViewModels.Administration.Information;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
 
     [Authorize]
     public class InformationController : AdministrationController
@@ -26,9 +25,9 @@
 
         public async Task<IActionResult> Emails()
         {
-            var emails = await this.informationsService.AllMessages().To<EmailsAllViewModel>().ToListAsync();
+            var emails = await this.informationsService.AllMessages();
 
-            return this.View(emails);
+            return this.View(emails.To<EmailsAllViewModel>());
         }
 
         [HttpGet]

@@ -7,7 +7,6 @@
     using BloodDanationSystem.Web.ViewModels.Administration.Donor;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
 
     [Authorize]
     public class DonorController : AdministrationController
@@ -21,9 +20,9 @@
 
         public async Task<IActionResult> All()
         {
-            var allDonors = await this.donorService.All().To<DonorAllViewModel>().ToListAsync();
+            var allDonors = await this.donorService.All();
 
-            return this.View(allDonors);
+            return this.View(allDonors.To<DonorAllViewModel>());
         }
     }
 }

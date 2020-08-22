@@ -1,7 +1,7 @@
 ﻿namespace BloodDanationSystem.Services
 {
     using System;
-    using System.Linq;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using BloodDanationSystem.Common;
@@ -60,9 +60,13 @@
             return result > 0;
         }
 
-        public IQueryable<DonorServiceModel> All()
+        public async Task<IEnumerable<DonorServiceModel>> All()
         {
-            return this.context.Donors.To<DonorServiceModel>();
+            return await this.context
+                .Donors
+                .AsNoTracking()
+                .To<DonorServiceModel>()
+                .ToListAsync();
         }
 
         public async Task<DonorServiceModel> GetByUserIdAsync(string userId)

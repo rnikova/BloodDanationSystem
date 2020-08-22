@@ -5,8 +5,8 @@
     using BloodDonationSystem.Services.Models.Cities;
     using BloodDonationSystem.Web.InputModels.BloodTypees;
     using BloodDonationSystem.Web.InputModels.Cities;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
     using static BloodDanationSystem.Common.GlobalConstants;
 
     public class DonorsCreateInputModel : IMapTo<DonorServiceModel>, IMapFrom<DonorServiceModel>
@@ -30,7 +30,7 @@
 
         public CityInputModel City { get; set; }
 
-        public IQueryable<CityServiceModel> Cities { get; set; }
+        public IEnumerable<CityServiceModel> Cities { get; set; }
 
         public string BloodTypeId { get; set; }
 

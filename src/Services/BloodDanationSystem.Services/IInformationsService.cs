@@ -1,6 +1,6 @@
 ﻿namespace BloodDanationSystem.Services
 {
-    using System.Linq;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using BloodDonationSystem.Services.Models;
@@ -10,10 +10,10 @@
     {
         Task<bool> CreateContactFormAsync(ContactFormServiceModel contactFormServiceModel);
 
-        IQueryable<ContactFormServiceModel> AllMessages();
+        Task<IEnumerable<ContactFormServiceModel>> AllMessages();
 
         Task<ContactFormServiceModel> GetByIdAsync(string id);
 
-        IQueryable<BloodCentersServiceModel> AllBloodCenters();
+        Task<IEnumerable<BloodCentersServiceModel>> AllBloodCenters();
     }
 }

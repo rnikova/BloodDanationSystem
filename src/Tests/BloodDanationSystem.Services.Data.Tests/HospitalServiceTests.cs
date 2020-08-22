@@ -20,11 +20,11 @@
             await seeder.SeedHospitals(context);
             var hospitalService = new HospitalService(context);
 
-            var actualResult = hospitalService.AllHospitals();
+            var actualResult = hospitalService.AllHospitals().Result;
             var expectedResult = context.Hospitals;
 
             Assert.True(actualResult.Count() == expectedResult.Count());
-            Assert.IsAssignableFrom<IQueryable<HospitalServiceModel>>(actualResult);
+            Assert.IsAssignableFrom<IEnumerable<HospitalServiceModel>>(actualResult);
         }
 
         [Fact]
@@ -36,12 +36,12 @@
             await seeder.SeedHospitals(context);
             var hospitalService = new HospitalService(context);
 
-            var actualResult = hospitalService.HospitalsInCity(1);
+            var actualResult = hospitalService.HospitalsInCity(1).Result;
             var expectedResult = context.Hospitals.Where(x => x.CityId == 1);
 
             Assert.NotNull(actualResult);
             Assert.IsAssignableFrom<IEnumerable<HospitalServiceModel>>(actualResult);
-            Assert.True(actualResult.AsQueryable().Count() == expectedResult.Count());
+            Assert.True(actualResult.Count() == expectedResult.Count());
         }
     }
 }

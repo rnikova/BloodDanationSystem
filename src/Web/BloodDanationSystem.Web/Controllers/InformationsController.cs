@@ -57,9 +57,9 @@
         [HttpGet]
         public IActionResult BloodCenters()
         {
-            var hospitals = this.informationsService.AllBloodCenters().To<BloodCentersViewModel>();
+            var bloodCenters = this.informationsService.AllBloodCenters().Result;
 
-            return this.View(hospitals);
+            return this.View(bloodCenters.To<BloodCentersViewModel>());
         }
 
         [HttpGet]

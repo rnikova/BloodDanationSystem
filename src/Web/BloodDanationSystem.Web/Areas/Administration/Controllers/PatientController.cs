@@ -19,7 +19,7 @@
 
         public async Task<IActionResult> All()
         {
-            var allPatients = await this.patientService.All().ToListAsync();
+            var allPatients = await this.patientService.All();
 
             return this.View(allPatients);
         }

@@ -101,7 +101,7 @@
             var userManager = this.GetUserManagerMock(context);
             var donorService = new DonorService(context, userManager.Object);
 
-            var actualResult = donorService.All();
+            var actualResult = donorService.All().Result;
             var expectedResult = context.Donors;
 
             Assert.True(actualResult.Count() == expectedResult.Count());

@@ -1,10 +1,13 @@
 ﻿namespace BloodDanationSystem.Services
 {
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using BloodDanationSystem.Data;
     using BloodDanationSystem.Services.Mapping;
     using BloodDonationSystem.Services.Models.Cities;
+    using Microsoft.EntityFrameworkCore;
 
     public class CityService : ICityService
     {
@@ -15,9 +18,13 @@
             this.context = context;
         }
 
-        public IQueryable<CityServiceModel> AllCities()
+        public async Task<IEnumerable<CityServiceModel>> AllCities()
         {
-            return this.context.Cities.OrderBy(x => x.Name).To<CityServiceModel>();
+            return await this.context
+                .Cities
+                .AsNoTracking()
+                .OrderBy(x => x.Name)
+                .To<CityServiceModel>().ToListAsync();
         }
     }
 }
