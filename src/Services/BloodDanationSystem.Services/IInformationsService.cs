@@ -10,10 +10,10 @@
     {
         Task<bool> CreateContactFormAsync(ContactFormServiceModel contactFormServiceModel);
 
-        Task<IEnumerable<ContactFormServiceModel>> AllMessages();
+        Task<IEnumerable<ContactFormServiceModel>> AllMessagesAsync();
 
         Task<ContactFormServiceModel> GetByIdAsync(string id);
 
-        Task<IEnumerable<BloodCentersServiceModel>> AllBloodCenters();
+        Task<IEnumerable<BloodCentersServiceModel>> AllBloodCentersAsync();
     }
 }

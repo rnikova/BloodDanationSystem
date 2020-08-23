@@ -37,7 +37,7 @@
             return result > 0;
         }
 
-        public async Task<IEnumerable<ContactFormServiceModel>> AllMessages()
+        public async Task<IEnumerable<ContactFormServiceModel>> AllMessagesAsync()
         {
             return await this.context
                 .ContactForms
@@ -61,7 +61,7 @@
             return model;
         }
 
-        public async Task<IEnumerable<BloodCentersServiceModel>> AllBloodCenters()
+        public async Task<IEnumerable<BloodCentersServiceModel>> AllBloodCentersAsync()
         {
             return await this.context
                 .BloodCenters

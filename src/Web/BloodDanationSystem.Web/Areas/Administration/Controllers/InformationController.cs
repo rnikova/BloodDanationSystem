@@ -6,6 +6,7 @@
     using BloodDanationSystem.Services.Mapping;
     using BloodDanationSystem.Services.Messaging;
     using BloodDanationSystem.Web.ViewModels.Administration.Information;
+    using BloodDanationSystem.Web.ViewModels.BloodCenters;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -25,7 +26,7 @@
 
         public async Task<IActionResult> Emails()
         {
-            var emails = await this.informationsService.AllMessages();
+            var emails = await this.informationsService.AllMessagesAsync();
 
             return this.View(emails.To<EmailsAllViewModel>());
         }
@@ -52,6 +53,16 @@
             await this.emailSender.SendEmailAsync(detailsViewModel.Email, detailsViewModel.Subject, detailsViewModel.Answer);
 
             return this.RedirectToAction("Emails");
+        }
+
+        public IActionResult CreateArticle()
+        {
+            return this.View();
+        }
+
+        public IActionResult AddBloodCenter()
+        {
+            return this.View();
         }
     }
 }

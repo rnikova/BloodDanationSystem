@@ -1,0 +1,44 @@
+﻿@model BloodDonationSystem.Web.InputModels.Informations.AddBloodCenter;
+@{ ViewData["Title"] = "Donor";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<hr />
+<div class="login-form">
+    <h1>Add Blood Center</h1>
+    <form asp-action="CreateArticle" method="post">
+        <div asp-validation-summary="All" class="text-warning"></div>
+        <div class="form-group">
+            <label asp-for="City"></label>
+            <input asp-for="City" class="form-control" />
+            <span asp-validation-for="City" class="text-warning"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Address"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-warning"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Phone"></label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-warning"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="WorkingHours"></label>
+            <input asp-for="WorkingHours" class="form-control" />
+            <span asp-validation-for="WorkingHours" class="text-warning"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-warning"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EventPhone"></label>
+            <input asp-for="EventPhone" class="form-control" />
+            <span asp-validation-for="EventPhone" class="text-warning"></span>
+        </div>
+        <div class="form-group col-md-6 offset-3">
+            <input type="submit" value="Create" class="btn btn-success" />
+        </div>
+    </form>
+</div>
