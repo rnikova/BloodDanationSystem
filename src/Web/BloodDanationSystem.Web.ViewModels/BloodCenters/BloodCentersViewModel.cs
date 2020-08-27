@@ -6,6 +6,8 @@
 
     public class BloodCentersViewModel : IMapFrom<BloodCentersServiceModel>, IMapTo<BloodCentersServiceModel>
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public int CityId { get; set; }

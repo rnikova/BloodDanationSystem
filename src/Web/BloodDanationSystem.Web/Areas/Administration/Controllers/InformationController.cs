@@ -6,7 +6,7 @@
     using BloodDanationSystem.Services.Mapping;
     using BloodDanationSystem.Services.Messaging;
     using BloodDanationSystem.Web.ViewModels.Administration.Information;
-    using BloodDanationSystem.Web.ViewModels.BloodCenters;
+    using BloodDonationSystem.Services.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -63,6 +63,38 @@
         public IActionResult AddBloodCenter()
         {
             return this.View();
+        }
+
+        public async Task<IActionResult> EditBloodCenter(int id)
+        {
+            var bloodCenter = await this.informationsService.GetBloodCenterByIdAsync(id);
+            var model = new EditBloodCenterViewModel
+            {
+                Id = bloodCenter.Id,
+                Address = bloodCenter.Address,
+                Phone = bloodCenter.Phone,
+                EventPhone = bloodCenter.EventPhone,
+                Email = bloodCenter.Email,
+                WorkingHours = bloodCenter.WorkingHours,
+                Name = bloodCenter.Name,
+            };
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditBLoodCenter(EditBloodCenterViewModel bloodCenter)
+        {
+            await this.informationsService.EditBloodCenterAsync(bloodCenter.To<BloodCentersServiceModel>());
+
+            return this.Redirect("/Informations/BloodCenters");
+        }
+
+        public async Task<IActionResult> DeleteBloodCenter(int id)
+        {
+            await this.informationsService.DeleteBloodCenterAsync(id);
+
+            return this.Redirect("/Informations/BloodCenters");
         }
     }
 }

@@ -1,16 +1,17 @@
-﻿@model BloodDonationSystem.Web.InputModels.Informations.AddBloodCenterInputModel;
-@{ ViewData["Title"] = "Donor";
+﻿@model BloodDanationSystem.Web.ViewModels.Administration.Information.EditBloodCenterViewModel;
+
+@{ ViewData["Title"] = "Edit Blood center";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <hr />
 <div class="login-form">
-    <h1>Add Blood Center</h1>
-    <form asp-action="CreateArticle" method="post">
+    <h1>Edit Blood Center</h1>
+    <form asp-action="EditBloodCenter" method="post">
         <div asp-validation-summary="All" class="text-warning"></div>
         <div class="form-group">
-            <label asp-for="City"></label>
-            <input asp-for="City" class="form-control" />
-            <span asp-validation-for="City" class="text-warning"></span>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-warning"></span>
         </div>
         <div class="form-group">
             <label asp-for="Address"></label>
@@ -38,7 +39,7 @@
             <span asp-validation-for="EventPhone" class="text-warning"></span>
         </div>
         <div class="form-group col-md-6 offset-3">
-            <input type="submit" value="Create" class="btn btn-success" />
+            <input type="submit" value="edit" class="btn btn-success" />
         </div>
     </form>
 </div>

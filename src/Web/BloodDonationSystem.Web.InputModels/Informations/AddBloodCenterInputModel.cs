@@ -1,6 +1,6 @@
 ﻿namespace BloodDonationSystem.Web.InputModels.Informations
 {
-    public class AddBloodCenter
+    public class AddBloodCenterInputModel
     {
         public string City { get; set; }
 

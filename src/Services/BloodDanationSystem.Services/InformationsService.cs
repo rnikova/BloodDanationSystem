@@ -70,5 +70,49 @@
                 .To<BloodCentersServiceModel>()
                 .ToListAsync();
         }
+
+        public async Task<BloodCentersServiceModel> GetBloodCenterByIdAsync(int id)
+        {
+            var bloodCenter = await this.context
+                .BloodCenters
+                .SingleOrDefaultAsync(x => x.Id == id);
+            var model = new BloodCentersServiceModel
+            {
+                Id = bloodCenter.Id,
+                Address = bloodCenter.Address,
+                Phone = bloodCenter.Phone,
+                EventPhone = bloodCenter.EventPhone,
+                Email = bloodCenter.Email,
+                WorkingHours = bloodCenter.WorkingHours,
+                Name = bloodCenter.Name,
+            };
+
+            return model;
+        }
+
+        public async Task<int> EditBloodCenterAsync(BloodCentersServiceModel model)
+        {
+            var bloodCenter = await this.context
+                .BloodCenters
+                .SingleOrDefaultAsync(x => x.Id == model.Id);
+
+            bloodCenter = model.To<BloodCenter>();
+
+            var result = await this.context.SaveChangesAsync();
+
+            return result;
+        }
+
+        public async Task<int> DeleteBloodCenterAsync(int id)
+        {
+            var bloodCenter = await this.context
+                .BloodCenters
+                .SingleOrDefaultAsync(x => x.Id == id);
+            bloodCenter.IsDeleted = true;
+
+            var result = await this.context.SaveChangesAsync();
+
+            return result;
+        }
     }
 }
