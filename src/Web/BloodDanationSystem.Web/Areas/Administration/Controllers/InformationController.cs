@@ -7,6 +7,7 @@
     using BloodDanationSystem.Services.Messaging;
     using BloodDanationSystem.Web.ViewModels.Administration.Information;
     using BloodDonationSystem.Services.Models;
+    using BloodDonationSystem.Web.InputModels.Informations;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -63,6 +64,14 @@
         public IActionResult AddBloodCenter()
         {
             return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddBloodCenter(AddBloodCenterInputModel bloodCenter)
+        {
+            await this.informationsService.AddBloodCenterAsync(bloodCenter.To<BloodCentersServiceModel>());
+
+            return this.Redirect("/Informations/BloodCenters");
         }
 
         public async Task<IActionResult> EditBloodCenter(int id)

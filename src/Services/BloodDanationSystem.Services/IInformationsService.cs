@@ -18,6 +18,8 @@
 
         Task<BloodCentersServiceModel> GetBloodCenterByIdAsync(int id);
 
+        Task<int> AddBloodCenterAsync(BloodCentersServiceModel bloodCenter);
+
         Task<int> EditBloodCenterAsync(BloodCentersServiceModel model);
 
         Task<int> DeleteBloodCenterAsync(int id);

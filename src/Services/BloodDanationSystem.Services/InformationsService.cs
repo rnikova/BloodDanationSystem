@@ -90,6 +90,25 @@
             return model;
         }
 
+        public async Task<int> AddBloodCenterAsync(BloodCentersServiceModel bloodCenter)
+        {
+            var newBloodCenter = new BloodCenter
+            {
+                Name = bloodCenter.Name,
+                Email = bloodCenter.Email,
+                Phone = bloodCenter.Phone,
+                EventPhone = bloodCenter.EventPhone,
+                Address = bloodCenter.Address,
+                City = bloodCenter.City.To<City>(),
+                WorkingHours = bloodCenter.WorkingHours,
+            };
+
+            await this.context.BloodCenters.AddAsync(newBloodCenter);
+            var result = await this.context.SaveChangesAsync();
+
+            return result;
+        }
+
         public async Task<int> EditBloodCenterAsync(BloodCentersServiceModel model)
         {
             var bloodCenter = await this.context
