@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
 
     using BloodDanationSystem.Data;
@@ -99,10 +100,24 @@
                 Phone = bloodCenter.Phone,
                 EventPhone = bloodCenter.EventPhone,
                 Address = bloodCenter.Address,
-                City = bloodCenter.City.To<City>(),
                 WorkingHours = bloodCenter.WorkingHours,
             };
 
+            var isNewCity = await this.context.Cities.FirstOrDefaultAsync(x => x.Name == bloodCenter.City.Name);
+
+            if (isNewCity == null)
+            {
+                var newCity = new City
+                {
+                    Name = bloodCenter.City.Name,
+                };
+
+                await this.context.Cities.AddAsync(newCity);
+                await this.context.SaveChangesAsync();
+            }
+
+            newBloodCenter.City = await this.context.Cities.FirstOrDefaultAsync(x => x.Name == bloodCenter.City.Name);
+            newBloodCenter.CityId = newBloodCenter.City.Id;
             await this.context.BloodCenters.AddAsync(newBloodCenter);
             var result = await this.context.SaveChangesAsync();
 
@@ -115,7 +130,12 @@
                 .BloodCenters
                 .SingleOrDefaultAsync(x => x.Id == model.Id);
 
-            bloodCenter = model.To<BloodCenter>();
+            bloodCenter.Name = model.Name;
+            bloodCenter.Address = model.Address;
+            bloodCenter.Phone = model.Phone;
+            bloodCenter.WorkingHours = model.WorkingHours;
+            bloodCenter.Email = model.Email;
+            bloodCenter.EventPhone = model.EventPhone;
 
             var result = await this.context.SaveChangesAsync();
 

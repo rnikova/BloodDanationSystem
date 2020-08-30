@@ -7,6 +7,7 @@
     using BloodDanationSystem.Services.Messaging;
     using BloodDanationSystem.Web.ViewModels.Administration.Information;
     using BloodDonationSystem.Services.Models;
+    using BloodDonationSystem.Services.Models.Cities;
     using BloodDonationSystem.Web.InputModels.Informations;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -69,7 +70,21 @@
         [HttpPost]
         public async Task<IActionResult> AddBloodCenter(AddBloodCenterInputModel bloodCenter)
         {
-            await this.informationsService.AddBloodCenterAsync(bloodCenter.To<BloodCentersServiceModel>());
+            var model = new BloodCentersServiceModel
+            {
+                Name = bloodCenter.Name,
+                City = new CityServiceModel
+                {
+                   Name = bloodCenter.City,
+                },
+                Phone = bloodCenter.Phone,
+                EventPhone = bloodCenter.EventPhone,
+                WorkingHours = bloodCenter.WorkingHours,
+                Address = bloodCenter.Address,
+                Email = bloodCenter.Email,
+            };
+
+            await this.informationsService.AddBloodCenterAsync(model);
 
             return this.Redirect("/Informations/BloodCenters");
         }
@@ -94,7 +109,18 @@
         [HttpPost]
         public async Task<IActionResult> EditBLoodCenter(EditBloodCenterViewModel bloodCenter)
         {
-            await this.informationsService.EditBloodCenterAsync(bloodCenter.To<BloodCentersServiceModel>());
+            var model = new BloodCentersServiceModel
+            {
+                Id = bloodCenter.Id,
+                Address = bloodCenter.Address,
+                Phone = bloodCenter.Phone,
+                EventPhone = bloodCenter.EventPhone,
+                Email = bloodCenter.Email,
+                WorkingHours = bloodCenter.WorkingHours,
+                Name = bloodCenter.Name,
+            };
+
+            await this.informationsService.EditBloodCenterAsync(model);
 
             return this.Redirect("/Informations/BloodCenters");
         }

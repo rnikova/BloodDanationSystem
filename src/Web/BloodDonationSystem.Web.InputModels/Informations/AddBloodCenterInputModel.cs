@@ -19,7 +19,7 @@
 
         [Required]
         [Display(Name = "Телефон")]
-        public int Phone { get; set; }
+        public string Phone { get; set; }
 
         [Required]
         [Display(Name = "Работно време")]
