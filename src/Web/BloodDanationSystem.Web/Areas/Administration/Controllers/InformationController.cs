@@ -62,6 +62,12 @@
             return this.View();
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> CreateArticle(CreateArticleInputModel article)
+        //{
+        //    return this.View();
+        //}
+
         public IActionResult AddBloodCenter()
         {
             return this.View();
@@ -75,7 +81,7 @@
                 Name = bloodCenter.Name,
                 City = new CityServiceModel
                 {
-                   Name = bloodCenter.City,
+                    Name = bloodCenter.City,
                 },
                 Phone = bloodCenter.Phone,
                 EventPhone = bloodCenter.EventPhone,

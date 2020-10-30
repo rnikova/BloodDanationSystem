@@ -1,6 +1,5 @@
 ﻿namespace BloodDonationSystem.Web.InputModels.Informations
 {
-
     using System.ComponentModel.DataAnnotations;
 
     public class AddBloodCenterInputModel

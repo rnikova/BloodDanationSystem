@@ -1,10 +1,8 @@
 ﻿@using BloodDanationSystem.Data.Models.Enums;
 @model BloodDonationSystem.Web.InputModels.Patients.PatientsCreateInputModel;
 
-@{
-    ViewData["Title"] = "BecomePatient";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewData["Title"] = "BecomePatient";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 
 <hr />
@@ -40,7 +38,7 @@
         <div class="form-group">
             <label asp-for="HospitalId" class="control-label"></label>
             <select asp-for="HospitalId" class="form-control" id="HospitalId" asp-items="@(new SelectList(string.Empty,"Id","Name"))"><option value="0">Избери лечебно заведение</option></select>
-            <action selected="0"></action>
+            <action selected=""></action>
         </div>
         <div>
             <label asp-for="Ward" class="control-label"></label>
@@ -60,22 +58,30 @@
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
 @*<script type="text/javascript">
-    $(document).ready(function () {
-        var items = "<option value='0'>Избери лечебно заведение</option>";
-        $('#HospitalId').html(items);
-    });
-</script>*@
-<script type="text/javascript">
-    $(document).change(function () {
-        var url = '@Url.Content("~/")' + "Users/GetHospitals";
-        var ddlSource = "#CityId";
-        $.getJSON(url, { CityId: $(ddlSource).val() }, function (data) {
-            var items = '';
-            $("#HospitalId");
-            $.each(data, function (i, hospital) {
-                items += "<option value='" + hospital.value + "'>" + hospital.text + "</opiton>";
-            });
+        $(document).ready(function () {
+            var items = "<option value='0'>Избери лечебно заведение</option>";
             $('#HospitalId').html(items);
+        });
+    </script>*@
+<script type="text/javascript">
+    var items = ["<option value='0'>Избери лечебно заведение</option>"];
+    $('#CityId').change(function () {
+        $('#CityId option:selected').each(function () {
+            var url = '@Url.Content("~/")' + "Users/GetHospitals";
+            $.getJSON(url, { CityId: $("#CityId").val() }, function (allHospitals) {
+                $.each(allHospitals, function (i, hospital) {
+                    items.push("<option value='" + hospital.value + "'>" + hospital.text + "</opiton>");
+                });
+                $('#HospitalId').html(items.join(''));
+            });
+        });
+    });
+
+    $("#HospitalId").change(function () {
+        $('#HospitalId option:selected').each(function () {
+            items[0] = ("<option value='" + $(this).val() + "'>" + $(this).text() + "</opiton>");
+        $('#HospitalId').html('');
+        $('#HospitalId').html(items.join(''));
         });
     });
 </script>
